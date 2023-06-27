@@ -1,0 +1,6 @@
+[submodule "ref/DirectoryPackages"]
+	path = ref/DirectoryPackages
+	url = https://github.com/BeyondDimension/DirectoryPackages.git
+[submodule "ref/WTTS.Public"]
+	path = ref/WTTS.Public
+	url = https://github.com/BeyondDimension/WTTS.Public.git
