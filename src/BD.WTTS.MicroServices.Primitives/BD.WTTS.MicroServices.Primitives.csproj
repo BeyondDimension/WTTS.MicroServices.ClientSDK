@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>BD.WTTS</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\ImplicitUsings.Primitives.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.MessagePack.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BD.Common" />
+		<PackageReference Include="BD.Common.Primitives" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\ref\WTTS.Public\src\BD.WTTS.MicroServices.Primitives.Resources\BD.WTTS.MicroServices.Primitives.Resources.csproj" />
+		<ProjectReference Include="..\..\ref\WTTS.Public\src\BD.WTTS.Primitives.Resources\BD.WTTS.Primitives.Resources.csproj" />
+		<ProjectReference Include="..\BD.WTTS.Primitives\BD.WTTS.Primitives.csproj" />
+	</ItemGroup>
+
+	<Import Project="..\TFM_NETX.props" />
+	<Import Project="..\GeneratePackage.props" />
+
+</Project>

@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>BD.WTTS</RootNamespace>
+		<DefineConstants>MVVM_VM;$(DefineConstants)</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\ImplicitUsings.ReactiveUI.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.JsonProperty.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.MessagePack.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<!--<Compile Include="..\ImplicitUsings.Services.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>-->
+		<Compile Include="..\ImplicitUsings.Primitives.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Models.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\BD.WTTS.Primitives.Models\Models\**\*.cs">
+			<LinkBase>Models</LinkBase>
+		</Compile>
+		<Compile Include="..\BD.WTTS.Primitives.Models\Extensions\**\*.cs">
+			<LinkBase>Extensions</LinkBase>
+		</Compile>
+		<Compile Remove="..\BD.WTTS.Primitives.Models\Models\**\Jobs\*.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BD.Common" />
+		<PackageReference Include="BD.Common.Primitives" />
+		<PackageReference Include="BD.Common.BirthDate" />
+		<PackageReference Include="BD.Common.PhoneNumber" />
+		<PackageReference Include="BD.Common.Mvvm" />
+		<PackageReference Include="ReactiveUI" />
+		<PackageReference Include="ReactiveUI.Fody" />
+		<PackageReference Include="BD.Common.Essentials.Utils" />
+		<PackageReference Include="Avalonia" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!--<ProjectReference Include="..\Avalonia.Base\Avalonia.Base.csproj">
+			<IncludeAssets>none</IncludeAssets>
+		</ProjectReference>-->
+		<ProjectReference Include="..\BD.WTTS.Primitives\BD.WTTS.Primitives.csproj" />
+	</ItemGroup>
+
+	<Import Project="..\TFM_NETX.props" />
+	<Import Project="..\GeneratePackage.props" />
+
+</Project>

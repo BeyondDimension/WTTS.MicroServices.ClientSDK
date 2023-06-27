@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Product>瓦特工具箱 - 客户端 SDK v2 兼容模块</Product>
+		<RootNamespace>BD.WTTS</RootNamespace>
+		<DefineConstants>__NOT_IMPORT_CONFIGURATION__;__NOT_IMPORT_WEBENCODERS__;$(DefineConstants)</DefineConstants>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\ImplicitUsings.Primitives.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Models.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.JsonProperty.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.MessagePack.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.MSEX.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Services.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Helpers.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BD.Common" />
+		<PackageReference Include="BD.Common.Primitives" />
+		<PackageReference Include="BD.Common.ModelValidator" />
+		<PackageReference Include="Polly" />
+		<PackageReference Include="System.Private.Uri" />
+		<PackageReference Include="System.Text.RegularExpressions" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BD.WTTS.MicroServices.ClientSDK\BD.WTTS.MicroServices.ClientSDK.csproj" />
+		<ProjectReference Include="..\BD.WTTS.Primitives.ViewModels.Compat\BD.WTTS.Primitives.ViewModels.Compat.csproj" />
+	</ItemGroup>
+
+	<Import Project="..\TFM_NETX.props" />
+
+</Project>

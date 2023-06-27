@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>BD.WTTS</RootNamespace>
+		<DefineConstants>__NOT_IMPORT_CONFIGURATION__;__NOT_IMPORT_WEBENCODERS__;$(DefineConstants)</DefineConstants>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\ImplicitUsings.MessagePack.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Primitives.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Helpers.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.MSEX.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BD.Common" />
+		<PackageReference Include="BD.Common.Primitives" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\ref\WTTS.Public\src\BD.WTTS.Primitives.Resources\BD.WTTS.Primitives.Resources.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Enums\SteamRecharge\" />
+	</ItemGroup>
+
+	<Import Project="..\TFM_NETX.props" />
+	<Import Project="..\GeneratePackage.props" />
+
+</Project>

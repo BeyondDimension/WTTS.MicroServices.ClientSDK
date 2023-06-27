@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Product>瓦特工具箱 - 客户端 SDK</Product>
+		<RootNamespace>BD.WTTS</RootNamespace>
+		<DefineConstants>__NOT_IMPORT_CONFIGURATION__;__NOT_IMPORT_WEBENCODERS__;PROJ_WTTS_MS_SDK;$(DefineConstants)</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\ImplicitUsings.Primitives.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Models.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.JsonProperty.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.MessagePack.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.MSEX.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Services.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Helpers.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\InternalsVisibleTo.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BD.Common" />
+		<PackageReference Include="BD.Common.Primitives" />
+		<PackageReference Include="BD.Common.ModelValidator" />
+		<PackageReference Include="Polly" />
+		<PackageReference Include="System.Private.Uri" />
+		<PackageReference Include="System.Text.RegularExpressions" />
+		<PackageReference Include="fusillade" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BD.WTTS.MicroServices.Primitives.ViewModels\BD.WTTS.MicroServices.Primitives.ViewModels.csproj" />
+		<ProjectReference Include="..\BD.WTTS.MicroServices.Primitives\BD.WTTS.MicroServices.Primitives.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+			<CustomToolNamespace>BD.WTTS.MicroServices.ClientSDK</CustomToolNamespace>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
+
+	<Import Project="..\TFM_NETX.props" />
+	<Import Project="..\GeneratePackage.props" />
+
+</Project>

@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>BD.WTTS</RootNamespace>
+		<DefineConstants>PROJ_TYPE_MODELS;__HAVE_N_JSON__;$(DefineConstants)</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\ImplicitUsings.AspNetCore.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.JsonProperty.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.MessagePack.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Primitives.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Helpers.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Models.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BD.Common" />
+		<PackageReference Include="BD.Common.Primitives" />
+		<PackageReference Include="BD.Common.BirthDate" />
+		<PackageReference Include="BD.Common.PhoneNumber" />
+		<PackageReference Include="BD.Common.Essentials.Utils" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BD.WTTS.Primitives.Models\BD.WTTS.Primitives.Models.csproj" />
+		<ProjectReference Include="..\BD.WTTS.Primitives\BD.WTTS.Primitives.csproj" />
+	</ItemGroup>
+
+	<Import Project="..\TFM_NETX.props" />
+
+</Project>

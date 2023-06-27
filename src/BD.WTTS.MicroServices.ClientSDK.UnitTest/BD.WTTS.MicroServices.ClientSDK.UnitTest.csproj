@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<IsPackable>false</IsPackable>
+		<DefineConstants>__NOT_IMPORT_CONFIGURATION__;__NOT_IMPORT_WEBENCODERS__;$(DefineConstants)</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\ImplicitUsings.UnitTest.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Helpers.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Primitives.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Models.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.Services.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.MSEX.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\ImplicitUsings.JsonProperty.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\Utils.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" />
+		<PackageReference Include="NUnit" />
+		<PackageReference Include="NUnit3TestAdapter" />
+		<PackageReference Include="NUnit.Analyzers" />
+		<PackageReference Include="Moq" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BD.WTTS.MicroServices.ClientSDK.Compat\BD.WTTS.MicroServices.ClientSDK.Compat.csproj" />
+		<ProjectReference Include="..\BD.WTTS.MicroServices.ClientSDK\BD.WTTS.MicroServices.ClientSDK.csproj" />
+	</ItemGroup>
+
+	<Import Project="..\TFM_NETX_WINDOWS.props" />
+
+</Project>
