@@ -31,6 +31,9 @@
 			<LinkBase>Extensions</LinkBase>
 		</Compile>
 		<Compile Remove="..\BD.WTTS.Primitives.Models\Models\**\Jobs\*.cs" />
+		<Compile Include="..\AssemblyInfo.Xaml.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>

@@ -26,6 +26,9 @@
 		<Compile Include="..\BD.WTTS.MicroServices.Primitives.Models\Heleprs\**\*.cs">
 			<LinkBase>Heleprs</LinkBase>
 		</Compile>
+		<Compile Include="..\AssemblyInfo.Xaml.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
