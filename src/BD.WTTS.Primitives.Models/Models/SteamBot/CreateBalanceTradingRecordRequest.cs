@@ -42,6 +42,5 @@ public sealed partial record CreateBalanceTradingRecordRequest
     /// </summary>
     // [MPKey(4), MP2Key(4)]
     [Required]
-    [RegularExpression("^(((ht|f)tps?):\\/\\/)?([^!@#$%^&*?.\\s-]([^!@#$%^&*?.\\s]{0,63}[^!@#$%^&*?.\\s])?\\.)+[a-z]{2,6}\\/?", ErrorMessage = "邀请链接格式错误")]
     public string InviteUrl { get; set; }
 }
