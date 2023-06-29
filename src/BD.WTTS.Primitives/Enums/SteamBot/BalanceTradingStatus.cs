@@ -17,6 +17,11 @@ public enum BalanceTradingStatus : byte
     Waiting,
 
     /// <summary>
+    /// 生成中
+    /// </summary>
+    Generating,
+
+    /// <summary>
     /// 待支付 
     /// </summary>
     PendingPayment,
