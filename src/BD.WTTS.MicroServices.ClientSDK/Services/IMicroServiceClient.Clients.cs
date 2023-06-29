@@ -334,74 +334,68 @@ partial interface IMicroServiceClient
 
     interface IAuthenticatorClient
     {
-        ///// <summary>
-        ///// 获取用户令牌DTO列表
-        ///// </summary>
-        ///// <returns></returns>
-        //Task<IApiRsp<List<UserAuthenticatorResponse>?>> Table();
+        #region 云令牌
 
-        ///// <summary>
-        ///// 获取用户令牌信息
-        ///// </summary>
-        ///// <param name="ids"></param>
-        ///// <returns></returns>
-        //Task<IApiRsp<List<UserAuthenticatorTokenResponse>?>> AuthToken(IEnumerable<Guid> ids);
+        /// <summary>
+        /// 用户令牌查询
+        /// </summary>
+        /// <returns></returns>
+        Task<IApiRsp<UserAuthenticatorResponse[]?>> GetAuthenticators();
 
-        ///// <summary>
-        ///// 用户添加令牌
-        ///// </summary>
-        ///// <param name="list"></param>
-        ///// <returns></returns>
-        //Task<IApiRsp<bool>> Add(IEnumerable<UserAuthenticatorRequest> list);
+        /// <summary>
+        /// 用户令牌变动
+        /// </summary>
+        /// <returns></returns>
+        Task<IApiRsp<UserAuthenticatorPushResponse?>> SyncAuthenticatorsToCloud(UserAuthenticatorPushRequest request);
 
-        ///// <summary>
-        ///// 删除令牌
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //Task<IApiRsp<bool>> Delete(Guid id);
+        #endregion
 
-        ///// <summary>
-        ///// 同步令牌
-        ///// </summary>
-        ///// <param name="list"></param>
-        ///// <returns></returns>
-        //Task<IApiRsp<bool>> SyncToken(IEnumerable<UserAuthenticatorSyncTokenRequest> list);
+        #region 云令牌独立密码
 
-        ///// <summary>
-        ///// 添加用户独立密码
-        ///// </summary>
-        ///// <param name="pwdRequest"></param>
-        ///// <returns></returns>
-        //Task<IApiRsp<bool>> AddSeparatePwd(UserAuthenticatorIndependentPasswordRequest pwdRequest);
+        /// <summary>
+        /// 添加令牌独立密码
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<IApiRsp> SetIndependentPassword(UserAuthenticatorIndependentPasswordSetRequest request);
 
-        ///// <summary>
-        ///// 用户独立密码验证
-        ///// </summary>
-        ///// <param name="separatePwd"></param>
-        ///// <returns></returns>
-        //Task<IApiRsp<bool>> SeparatePwdVerify(string separatePwd);
+        /// <summary>
+        /// 重置令牌独立密码
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<IApiRsp> ResetIndependentPassword(UserAuthenticatorIndependentPasswordResetRequest request);
 
-        ///// <summary>
-        ///// 获取用户独立密码密保问题
-        ///// </summary>
-        ///// <returns></returns>
-        //Task<IApiRsp<string>> GetSeparatePwdQuestion();
+        /// <summary>
+        /// 验证令牌独立密码
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<IApiRsp<bool>> VerifyIndependentPassword(UserAuthenticatorIndependentPasswordVerifyRequest request);
 
-        ///// <summary>
-        ///// 用户独立密码密保问题验证
-        ///// </summary>
-        ///// <param name="separatePwd"></param>
-        ///// <returns></returns>
-        //Task<IApiRsp<bool>> SeparatePwdQuestionVerify(string separatePwd);
+        /// <summary>
+        /// 获取令牌独立密码的密保问题
+        /// </summary>
+        /// <returns></returns>
+        Task<IApiRsp<string?>> GetIndependentPasswordQuestion();
 
-        ///// <summary>
-        ///// 用户重置独立密码
-        ///// </summary>
-        ///// <param name="separatePwd"></param>
-        ///// <returns></returns>
-        //Task<IApiRsp<bool>> SeparatePwdReset(string separatePwd);
+        #endregion
 
+        #region 云令牌的删除备份
+
+        /// <summary>
+        /// 用户令牌删除记录查询
+        /// </summary>
+        /// <returns></returns>
+        Task<IApiRsp<UserAuthenticatorDeleteBackupResponse[]?>> GetAuthenticatorDeleteBackups();
+
+        /// <summary>
+        /// 还原用户删除的令牌
+        /// </summary>
+        /// <returns></returns>
+        Task<IApiRsp> RecoverAuthenticatorsFromDeleteBackups(UserAuthenticatorDeleteBackupRecoverRequest request);
+
+        #endregion
     }
 
     #endregion

@@ -348,6 +348,145 @@ partial class SDKTest
         }
     }
 
+    [Test]
+    public async Task TestUserAuthenticator()
+    {
+        if (ProjectUtils.IsCI()) return;
+
+        await OnTestEnv(async (host, client) =>
+        {
+            #region 登录一位新用户
+
+            tel = string.Concat("176", Random2.GenerateRandomString(8, String2.Digits));
+
+            // 发送验证码
+            var ssRsp = await client.AuthMessage.SendSms(new() { PhoneNumber = tel, Type = SmsCodeType.LoginOrRegister });
+            Assert.That(ssRsp.Code, Is.EqualTo(ApiRspCode.OK));
+
+            // 登录用户
+            var lrRsp = await client.Account.LoginOrRegister_Compat(new() { PhoneNumber = tel, SmsCode = "666666" });
+            Assert.That(lrRsp.Code, Is.EqualTo(ApiRspCode.OK));
+
+            #endregion
+
+            #region 独立密码
+
+            var question = "喜欢的颜色是？";
+            var answer = "azure";
+            var rspSIP = await client.AuthenticatorClient.SetIndependentPassword(new() { PwdQuestion = question, Answer = answer });
+            Assert.That(rspSIP.Code, Is.EqualTo(ApiRspCode.OK));
+
+            var rspGIPQ = await client.AuthenticatorClient.GetIndependentPasswordQuestion();
+            Assert.That(rspGIPQ.Code, Is.EqualTo(ApiRspCode.OK));
+            Assert.That(rspGIPQ.Content, Is.EqualTo(question));
+
+            var rspRSIP = await client.AuthenticatorClient.ResetIndependentPassword(new() { Answer = answer, NewPwdQuestion = question, NewAnswer = answer = "lavender" });
+            Assert.That(rspSIP.Code, Is.EqualTo(ApiRspCode.OK));
+
+            var rspVIP = await client.AuthenticatorClient.VerifyIndependentPassword(new() { Answer = answer });
+            Assert.That(rspVIP.Code, Is.EqualTo(ApiRspCode.OK));
+            Assert.That(rspVIP.Content, Is.EqualTo(true));
+
+            #endregion
+
+            #region 云令牌同步
+
+            // 初始上传令牌
+            var localAuthr = new UserAuthenticatorPushItem[]
+            {
+                new()
+                {
+                    Id = null, // 新增的项 Id 为 null
+                    Name = "测试令牌A",
+                    TokenType = UserAuthenticatorTokenType.TOTP,
+                    Token = MemoryPack.MemoryPackSerializer.Serialize(new AuthenticatorExportDTO() { SteamData = "DATA", Platform = AuthenticatorPlatform.Steam }),
+                    Remarks = "添加时间：" + DateTime.Now,
+                    Order = 2,
+                },
+                new()
+                {
+                    Id = null, // 新增的项 Id 为 null
+                    Name = "测试令牌B",
+                    TokenType = UserAuthenticatorTokenType.HOTP,
+                    Token = MemoryPack.MemoryPackSerializer.Serialize(new AuthenticatorExportDTO() { Counter = 999, Platform = AuthenticatorPlatform.Microsoft }),
+                    Remarks = "添加时间：" + DateTime.Now,
+                    Order = 999,
+                },
+            };
+            var rspSATC = await client.AuthenticatorClient.SyncAuthenticatorsToCloud(new() { Answer = answer, Difference = localAuthr, });
+            Assert.That(rspSATC.Code, Is.EqualTo(ApiRspCode.OK));
+            Assert.That(rspSATC.Content!.Result, Is.EqualTo(true));
+
+            // 获取云端令牌与本地比较
+            var rspGA_For_InitUpload = await client.AuthenticatorClient.GetAuthenticators();
+            var cloudAuthr = rspGA_For_InitUpload.Content!.OrderBy(a => a.Order).ToArray();
+            Assert.That(rspGA_For_InitUpload.Code, Is.EqualTo(ApiRspCode.OK));
+            Assert.IsTrue(CompareLocalWithClound(localAuthr.Where(a => !a.IsDeleted).ToArray(), cloudAuthr)); // 检查重新加密令牌Token是否正常
+
+            // 变动本地令牌数据
+            //     修改第一个令牌信息
+            localAuthr[0].Id = cloudAuthr[0].Id;
+            localAuthr[0].Name = "云令牌A(测试数据)";
+            localAuthr[0].Remarks = cloudAuthr[0].Remarks + " 修改时间：" + DateTime.Now;
+            localAuthr[0].Order = 1;
+            //     删除第二个令牌
+            localAuthr[1].Id = cloudAuthr[1].Id;
+            localAuthr[1].IsDeleted = true;
+
+            // 同步令牌到云端
+            var rspSATC2 = await client.AuthenticatorClient.SyncAuthenticatorsToCloud(new() { Answer = answer, Difference = localAuthr, });
+            Assert.That(rspSATC2.Code, Is.EqualTo(ApiRspCode.OK));
+            Assert.That(rspSATC2.Content!.Result, Is.EqualTo(true));
+
+            // 检查是否修改成功
+            var rspGA_For_Update = await client.AuthenticatorClient.GetAuthenticators();
+            cloudAuthr = rspGA_For_Update.Content!.OrderBy(a => a.Order).ToArray();
+            Assert.That(rspGA_For_Update.Code, Is.EqualTo(ApiRspCode.OK));
+            Assert.IsTrue(CompareLocalWithClound(localAuthr.Where(a => !a.IsDeleted).ToArray(), cloudAuthr)); // 检查重新加密令牌Token是否正常
+
+            #endregion
+
+            #region 云令牌删除备份
+
+            // 测试重置密码后再恢复时，使用新HashPassword重新加密令牌Token是否正常
+            var rspRSIP_For_RAFDB = await client.AuthenticatorClient.ResetIndependentPassword(new() { Answer = answer, NewPwdQuestion = question, NewAnswer = answer = "black" });
+            Assert.That(rspSIP.Code, Is.EqualTo(ApiRspCode.OK));
+
+            var rspADB = await client.AuthenticatorClient.GetAuthenticatorDeleteBackups();
+            var backupAuthr = rspADB.Content!;
+            var localDelAuthr = localAuthr.Where(a => a.IsDeleted);
+            Assert.That(rspADB.Code, Is.EqualTo(ApiRspCode.OK));
+            Assert.That(rspADB.Content!.Length, Is.EqualTo(localDelAuthr.Count(a => a.IsDeleted)));
+
+            var rspRAFDB = await client.AuthenticatorClient.RecoverAuthenticatorsFromDeleteBackups(new() { Id = backupAuthr.Select(a => a.Id).ToArray(), Answer = answer });
+            Assert.That(rspRAFDB.Code, Is.EqualTo(ApiRspCode.OK));
+
+            // 检查是否还原成功
+            var rspGA_For_RAFDB = await client.AuthenticatorClient.GetAuthenticators();
+            cloudAuthr = rspGA_For_RAFDB.Content!.OrderBy(a => a.Order).ToArray();
+            Assert.That(rspGA_For_RAFDB.Code, Is.EqualTo(ApiRspCode.OK));
+            Assert.IsTrue(CompareLocalWithClound(localAuthr, cloudAuthr)); // 检查重新加密令牌Token是否正常
+
+            #endregion
+        });
+
+        bool CompareLocalWithClound(UserAuthenticatorPushItem[] local, UserAuthenticatorResponse[] cloud)
+        {
+            if (local.Length != cloud.Length)
+                return false;
+
+            return Enumerable
+                .Zip(local.OrderBy(a => a.Order), local.OrderBy(a => a.Order))
+                .All(pair =>
+                {
+                    return pair.First.Name == pair.Second.Name
+                        && pair.First.Remarks == pair.Second.Remarks
+                        && pair.First.Order == pair.Second.Order
+                        && Enumerable.SequenceEqual(pair.First.Token!, pair.Second.Token!);
+                });
+        }
+    }
+
     /// <summary>
     /// 测试【基础服务】部分的接口
     /// </summary>

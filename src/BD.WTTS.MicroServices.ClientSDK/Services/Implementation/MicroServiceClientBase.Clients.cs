@@ -433,142 +433,101 @@ partial class MicroServiceClientBase :
 
     public IAuthenticatorClient AuthenticatorClient => this;
 
-    //public virtual async Task<IApiRsp<List<UserAuthenticatorResponse>?>> Table()
-    //{
-    //    var apiUrl = $"authenticator/v3/userauth";
-    //    var r = await Conn.SendAsync<List<UserAuthenticatorResponse>>(
-    //            isPolly: true,
-    //            isAnonymous: true,
-    //            isSecurity: false,
-    //            method: HttpMethod.Get,
-    //            requestUri: apiUrl,
-    //            cancellationToken: default);
-    //    return r;
-    //}
+    public async Task<IApiRsp<UserAuthenticatorResponse[]?>> GetAuthenticators()
+    {
+        var apiUrl = $"authenticator/authenticators";
+        var r = await Conn.SendAsync<UserAuthenticatorResponse[]>(
+                method: HttpMethod.Get,
+                requestUri: apiUrl,
+                isPolly: true,
+                isSecurity: true,
+                cancellationToken: default);
+        return r;
+    }
 
-    //public virtual async Task<IApiRsp<List<UserAuthenticatorTokenResponse>?>> AuthToken(IEnumerable<Guid> ids)
-    //{
-    //    var apiUrl = $"authenticator/v3/userauth/ids";
-    //    var r = await Conn.SendAsync<IEnumerable<Guid>, List<UserAuthenticatorTokenResponse>>(
-    //            isPolly: true,
-    //            isAnonymous: true,
-    //            isSecurity: true,
-    //            method: HttpMethod.Post,
-    //            request: ids,
-    //            requestUri: apiUrl,
-    //            cancellationToken: default);
-    //    return r;
-    //}
+    public async Task<IApiRsp<UserAuthenticatorPushResponse?>> SyncAuthenticatorsToCloud(UserAuthenticatorPushRequest request)
+    {
+        var apiUrl = $"authenticator/authenticators/synctocloud";
+        var r = await Conn.SendAsync<UserAuthenticatorPushRequest, UserAuthenticatorPushResponse>(
+            method: HttpMethod.Post,
+            requestUri: apiUrl,
+            request: request,
+            isSecurity: true,
+            cancellationToken: default);
+        return r;
+    }
 
-    //public virtual async Task<IApiRsp<bool>> Add(IEnumerable<UserAuthenticatorRequest> list)
-    //{
-    //    var apiUrl = $"authenticator/v3/userauth/list";
-    //    var r = await Conn.SendAsync<IEnumerable<UserAuthenticatorRequest>, bool>(
-    //            isPolly: true,
-    //            isAnonymous: true,
-    //            isSecurity: true,
-    //            method: HttpMethod.Post,
-    //            request: list,
-    //            requestUri: apiUrl,
-    //            cancellationToken: default);
-    //    return r;
-    //}
+    public async Task<IApiRsp> SetIndependentPassword(UserAuthenticatorIndependentPasswordSetRequest request)
+    {
+        var apiUrl = $"/authenticator/independentpasswords";
+        var r = await Conn.SendAsync(
+            method: HttpMethod.Post,
+            requestUri: apiUrl,
+            request: request,
+            isSecurity: true,
+            cancellationToken: default);
+        return r;
+    }
 
-    //public virtual async Task<IApiRsp<bool>> Delete(Guid id)
-    //{
-    //    var apiUrl = $"authenticator/v3/userauth/{id}";
-    //    var r = await Conn.SendAsync<bool>(
-    //            isPolly: true,
-    //            isAnonymous: true,
-    //            isSecurity: false,
-    //            method: HttpMethod.Delete,
-    //            requestUri: apiUrl,
-    //            cancellationToken: default);
-    //    return r;
-    //}
+    public async Task<IApiRsp> ResetIndependentPassword(UserAuthenticatorIndependentPasswordResetRequest request)
+    {
+        var apiUrl = $"authenticator/independentpasswords";
+        var r = await Conn.SendAsync(
+            method: HttpMethod.Put,
+            requestUri: apiUrl,
+            request: request,
+            isSecurity: true,
+            cancellationToken: default);
+        return r;
+    }
 
-    //public virtual async Task<IApiRsp<bool>> SyncToken(IEnumerable<UserAuthenticatorSyncTokenRequest> list)
-    //{
-    //    var apiUrl = $"authenticator/v3/userauth";
-    //    var r = await Conn.SendAsync<IEnumerable<UserAuthenticatorSyncTokenRequest>, bool>(
-    //            isPolly: true,
-    //            isAnonymous: true,
-    //            isSecurity: true,
-    //            method: HttpMethod.Put,
-    //            request: list,
-    //            requestUri: apiUrl,
-    //            cancellationToken: default);
-    //    return r;
-    //}
+    public async Task<IApiRsp<bool>> VerifyIndependentPassword(UserAuthenticatorIndependentPasswordVerifyRequest request)
+    {
+        var apiUrl = $"authenticator/independentpasswords/verify";
+        var r = await Conn.SendAsync<UserAuthenticatorIndependentPasswordVerifyRequest, bool>(
+            method: HttpMethod.Post,
+            requestUri: apiUrl,
+            request: request,
+            isSecurity: true,
+            cancellationToken: default);
+        return r;
+    }
 
-    //public virtual async Task<IApiRsp<bool>> AddSeparatePwd(UserAuthenticatorIndependentPasswordRequest pwdRequest)
-    //{
-    //    var apiUrl = $"authenticator/v3/separatepwd";
-    //    var r = await Conn.SendAsync<UserAuthenticatorIndependentPasswordRequest, bool>(
-    //            isPolly: true,
-    //            isAnonymous: true,
-    //            isSecurity: true,
-    //            method: HttpMethod.Post,
-    //            request: pwdRequest,
-    //            requestUri: apiUrl,
-    //            cancellationToken: default);
-    //    return r;
-    //}
+    public async Task<IApiRsp<string?>> GetIndependentPasswordQuestion()
+    {
+        var apiUrl = $"authenticator/independentpasswords/getquestion";
+        var r = await Conn.SendAsync<string?>(
+                method: HttpMethod.Get,
+                requestUri: apiUrl,
+                isPolly: true,
+                isSecurity: true,
+                cancellationToken: default);
+        return r;
+    }
 
-    //public virtual async Task<IApiRsp<bool>> SeparatePwdVerify(string separatePwd)
-    //{
-    //    var apiUrl = $"authenticator/v3/separatepwd/verify";
-    //    var r = await Conn.SendAsync<string, bool>(
-    //            isPolly: true,
-    //            isAnonymous: true,
-    //            isSecurity: true,
-    //            method: HttpMethod.Post,
-    //            request: separatePwd,
-    //            requestUri: apiUrl,
-    //            cancellationToken: default);
-    //    return r;
-    //}
+    public async Task<IApiRsp<UserAuthenticatorDeleteBackupResponse[]?>> GetAuthenticatorDeleteBackups()
+    {
+        var apiUrl = $"authenticator/deletebackups";
+        var r = await Conn.SendAsync<UserAuthenticatorDeleteBackupResponse[]?>(
+                method: HttpMethod.Get,
+                requestUri: apiUrl,
+                isPolly: true,
+                isSecurity: true,
+                cancellationToken: default);
+        return r;
+    }
 
-    //public virtual async Task<IApiRsp<string?>> GetSeparatePwdQuestion()
-    //{
-    //    var apiUrl = $"authenticator/v3/separatepwd";
-    //    var r = await Conn.SendAsync<string>(
-    //            isPolly: true,
-    //            isAnonymous: true,
-    //            isSecurity: false,
-    //            method: HttpMethod.Get,
-    //            requestUri: apiUrl,
-    //            cancellationToken: default);
-    //    return r;
-    //}
-
-    //public virtual async Task<IApiRsp<bool>> SeparatePwdQuestionVerify(string answer)
-    //{
-    //    var apiUrl = $"authenticator/v3/separatepwd/questionVerify";
-    //    var r = await Conn.SendAsync<string, bool>(
-    //            isPolly: true,
-    //            isAnonymous: true,
-    //            isSecurity: true,
-    //            method: HttpMethod.Post,
-    //            request: answer,
-    //            requestUri: apiUrl,
-    //            cancellationToken: default);
-    //    return r;
-    //}
-
-    //public virtual async Task<IApiRsp<bool>> SeparatePwdReset(string separatePwd)
-    //{
-    //    var apiUrl = $"authenticator/v3/separatepwd/questionVerify/reset";
-    //    var r = await Conn.SendAsync<string, bool>(
-    //            isPolly: true,
-    //            isAnonymous: true,
-    //            isSecurity: true,
-    //            method: HttpMethod.Post,
-    //            request: separatePwd,
-    //            requestUri: apiUrl,
-    //            cancellationToken: default);
-    //    return r;
-    //}
+    public async Task<IApiRsp> RecoverAuthenticatorsFromDeleteBackups(UserAuthenticatorDeleteBackupRecoverRequest request)
+    {
+        var apiUrl = $"authenticator/deletebackups/recover";
+        var r = await Conn.SendAsync(
+            method: HttpMethod.Post,
+            requestUri: apiUrl,
+            request: request,
+            isSecurity: true,
+            cancellationToken: default);
+        return r;
+    }
 
     #endregion
 

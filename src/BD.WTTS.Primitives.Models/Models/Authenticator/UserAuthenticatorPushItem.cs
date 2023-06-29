@@ -1,16 +1,19 @@
 namespace BD.WTTS.Models;
 
 [MPObj, MP2Obj(SerializeLayout.Explicit)]
-public sealed partial class UserAuthenticatorResponse
+public sealed partial class UserAuthenticatorPushItem
 {
+    /// <summary>
+    /// 云令牌Id
+    /// </summary>
     [MPKey(0), MP2Key(0)]
-    public Guid Id { get; set; }
+    public Guid? Id { get; set; }
 
     /// <summary>
     /// 令牌名
     /// </summary>
     [MPKey(1), MP2Key(1)]
-    [MaxLength(Constants.Lengths.Max_AuthenticatorName)]
+    [StringLength(Constants.Lengths.Max_AuthenticatorName)]
     public string Name { get; set; } = "";
 
     /// <summary>
@@ -23,7 +26,6 @@ public sealed partial class UserAuthenticatorResponse
     /// 令牌序列化储存内容
     /// </summary>
     [MPKey(3), MP2Key(3)]
-    [Required]
     [MaxLength(Constants.Lengths.Max_AuthenticatorToken)]
     public byte[]? Token { get; set; } = null!;
 
@@ -38,4 +40,22 @@ public sealed partial class UserAuthenticatorResponse
     /// </summary>
     [MPKey(5), MP2Key(5)]
     public long Order { get; set; }
+
+    /// <summary>
+    /// 是否要删除
+    /// </summary>
+    [MPKey(6), MP2Key(6)]
+    public bool IsDeleted { get; set; }
+
+    /// <summary>
+    /// 令牌数据是否错误
+    /// </summary>
+    [MPIgnore, MP2Ignore]
+    public bool IsWrong { get; set; }
+
+    /// <summary>
+    /// 令牌所属平台
+    /// </summary>
+    [MPIgnore, MP2Ignore]
+    public int GamePlatform { get; set; }
 }

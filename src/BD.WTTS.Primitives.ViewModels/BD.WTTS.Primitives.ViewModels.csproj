@@ -24,7 +24,8 @@
 		<Compile Include="..\ImplicitUsings.Models.cs">
 			<LinkBase>Properties</LinkBase>
 		</Compile>
-		<Compile Include="..\BD.WTTS.Primitives.Models\Models\**\*.cs">
+		<Compile Include="..\BD.WTTS.Primitives.Models\Models\**\*.cs"
+				 Exclude="..\BD.WTTS.Primitives.Models\Models\Authenticator\AuthenticatorExportDTO.cs">
 			<LinkBase>Models</LinkBase>
 		</Compile>
 		<Compile Include="..\BD.WTTS.Primitives.Models\Extensions\**\*.cs">

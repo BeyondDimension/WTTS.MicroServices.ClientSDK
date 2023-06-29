@@ -31,6 +31,9 @@
 		<Compile Include="..\ImplicitUsings.Helpers.cs">
 			<LinkBase>Properties</LinkBase>
 		</Compile>
+		<Compile Include="..\BD.WTTS.Primitives\Enums\Authenticator\AuthenticatorPlatform.cs">
+			<LinkBase>Enums</LinkBase>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>

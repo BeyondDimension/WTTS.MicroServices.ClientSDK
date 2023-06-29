@@ -21,8 +21,17 @@
 		<Compile Include="..\ImplicitUsings.Services.cs">
 			<LinkBase>Properties</LinkBase>
 		</Compile>
+		<Compile Include="..\ImplicitUsings.MessagePack.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
 		<Compile Include="..\ImplicitUsings.MSEX.cs">
 			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\BD.WTTS.Primitives\Enums\Authenticator\AuthenticatorPlatform.cs">
+			<LinkBase>Enums</LinkBase>
+		</Compile>
+		<Compile Include="..\BD.WTTS.Primitives.Models\Models\Authenticator\AuthenticatorExportDTO.cs">
+			<LinkBase>Models</LinkBase>
 		</Compile>
 		<Compile Include="..\ImplicitUsings.JsonProperty.cs">
 			<LinkBase>Properties</LinkBase>
