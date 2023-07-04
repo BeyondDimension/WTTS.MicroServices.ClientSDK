@@ -140,6 +140,11 @@ public static partial class Constants
         public const int Max_DealerGameId = 256;
 
         /// <summary>
+        /// 游戏Sub在对应零售商平台的 SubId 最大长度，例如 Steam 的 SubId
+        /// </summary>
+        public const int Max_DealerSubId = 256;
+
+        /// <summary>
         /// 游戏在对应零售商平台用户 Id 最大长度，例如 Steam 64 位 UserId
         /// </summary>
         public const int Max_DealerUserId = 256;
