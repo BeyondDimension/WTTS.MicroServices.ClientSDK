@@ -22,7 +22,7 @@ public class ArticleDTO
     /// <summary>
     /// 分类
     /// </summary>
-    public ArticleCategoryDTO1? CategoryName { get; set; }
+    public ArticleCategoryDTO? CategoryName { get; set; }
 
     /// <summary>
     /// 标签列表

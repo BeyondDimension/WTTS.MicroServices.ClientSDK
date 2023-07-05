@@ -1,5 +1,5 @@
 namespace BD.WTTS.Models;
-public class ArticleCategoryDTO1
+public class ArticleCategoryDTO
 {
 
     public Guid Id { get; set; }
@@ -7,7 +7,7 @@ public class ArticleCategoryDTO1
     public string Name { get; set; } = string.Empty;
 }
 
-public class ArticleCategoryTreeDTO : ArticleCategoryDTO1
+public class ArticleCategoryTreeDTO : ArticleCategoryDTO
 {
-    public ArticleCategoryDTO1[]? Child { get; set; }
+    public ArticleCategoryDTO[]? Child { get; set; }
 }
