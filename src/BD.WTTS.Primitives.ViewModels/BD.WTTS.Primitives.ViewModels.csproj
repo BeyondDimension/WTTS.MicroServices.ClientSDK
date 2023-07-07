@@ -46,7 +46,6 @@
 		<PackageReference Include="ReactiveUI" />
 		<PackageReference Include="ReactiveUI.Fody" />
 		<PackageReference Include="BD.Common.Essentials.Utils" />
-		<PackageReference Include="Avalonia" />
 	</ItemGroup>
 
 	<ItemGroup>

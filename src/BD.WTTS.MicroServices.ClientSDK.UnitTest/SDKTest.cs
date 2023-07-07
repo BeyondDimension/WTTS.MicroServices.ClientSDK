@@ -94,6 +94,16 @@ public sealed partial class SDKTest : IDisposable
 
     sealed class TestToast : IToast
     {
+        public void Show(ToastIcon icon, string text, int? duration = null)
+        {
+            TestContext.WriteLine(text);
+        }
+
+        public void Show(ToastIcon icon, string text, ToastLength duration)
+        {
+            TestContext.WriteLine(text);
+        }
+
         void IToast.Show(string text, int? duration)
         {
             TestContext.WriteLine(text);

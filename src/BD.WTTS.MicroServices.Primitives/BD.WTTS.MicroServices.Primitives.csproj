@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<RootNamespace>BD.WTTS</RootNamespace>
+		<DefineConstants>LIB_WTTS_MS_PRIMITIVES;$(DefineConstants)</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -9,6 +10,9 @@
 			<LinkBase>Properties</LinkBase>
 		</Compile>
 		<Compile Include="..\ImplicitUsings.MessagePack.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\AssemblyInfo.Xaml.cs">
 			<LinkBase>Properties</LinkBase>
 		</Compile>
 	</ItemGroup>

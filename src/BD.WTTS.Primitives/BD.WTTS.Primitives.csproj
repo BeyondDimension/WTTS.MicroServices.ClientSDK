@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<RootNamespace>BD.WTTS</RootNamespace>
-		<DefineConstants>__NOT_IMPORT_CONFIGURATION__;__NOT_IMPORT_WEBENCODERS__;$(DefineConstants)</DefineConstants>
+		<DefineConstants>LIB_WTTS_PRIMITIVES;__NOT_IMPORT_CONFIGURATION__;__NOT_IMPORT_WEBENCODERS__;$(DefineConstants)</DefineConstants>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
@@ -21,6 +21,9 @@
 			<LinkBase>Properties</LinkBase>
 		</Compile>
 		<Compile Include="..\ImplicitUsings.MSEX.cs">
+			<LinkBase>Properties</LinkBase>
+		</Compile>
+		<Compile Include="..\AssemblyInfo.Xaml.cs">
 			<LinkBase>Properties</LinkBase>
 		</Compile>
 	</ItemGroup>
