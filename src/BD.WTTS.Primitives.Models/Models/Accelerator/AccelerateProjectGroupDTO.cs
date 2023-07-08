@@ -17,7 +17,6 @@ public sealed partial class AccelerateProjectGroupDTO
     public AccelerateProjectGroupDTO()
     {
         this.WhenAnyValue(x => x.Items)
-              .DistinctUntilChanged()
               .Subscribe(s =>
               {
                   if (s.Any_Nullable())
@@ -27,23 +26,12 @@ public sealed partial class AccelerateProjectGroupDTO
         this.WhenAnyValue(v => v.ObservableItems)
               .Subscribe(items => items?
                     .ToObservableChangeSet()
-                    //.DistinctUntilChanged()
-                    .AutoRefresh(x => x.Checked)
-                    //.ToCollection()
-                    //.Select<IReadOnlyCollection<AccelerateProjectDTO>, bool?>(x =>
-                    //{
-                    //    var count = x.Count(s => s.Enable);
-                    //    if (x == null || count == 0)
-                    //        return false;
-                    //    if (count == x.Count)
-                    //        return true;
-                    //    return null;
-                    //})
-                    .WhenValueChanged(x => x.Checked)
+                    .AutoRefresh(x => x.ThreeStateEnable)
+                    .WhenValueChanged(x => x.ThreeStateEnable)
                     .Subscribe(_ =>
                     {
                         bool? b = null;
-                        var count = items.Count(s => s.Checked);
+                        var count = items.Count(s => s.ThreeStateEnable is null or true);
                         if (!items.Any_Nullable() || count == 0)
                             b = false;
                         else if (count == items.Count)
@@ -90,11 +78,11 @@ public sealed partial class AccelerateProjectGroupDTO
         set
         {
             mThreeStateEnable = value;
-            Checked = !(mThreeStateEnable == true);
+            Checked = mThreeStateEnable == true;
             if (Items != null)
                 foreach (var item in Items)
-                    if (item.Checked != Checked)
-                        item.Checked = Checked;
+                    if (item.ThreeStateEnable != Checked)
+                        item.ThreeStateEnable = Checked;
             this.RaisePropertyChanged();
         }
     }

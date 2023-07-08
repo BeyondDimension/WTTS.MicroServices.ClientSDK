@@ -16,17 +16,75 @@ public sealed partial class AccelerateProjectDTO
 #if MVVM_VM
     public AccelerateProjectDTO()
     {
-        this.WhenAnyValue(v => v)
-              .Subscribe(x =>
-              {
-                  if (Items.Any_Nullable())
+        this.WhenAnyValue(x => x.Items)
+             .Subscribe(s =>
+             {
+                 if (s.Any_Nullable())
+                     ObservableItems = new ObservableCollection<AccelerateProjectDTO>(s);
+             });
+
+        this.WhenAnyValue(v => v.ObservableItems)
+            .Subscribe(items => items?
+                  .ToObservableChangeSet()
+                  .AutoRefresh(x => x.Checked)
+                  .WhenValueChanged(x => x.Checked)
+                  .Subscribe(_ =>
                   {
-                      foreach (var item in Items)
+                      bool? b = null;
+                      var count = items.Count(s => s.Checked);
+                      if (!items.Any_Nullable() || count == 0)
+                          b = false;
+                      else if (count == items.Count)
+                          b = true;
+
+                      if (ThreeStateEnable != b)
                       {
-                          item.Checked = x.Checked;
+                          mThreeStateEnable = b;
+                          this.RaisePropertyChanged(nameof(ThreeStateEnable));
                       }
-                  }
-              });
+                  }));
+    }
+
+    private ObservableCollection<AccelerateProjectDTO>? _ObservableItems;
+
+    [MPIgnore, MP2Ignore]
+#if __HAVE_N_JSON__
+    [N_JsonIgnore]
+#endif
+#if !__NOT_HAVE_S_JSON__
+    [S_JsonIgnore]
+#endif
+    public ObservableCollection<AccelerateProjectDTO>? ObservableItems
+    {
+        get => _ObservableItems;
+        set => this.RaiseAndSetIfChanged(ref _ObservableItems, value);
+    }
+
+    /// <summary>
+    /// 是否有子项目选中的第三状态（仅客户端）
+    /// </summary>
+    bool? mThreeStateEnable = false;
+
+    [MPIgnore, MP2Ignore]
+#if __HAVE_N_JSON__
+    [N_JsonIgnore]
+#endif
+#if !__NOT_HAVE_S_JSON__
+    [S_JsonIgnore]
+#endif
+    public bool? ThreeStateEnable
+    {
+        get => mThreeStateEnable;
+        set
+        {
+            mThreeStateEnable = value;
+            Checked = mThreeStateEnable is null or true;
+            if (Items != null)
+                foreach (var item in Items)
+                    if (item.ThreeStateEnable != Checked)
+                        item.ThreeStateEnable = Checked;
+            this.RaisePropertyChanged();
+        }
     }
 #endif
 
@@ -171,7 +229,17 @@ public sealed partial class AccelerateProjectDTO
     /// 子级加速项目
     /// </summary>
     [MPKey(12), MP2Key(12)]
-    public List<AccelerateProjectDTO>? Items { get; set; }
+    public List<AccelerateProjectDTO>? Items
+#if MVVM_VM
+    {
+        get => mItems;
+        set => this.RaiseAndSetIfChanged(ref mItems, value);
+    }
+
+    List<AccelerateProjectDTO>? mItems;
+#else
+    { get; set; } = new();
+#endif
 
     /// <summary>
     /// 版本号
