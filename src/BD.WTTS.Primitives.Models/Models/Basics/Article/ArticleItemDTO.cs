@@ -28,4 +28,15 @@ public class ArticleItemDTO
     /// 文章创建时间
     /// </summary>
     public DateTimeOffset CreationTime { get; set; }
+
+    /// <summary>
+    /// 文章标签
+    /// </summary>
+    public IEnumerable<ArticleTagDTO>? Tags { get; set; }
+
+    /// <summary>
+    /// 文章分类
+    /// </summary>
+    public ArticleCategoryDTO? Category { get; set; }
+
 }
