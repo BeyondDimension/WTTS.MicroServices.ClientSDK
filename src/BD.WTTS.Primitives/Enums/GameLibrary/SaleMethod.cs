@@ -9,4 +9,5 @@ public enum SaleMethod : byte
     捆绑包 = 1,
     CDKey = 2,
     慈善包 = 3,
+    商店购买 = 4,
 }
