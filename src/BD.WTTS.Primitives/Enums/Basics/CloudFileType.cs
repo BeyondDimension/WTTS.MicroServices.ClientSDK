@@ -56,4 +56,49 @@ public static class CloudFileTypeEnumExtensions
         }
         return default;
     }
+
+    /// <summary>
+    /// 扩展名或者图片类型识别是否是支持的文件类型
+    /// </summary>
+    /// <param name="extension"></param>
+    /// <param name="imageFormat"></param>
+    /// <returns></returns>
+    public static CloudFileType? GetFileFormat(this string extension, ImageFormat? imageFormat)
+    {
+        if (imageFormat.HasValue)
+        {
+            int value = Enum2.ConvertToInt32(imageFormat.Value);
+            if (value > 0 && value < byte.MaxValue)
+            {
+                byte value2 = Convert.ToByte(value);
+                return (CloudFileType)value2;
+            }
+        }
+        else
+        {
+            switch (extension.ToLower())
+            {
+                case FileEx.EXE:
+                    return CloudFileType.WinExe;
+                case ".tar.gz":
+                case FileEx.TAR_GZ:
+                    return CloudFileType.TarGzip;
+                case FileEx.TAR_XZ:
+                    return CloudFileType.TarXz;
+                case FileEx.TAR_ZST:
+                    return CloudFileType.TarZstd;
+                case FileEx.DMG:
+                    return CloudFileType.DMG;
+                case FileEx.DEB:
+                    return CloudFileType.DEB;
+                case FileEx.RPM:
+                    return CloudFileType.RPM;
+                case FileEx.APK:
+                    return CloudFileType.RPM;
+                default:
+                    return null;
+            }
+        }
+        return null;
+    }
 }

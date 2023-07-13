@@ -27,6 +27,9 @@ public sealed partial class EditUserProfileRequest
     [MPKey(5), MP2Key(5)]
     public int? AreaId { get; set; }
 
+    [MPKey(6), MP2Key(6)]
+    public string? PersonalizedSignature { get; set; }
+
     public string? GetErrorMessage()
     {
         if (string.IsNullOrEmpty(NickName))

@@ -159,4 +159,13 @@ public sealed partial class IdentityUserInfoDTO :
     [Reactive]
 #endif
     public string? PhoneNumber { get; set; }
+
+    /// <summary>
+    /// 个性签名
+    /// </summary>
+    [MPKey(20), MP2Key(20)]
+#if MVVM_VM
+    [Reactive]
+#endif
+    public string? PersonalizedSignature { get; set; }
 }
