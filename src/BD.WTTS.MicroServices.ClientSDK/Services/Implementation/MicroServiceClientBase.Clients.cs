@@ -280,7 +280,6 @@ partial class MicroServiceClientBase :
     {
         var r = await Conn.SendAsync<PagedModel<ScriptDTO>>(
                isPolly: true,
-               isAnonymous: false,
                isSecurity: false,
                method: HttpMethod.Get,
                requestUri: $"accelerator/scripts/{current}/{pageSize}/{name}",
