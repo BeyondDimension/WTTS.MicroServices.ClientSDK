@@ -127,7 +127,12 @@ public static partial class Constants
         /// <summary>
         /// 游戏成就名最大长度
         /// </summary>
-        public const int Max_GameAchievementName = 100;
+        public const int Max_GameAchievementName = 1000;
+
+        /// <summary>
+        /// 游戏成就名最大长度
+        /// </summary>
+        public const int Max_GameSystemInfo = 2000;
 
         /// <summary>
         /// 游戏平台名称最大长度
