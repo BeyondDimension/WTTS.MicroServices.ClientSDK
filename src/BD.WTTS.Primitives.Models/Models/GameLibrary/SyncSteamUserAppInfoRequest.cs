@@ -6,4 +6,4 @@ namespace BD.WTTS.Models;
 /// <param name="SteamUserId64"> Steam 用户 Id</param>
 [MPObj, MP2Obj(SerializeLayout.Explicit)]
 public sealed partial record class SyncSteamUserAppInfoRequest(
-    [property: MPKey(0), MP2Key(0)] long SteamUserId64);
+    [property: MPKey(0), MP2Key(0)] string SteamUserId64);
