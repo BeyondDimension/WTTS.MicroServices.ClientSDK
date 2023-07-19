@@ -25,6 +25,11 @@ public class ArticleItemDTO
     public string Introduction { get; set; } = string.Empty;
 
     /// <summary>
+    /// 浏览量
+    /// </summary>
+    public long ViewCount { get; set; }
+
+    /// <summary>
     /// 文章创建时间
     /// </summary>
     public DateTimeOffset CreationTime { get; set; }

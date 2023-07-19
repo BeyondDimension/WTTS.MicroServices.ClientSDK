@@ -20,6 +20,11 @@ public class ArticleDTO
     public string Content { get; set; } = string.Empty;
 
     /// <summary>
+    /// 浏览量
+    /// </summary>
+    public long ViewCount { get; set; }
+
+    /// <summary>
     /// 分类
     /// </summary>
     public ArticleCategoryDTO? Category { get; set; }
