@@ -1,4 +1,5 @@
 namespace BD.WTTS.Models;
+
 public class MyWishListGameItem
 {
     public string? HeaderImage { get; set; }

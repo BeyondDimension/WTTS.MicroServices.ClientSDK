@@ -27,6 +27,7 @@ public class AppPackageData
     [JsonPropertyName("price")]
     public Price? Price { get; set; }
 }
+
 public class GameApp
 {
     [JsonPropertyName("id")]
@@ -39,7 +40,7 @@ public class GameApp
 public class Price
 {
     /// <summary>
-    /// 货币Code
+    /// 货币 Code
     /// </summary>
     [JsonPropertyName("currency")]
     public string? Currency { get; set; }

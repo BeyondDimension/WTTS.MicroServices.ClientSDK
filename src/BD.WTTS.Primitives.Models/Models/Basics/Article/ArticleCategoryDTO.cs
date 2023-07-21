@@ -1,4 +1,5 @@
 namespace BD.WTTS.Models;
+
 public class ArticleCategoryDTO
 {
     public Guid Id { get; set; }

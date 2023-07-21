@@ -1,4 +1,5 @@
 namespace BD.WTTS.Enums;
+
 public enum UploadFileItemCodes : byte
 {
     /// <summary>
