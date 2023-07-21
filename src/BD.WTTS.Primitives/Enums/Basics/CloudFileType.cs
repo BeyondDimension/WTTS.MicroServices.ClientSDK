@@ -37,6 +37,20 @@ public enum CloudFileType
     APK,
 
     #endregion
+
+    Json = 300,
+    Dll,
+    Xml,
+    So,
+    Dylib,
+    None,
+    Js,
+    Xaml,
+    AXaml,
+    CSharp,
+
+    Msix = 901,
+    MsixUpload,
 }
 
 public static class CloudFileTypeEnumExtensions
