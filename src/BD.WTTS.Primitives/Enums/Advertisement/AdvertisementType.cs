@@ -25,4 +25,9 @@ public enum AdvertisementType
     /// 内嵌广告
     /// </summary>
     Embedded = 8,
+
+    /// <summary>
+    /// 桌面端主页 Banner 图
+    /// </summary>
+    DeskTopHomeBanner = 16,
 }
