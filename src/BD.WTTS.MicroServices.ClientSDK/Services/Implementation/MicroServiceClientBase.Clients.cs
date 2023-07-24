@@ -14,9 +14,27 @@ partial class MicroServiceClientBase :
     IAdvertisementClient,
     IAuthenticatorClient,
     ISponsorClient,
-    IGameLibaryClient
+    IGameLibaryClient,
+    IArticleClient
 {
     #region BasicServices - 基础服务
+    public IArticleClient Article => this;
+
+    public async Task<IApiRsp<PagedModel<ArticleItemDTO>?>> Order(
+            Guid? categoryId,
+            ArticleOrderBy orderBy = ArticleOrderBy.DateTime,
+            int current = IPagedModel.DefaultCurrent,
+            int pageSize = IPagedModel.DefaultPageSize)
+    {
+        var url = $"basic/article/order/{(int)orderBy}/{current}/{pageSize}{(categoryId.HasValue ? $"/{categoryId}" : "")}";
+        var r = await Conn.SendAsync<PagedModel<ArticleItemDTO>?>(
+            isAnonymous: true,
+            method: HttpMethod.Get,
+            requestUri: url,
+            cancellationToken: default,
+            responseContentMaybeNull: true);
+        return r;
+    }
 
     public INoticeClient Notice => this;
 

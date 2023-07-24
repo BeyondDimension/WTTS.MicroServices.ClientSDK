@@ -10,6 +10,28 @@ partial interface IMicroServiceClient
     {
     }
 
+    /// <summary>
+    /// 文章
+    /// </summary>
+    IArticleClient Article { get; }
+
+    interface IArticleClient
+    {
+        /// <summary>
+        /// 获取文章 指定排序列表
+        /// </summary>
+        /// <param name="categoryId">分类 Id 非必填</param>
+        /// <param name="orderBy">排序类型 时间，浏览量</param>
+        /// <param name="current"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        Task<IApiRsp<PagedModel<ArticleItemDTO>?>> Order(
+            Guid? categoryId,
+            ArticleOrderBy orderBy = ArticleOrderBy.DateTime,
+            int current = IPagedModel.DefaultCurrent,
+            int pageSize = IPagedModel.DefaultPageSize);
+    }
+
     IVersionClient Version { get; }
 
     interface IVersionClient
