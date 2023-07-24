@@ -32,6 +32,25 @@ partial interface IMicroServiceClient
             int pageSize = IPagedModel.DefaultPageSize);
     }
 
+    IMessageClient Message { get; }
+
+    interface IMessageClient
+    {
+        /// <summary>
+        /// 获取官方消息
+        /// </summary>
+        /// <param name="clientPlatform">客户端平台</param>
+        /// <param name="messageType">官方消息类型</param>
+        /// <param name="current">当前页码</param>
+        /// <param name="pageSize">页大小</param>
+        /// <returns></returns>
+        Task<IApiRsp<PagedModel<OfficialMessageItemDTO>>> GetMessage(
+            ClientPlatform? clientPlatform,
+            OfficialMessageType? messageType,
+            int current = IPagedModel.DefaultCurrent,
+            int pageSize = IPagedModel.DefaultPageSize);
+    }
+
     IVersionClient Version { get; }
 
     interface IVersionClient

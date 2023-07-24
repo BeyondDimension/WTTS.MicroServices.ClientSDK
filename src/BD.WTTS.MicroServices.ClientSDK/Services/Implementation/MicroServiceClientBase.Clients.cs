@@ -4,6 +4,7 @@ namespace BD.WTTS.Services.Implementation;
 
 partial class MicroServiceClientBase :
     INoticeClient,
+    IMessageClient,
     IVersionClient,
     IActiveUserClient,
     IAccountClient,
@@ -56,6 +57,24 @@ partial class MicroServiceClientBase :
     }
 
     public IVersionClient Version => this;
+
+    public IMessageClient Message => this;
+
+    public async Task<IApiRsp<PagedModel<OfficialMessageItemDTO>>> GetMessage(
+        ClientPlatform? clientPlatform,
+        OfficialMessageType? messageType,
+        int current = 1,
+        int pageSize = 10)
+    {
+        var apiUrl = $"basics/officialmessage/message";
+        var r = await Conn.SendAsync<PagedModel<OfficialMessageItemDTO>>(
+                method: HttpMethod.Get,
+                requestUri: apiUrl,
+                isPolly: true,
+                isAnonymous: true,
+                cancellationToken: default);
+        return r;
+    }
 
     #endregion
 

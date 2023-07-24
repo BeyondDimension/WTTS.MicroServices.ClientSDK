@@ -546,6 +546,11 @@ partial class SDKTest
                 DeploymentMode.FDE);
             Assert.That(cuRsp.Code, Is.EqualTo(ApiRspCode.OK));
 
+            var clientPlatform = ClientPlatform.Win32X86 | ClientPlatform.Win32X64 | ClientPlatform.Win32Arm64;
+            var msgRsp = await client.Message.GetMessage(clientPlatform, OfficialMessageType.OfficialMessage);
+            Assert.That(msgRsp.Code, Is.EqualTo(ApiRspCode.OK));
+            Assert.That(msgRsp.Content?.DataSource?.Length, Is.GreaterThanOrEqualTo(0));
+
             #endregion
         }
     }
