@@ -131,33 +131,30 @@ partial class AccelerateProjectDTO : IDomainConfig
 
     string? IDomainConfig.TlsSniPattern => FakeServerName;
 
-    bool IDomainConfig.TlsIgnoreNameMismatch => true;
+    bool IDomainConfig.TlsIgnoreNameMismatch => IgnoreSSLCertVerification;
 
     IPAddress? IDomainConfig.IPAddress
     {
-        //get
-        //{
-        //if (ProxyType == ProxyType.Local && !ForwardDomainIsNameOrIP)
-        //{
-        //    IPAddress2.TryParse(ForwardDomainIP, out var ip);
-        //    return ip;
-        //}
-        //    return null;
-        //}
-        get;
+        get
+        {
+            if (ProxyType == ProxyType.Local && IPAddress2.TryParse(ForwardDomainNames, out var ip))
+            {
+                return ip;
+            }
+            return null;
+        }
     }
 
     string? IDomainConfig.ForwardDestination
     {
-        //get
-        //{
-        //if (ProxyType == ProxyType.Local && ForwardDomainIsNameOrIP)
-        //{
-        //    return ForwardDomainName;
-        //}
-        //    return null;
-        //}
-        get;
+        get
+        {
+            if (ProxyType == ProxyType.Local && !IPAddress2.TryParse(ForwardDomainNames, out var _))
+            {
+                return ForwardDomainNames;
+            }
+            return null;
+        }
     }
 
     TimeSpan? IDomainConfig.Timeout => null;
