@@ -75,8 +75,21 @@ public partial class AdvertisementDTO
 #endif
 #if !__NOT_HAVE_S_JSON__
     [S_JsonIgnore]
+#endif
     public Task<ImageSource.ClipStream?> ImageSrc
         => ImageSource.GetAsync(Constants.Urls.GetAdvertisementImageUrl(Id), cache: true);
+
+    /// <summary>
+    /// 广告图片Url
+    /// </summary>
+    [MPIgnore, MP2Ignore]
+#if __HAVE_N_JSON__
+    [N_JsonIgnore]
+#endif
+#if !__NOT_HAVE_S_JSON__
+    [S_JsonIgnore]
+#endif
+    public string ImageUrl => Constants.Urls.GetAdvertisementImageUrl(Id);
 
     /// <summary>
     /// 广告点击跳转地址
@@ -89,7 +102,5 @@ public partial class AdvertisementDTO
     [S_JsonIgnore]
 #endif
     public string Url => Constants.Urls.GetAdvertisementJumpUrl(Id);
-#endif
-
 #endif
 }

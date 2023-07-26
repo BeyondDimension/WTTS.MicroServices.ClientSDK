@@ -34,7 +34,7 @@ public static partial class Constants
         public const string BaseUrl_API_Development = "https://steampp.mossimo.net:8800";
         public const string BaseUrl_API_Debug = "https://localhost:5001";
 
-        static string BaseUrl_API = BaseUrl_API_Debug;
+        static string BaseUrl_API = BaseUrl_API_Development;
 
         public static string ApiBaseUrl
         {
