@@ -20,7 +20,19 @@ public interface IScriptConfig
 
 }
 
-partial class ScriptDTO : IScriptConfig
+[MP2Obj(SerializeLayout.Explicit)]
+public readonly partial record struct ScriptIPCDTO(
+    [property: MP2Key(0)]
+    int LocalId,
+    [property: MP2Key(1)]
+    string CachePath,
+    [property: MP2Key(2)]
+    string[] MatchDomainNamesArray,
+    [property: MP2Key(3)]
+    string ExcludeDomainNames,
+    [property: MP2Key(4)]
+    long Order
+    ) : IScriptConfig
 {
     DomainPattern? IScriptConfig.ExcludeDomainPattern => string.IsNullOrWhiteSpace(ExcludeDomainNames) ? null : new DomainPattern(ExcludeDomainNames);
 }

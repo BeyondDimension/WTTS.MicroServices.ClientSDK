@@ -13,14 +13,6 @@ public sealed partial class ScriptDTO
 #endif
 {
 #if MVVM_VM
-    const string HomepageURL = "HomepageURL";
-    const string DownloadURL = "DownloadURL";
-    const string UpdateURL = "UpdateURL";
-    const string Exclude = "Exclude";
-    const string Grant = "Grant";
-    const string Require = "Require";
-    const string Include = "Include";
-    const string DescRegex = @"(?<={0})[\s\S]*?(?=\n)";
 
     public ScriptDTO()
     {
@@ -30,47 +22,6 @@ public sealed partial class ScriptDTO
                 this.RaisePropertyChanged(nameof(DownloadLoading));
                 this.RaisePropertyChanged(nameof(DownloadButtonLoading));
             });
-    }
-
-    public static bool TryParse(string path, [NotNullWhen(true)] out ScriptDTO? proxyScript)
-    {
-        var content = File.ReadAllText(path);
-        if (!string.IsNullOrEmpty(content))
-        {
-            var userScript = content.Substring("==UserScript==", "==/UserScript==");
-            if (!string.IsNullOrEmpty(userScript))
-            {
-                var script = new ScriptDTO
-                {
-                    FilePath = path,
-                    Content = content.Replace("</script>", "<\\/script>"),
-                    //Content = content.Replace("</script>", "<\\/script>").Replace(" ", "").Replace("\r", "").Replace("\n", "").Replace("\t", ""),
-                    Name = Regex.Match(userScript, string.Format(DescRegex, "@Name"), RegexOptions.IgnoreCase).GetValue(s => s.Success == true),
-                    //NameSpace = Regex.Matches(userScript, string.Format(DescRegex, $"@NameSpace"), RegexOptions.IgnoreCase).GetValues(s => s.Success == true).ToArray(),
-                    Version = Regex.Match(userScript, string.Format(DescRegex, "@Version"), RegexOptions.IgnoreCase).GetValue(s => s.Success == true),
-                    Describe = Regex.Match(userScript, string.Format(DescRegex, "@Description"), RegexOptions.IgnoreCase).GetValue(s => s.Success == true),
-                    AuthorName = Regex.Match(userScript, string.Format(DescRegex, "@Author"), RegexOptions.IgnoreCase).GetValue(s => s.Success == true),
-                    SourceLink = Regex.Match(userScript, string.Format(DescRegex, "@HomepageURL"), RegexOptions.IgnoreCase).GetValue(s => s.Success == true),
-                    //SupportURL = Regex.Match(userScript, string.Format(DescRegex, $"@SupportURL"), RegexOptions.IgnoreCase).GetValue(s => s.Success == true),
-                    DownloadLink = Regex.Match(userScript, string.Format(DescRegex, $"@{DownloadURL}"), RegexOptions.IgnoreCase).GetValue(s => s.Success == true),
-                    UpdateLink = Regex.Match(userScript, string.Format(DescRegex, $"@{UpdateURL}"), RegexOptions.IgnoreCase).GetValue(s => s.Success == true),
-                    ExcludeDomainNames = string.Join(GeneralSeparator, Regex.Matches(userScript, string.Format(DescRegex, $"@{Exclude}"), RegexOptions.IgnoreCase).GetValues(s => s.Success == true)),
-                    DependentGreasyForkFunction = Regex.Matches(userScript, string.Format(DescRegex, $"@{Grant}"), RegexOptions.IgnoreCase).GetValues(s => s.Success == true).Any_Nullable(),
-                    RequiredJs = string.Join(GeneralSeparator, Regex.Matches(userScript, string.Format(DescRegex, $"@{Require}"), RegexOptions.IgnoreCase).GetValues(s => s.Success == true)),
-                };
-                var matchs = string.Join(GeneralSeparator, Regex.Matches(userScript, string.Format(DescRegex, $"@Match"), RegexOptions.IgnoreCase).GetValues(s => s.Success == true));
-                var includes = string.Join(GeneralSeparator, Regex.Matches(userScript, string.Format(DescRegex, $"@{Include}"), RegexOptions.IgnoreCase).GetValues(s => s.Success == true));
-                script.MatchDomainNames = string.IsNullOrEmpty(matchs) ? includes : matchs;
-                // 忽略脚本 Enable 启动标签默认启动
-                //var enable = Regex.Match(userScript, string.Format(DescRegex, "@Enable"), RegexOptions.IgnoreCase).GetValue(s => s.Success == true);
-                script.Disable = true;
-                //script.Enable = bool.TryParse(enable, out var e) && e;
-                proxyScript = script;
-                return true;
-            }
-        }
-        proxyScript = null;
-        return false;
     }
 
     [MPIgnore, MP2Ignore]
@@ -108,15 +59,6 @@ public sealed partial class ScriptDTO
     [S_JsonIgnore]
 #endif
     public string? FileName => Path.GetFileName(FilePath);
-
-    [MPIgnore, MP2Ignore]
-#if __HAVE_N_JSON__
-    [N_JsonIgnore]
-#endif
-#if !__NOT_HAVE_S_JSON__
-    [S_JsonIgnore]
-#endif
-    public string Content { get; set; } = string.Empty;
 
     [MPIgnore, MP2Ignore]
 #if __HAVE_N_JSON__
