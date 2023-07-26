@@ -257,6 +257,14 @@ partial interface IMicroServiceClient
             var ids_ = ids.AsEnumerable();
             return GetInfoByIds(errorAppendText, ids_);
         }
+
+        /// <summary>
+        /// 获取我的IP地址
+        /// </summary>
+        /// <param name="ipV4">仅获取 IPv4 地址</param>
+        /// <param name="ipV6">仅获取 IPv6 地址</param>
+        /// <returns></returns>
+        Task<IApiRsp<string?>> GetMyIP(bool ipV4 = false, bool ipV6 = false);
     }
 
     IScriptClient Script { get; }

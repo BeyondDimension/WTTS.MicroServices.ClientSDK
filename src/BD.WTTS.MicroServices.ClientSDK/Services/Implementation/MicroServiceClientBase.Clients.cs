@@ -392,6 +392,18 @@ partial class MicroServiceClientBase :
         return r;
     }
 
+    public async Task<IApiRsp<string?>> GetMyIP(bool ipV4 = false, bool ipV6 = false)
+    {
+        var r = await Conn.SendAsync<string?>(
+               isPolly: true,
+               isAnonymous: true,
+               isSecurity: false,
+               method: HttpMethod.Get,
+               requestUri: $"accelerator/projectgroups/myip?ipv4={ipV4}&ipv6={ipV6}",
+               cancellationToken: default)!;
+        return r;
+    }
+
     public async Task<IApiRsp<bool>> ScriptEvaluationAddorUpdate(AddOrUpdateEvaluationRequest addOrUpdateEvaluationRequest)
     {
         var r = await Conn.SendAsync<AddOrUpdateEvaluationRequest, bool>(

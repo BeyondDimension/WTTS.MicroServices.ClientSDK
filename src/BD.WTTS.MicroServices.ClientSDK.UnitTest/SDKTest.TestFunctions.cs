@@ -176,6 +176,16 @@ partial class SDKTest
             var suiRsp = await client.Script.ScriptUpdateInfo_Compat(guids, "");
             Assert.That(suiRsp.Code, Is.EqualTo(ApiRspCode.OK));
 
+            var myIPRsp = await client.Accelerate.GetMyIP();
+            Assert.That(myIPRsp.Code, Is.EqualTo(ApiRspCode.OK));
+            Assert.True(IPAddress.TryParse(myIPRsp.Content, out var ipAddress));
+            Assert.NotNull(ipAddress);
+
+            var myIPv4Rsp = await client.Accelerate.GetMyIP(ipV4: true);
+            var myIPv6Rsp = await client.Accelerate.GetMyIP(ipV6: true);
+            Assert.That(myIPv4Rsp.Code, Is.EqualTo(ApiRspCode.OK));
+            Assert.That(myIPv6Rsp.Code, Is.EqualTo(ApiRspCode.OK));
+
             #endregion
 
             #region Advertisement - 广告业务
