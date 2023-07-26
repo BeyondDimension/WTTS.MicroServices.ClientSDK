@@ -67,6 +67,15 @@ public sealed partial class ScriptDTO
 #if !__NOT_HAVE_S_JSON__
     [S_JsonIgnore]
 #endif
+    public string Content { get; set; } = string.Empty;
+
+    [MPIgnore, MP2Ignore]
+#if __HAVE_N_JSON__
+    [N_JsonIgnore]
+#endif
+#if !__NOT_HAVE_S_JSON__
+    [S_JsonIgnore]
+#endif
     public string? JsPathUrl { get; set; }
 
     private bool _IsUpdate;
