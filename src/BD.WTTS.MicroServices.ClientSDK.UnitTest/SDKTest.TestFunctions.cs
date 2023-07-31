@@ -15,7 +15,7 @@ partial class SDKTest
     [Test]
     public async Task TestSDK()
     {
-        if (ProjectUtils.IsCI()) return;
+        //if (ProjectUtils.IsCI()) return;
 
         foreach (var implType in new[] {
             Serializable.ImplType.MessagePack,
@@ -251,13 +251,13 @@ partial class SDKTest
     [Test]
     public async Task TeskGameLibary()
     {
-        if (ProjectUtils.IsCI()) return;
+        //if (ProjectUtils.IsCI()) return;
 
         await OnTestEnv(async (host, client) =>
         {
             #region GameLibary - 游戏库存服务
 
-            var syncUserAppInfoRsp = await client.GameLibary.SyncUserAppInfo(new SyncSteamUserAppInfoRequest(Random.Shared.Next(1, 9999999)));
+            var syncUserAppInfoRsp = await client.GameLibary.SyncUserAppInfo(new SyncSteamUserAppInfoRequest(Random.Shared.Next(1, 9999999).ToString()));
             //var syncUserAppInfoRsp = await client.GameLibary.SyncUserAppInfo(new SyncSteamUserAppInfoRequest(76561198179379306));
 
             Assert.That(syncUserAppInfoRsp.Code, Is.EqualTo(ApiRspCode.OK));
@@ -281,45 +281,22 @@ partial class SDKTest
     [Test]
     public async Task TestScriptEvaluation()
     {
-        if (ProjectUtils.IsCI()) return;
+        //if (ProjectUtils.IsCI()) return;
 
-        #region Auth
-        var jWTEntity = new JWTEntity()
+        await OnTestEnv(async (host, client) =>
         {
-            AccessToken = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1Sm5adi1tcHpVeVFjSF82cEJFWjZnIiwiaWF0IjoxNjg3Njc1NTA4OTY3LCJuYmYiOjE2ODc2NDY3MDgsImV4cCI6MTY5MDMyNTEwOCwiaXNzIjoiQ2xvdWRTZXJ2aWNlIiwiYXVkIjoiU3RlYW1Ub29scy5DbGllbnQifQ.5Njp-lV-FNFCVHuWlBr-frsG-HY3R3VO7yFBmWiY8k4CPyt6nmFgonqdpHStl5vK",
-            RefreshToken = "AQAAAAEAACcQAAAAIIV3pRxfP8w1OFHoX6erJp8DLmOnWBD0AyIe5VW_0U19fmWEsizryebpzRBzE0us8_HZ6NVvpg58JG6-vEvk9Ec",
-            ExpiresIn = new DateTimeOffset(DateTime.Now.AddYears(1))
-        };
-        AuthHelper.AuthToken = jWTEntity;
-        #endregion
+            #region 登录一位新用户
 
-        foreach (var implType in new[] {
-            Serializable.ImplType.MessagePack,
-            Serializable.ImplType.SystemTextJson,
-            Serializable.ImplType.MemoryPack,
-        })
-        {
+            tel = string.Concat("176", Random2.GenerateRandomString(8, String2.Digits));
 
-            #region Host
-            host = Host.CreateDefaultBuilder()
-                .ConfigureServices(services =>
-                {
-                    //services.AddSingleton(repo.Object);
-                    services.AddSingleton<MicroServiceClient>();
-                    services.AddSingleton<IHttpClientFactory, TestHttpClientFactory>();
-                    services.AddSingleton<IHttpPlatformHelperService, TestHttpPlatformHelperService>();
-                    services.AddSingleton<IToast, TestToast>();
-                    services.AddSingleton<IAuthHelper, AuthHelper>();
-                    services.AddSingleton<IModelValidator, TestModelValidator>();
-                    services.AddSingleton<IApplicationVersionService, TestApplicationVersionService>();
-                    services.AddSingleton<IMicroServiceClient.ISettings, TestSettings>();
-                    services.AddSingleton<IMicroServiceClient>(s => s.GetRequiredService<MicroServiceClient>());
-                    IMicroServiceClient.SerializableImplType = implType;
-                })
-                .ConfigureLogging(cfg => cfg.AddConsole())
-                .Build();
-            Ioc.ConfigureServices(host.Services);
-            client = host!.Services.GetRequiredService<IMicroServiceClient>();
+            // 发送验证码
+            var ssRsp = await client.AuthMessage.SendSms(new() { PhoneNumber = tel, Type = SmsCodeType.LoginOrRegister });
+            Assert.That(ssRsp.Code, Is.EqualTo(ApiRspCode.OK));
+
+            // 登录用户
+            var lrRsp = await client.Account.LoginOrRegister_Compat(new() { PhoneNumber = tel, SmsCode = "666666" });
+            Assert.That(lrRsp.Code, Is.EqualTo(ApiRspCode.OK));
+
             #endregion
 
             var scriptId = Guid.Parse("91bcbf3e-f36b-1410-8745-00bf2430ffa9");
@@ -355,13 +332,13 @@ partial class SDKTest
             var deleteRsp = await client.Script.DeleteScriptEvaluation(scriptEvaluationId);
 
             Assert.That(deleteRsp.Code, Is.EqualTo(ApiRspCode.OK));
-        }
+        });
     }
 
     [Test]
     public async Task TestUserAuthenticator()
     {
-        if (ProjectUtils.IsCI()) return;
+        //if (ProjectUtils.IsCI()) return;
 
         await OnTestEnv(async (host, client) =>
         {
@@ -504,7 +481,7 @@ partial class SDKTest
     [Test]
     public async Task TestSDKBasic()
     {
-        if (ProjectUtils.IsCI()) return;
+        //if (ProjectUtils.IsCI()) return;
 
         foreach (var implType in new[] {
             Serializable.ImplType.MessagePack,
