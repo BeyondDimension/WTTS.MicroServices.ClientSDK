@@ -130,6 +130,23 @@ partial class SDKTest
                 DeploymentMode.FDE);
             Assert.That(cuRsp.Code, Is.EqualTo(ApiRspCode.OK));
 
+            //var savRsp = await client.Version.SubmitAppVersion(new()
+            //{
+            //    Version = "2.8.19",
+            //    ReleaseNote = "测试提交发布信息哦",
+            //    Builds = new()
+            //    {
+            //        new()
+            //        {
+            //            AvailableTime = DateTime.Today.AddDays(7),
+            //            ClientDeviceType = ClientPlatform.Win32X64 | ClientPlatform.UWPX64 | ClientPlatform.LinuxX64,
+            //            ClientDistributionChannel = ClientDistributionChannel.Official,
+            //            DeploymentMode = DeploymentMode.SCD,
+            //        },
+            //    },
+            //});
+            //Assert.That(savRsp.Code, Is.EqualTo(ApiRspCode.OK));
+
             #endregion
 
             #region BigDataAnalysis - 大数据分析

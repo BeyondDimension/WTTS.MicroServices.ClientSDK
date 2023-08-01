@@ -70,6 +70,13 @@ partial interface IMicroServiceClient
             Version osVersion,
             Architecture architecture,
             DeploymentMode deploymentMode);
+
+        /// <summary>
+        /// 提交客户端程序版本
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<IApiRsp> SubmitAppVersion(AppVerSubmissionRequest request);
     }
 
     #endregion

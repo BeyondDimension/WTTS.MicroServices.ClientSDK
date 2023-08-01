@@ -56,6 +56,18 @@ partial class MicroServiceClientBase :
         return r;
     }
 
+    public async Task<IApiRsp> SubmitAppVersion(AppVerSubmissionRequest request)
+    {
+        var url = $"basic/versions/submitappversion";
+        var r = await Conn.SendAsync(
+            isAnonymous: false, // 使用 PublishToken 授权
+            method: HttpMethod.Post,
+            requestUri: url,
+            request: request,
+            cancellationToken: default);
+        return r;
+    }
+
     public IVersionClient Version => this;
 
     public IMessageClient Message => this;
