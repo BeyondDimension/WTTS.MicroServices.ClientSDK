@@ -98,5 +98,7 @@ public static partial class Constants
         public const string SponsorUrl_afdian = "https://afdian.net/@rmbgame";
         public const string SponsorUrl_ko_fi = "https://ko-fi.com/rmbgame";
         public const string SponsorUrl_patreon = "https://www.patreon.com/rmbgame";
+
+        public const string CrowUrl = "https://crowdin.com/project/steampp";
     }
 }
