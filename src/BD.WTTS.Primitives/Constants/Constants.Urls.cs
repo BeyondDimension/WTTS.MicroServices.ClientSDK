@@ -13,6 +13,7 @@ public static partial class Constants
         public const string OfficialWebsite_Agreement = "https://steampp.net/agreement";
         public const string OfficialWebsite_Contact = "https://steampp.net/contact";
         public const string OfficialWebsite_Faq = "https://steampp.net/faq";
+        public const string OfficialWebsite_JoinUs = "https://steampp.net/joinus";
         public const string OfficialWebsite_Changelog = "https://steampp.net/changelog";
         public const string OfficialWebsite_Box_Changelog_ = "https://steampp.net/changelogbox?theme={0}&language={1}";
         public const string OfficialWebsite_Box_Faq_ = "https://steampp.net/faqbox?theme={0}&language={1}";
