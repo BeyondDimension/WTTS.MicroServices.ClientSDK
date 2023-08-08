@@ -412,6 +412,7 @@ partial class MicroServiceClientBase :
                isSecurity: false,
                method: HttpMethod.Get,
                requestUri: $"accelerator/projectgroups/myip?ipv4={ipV4}&ipv6={ipV6}",
+               responseContentMaybeNull: true,
                cancellationToken: default)!;
         return r;
     }
