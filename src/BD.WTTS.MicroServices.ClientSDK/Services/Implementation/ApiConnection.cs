@@ -541,7 +541,6 @@ sealed class ApiConnection : IApiConnection
             {
                 var validate_fail_r = ApiRspHelper.Code<TResponseModel>(
                     ApiRspCode.RequestModelValidateFail, errorMessage);
-                if (isShowResponseErrorMessage) ShowResponseErrorMessage(requestUri, validate_fail_r, errorAppendText);
                 return validate_fail_r;
             }
         }
