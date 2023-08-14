@@ -26,6 +26,7 @@ public static partial class Constants
         public const string OfficialWebsite_Notice = "https://steampp.net/notice?id={0}";
         public const string OfficialWebsite_UploadsPublishFiles = $"https://steampp.net/uploads/publish/files/{{0}}{FileEx.BIN}";
         public const string OfficialWebsite_UploadsPublish = "https://steampp.net/uploads/publish/{0}";
+        public const string OfficialWebsite_Sponsor = "https://steampp.net/sponsor";
 
         #endregion
 
