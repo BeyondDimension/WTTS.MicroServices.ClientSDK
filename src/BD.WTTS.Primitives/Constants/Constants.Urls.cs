@@ -39,12 +39,24 @@ public static partial class Constants
         public const string BaseUrl_API_Development = "https://steampp.mossimo.net:8800";
         public const string BaseUrl_API_Debug = "https://localhost:5001";
 
+        static bool IsApiBaseUrl(string value) => value switch
+        {
+            BaseUrl_API_Production or
+            BaseUrl_API_Development or
+            BaseUrl_API_Debug => true,
+            _ => false,
+        };
+
         static string BaseUrl_API = BaseUrl_API_Development;
 
         public static string ApiBaseUrl
         {
             get => BaseUrl_API;
-            set => BaseUrl_API = value;
+            set
+            {
+                if (IsApiBaseUrl(value))
+                    BaseUrl_API = value;
+            }
         }
 
         public static string GetAdvertisementJumpUrl(Guid id)
