@@ -1,8 +1,28 @@
-﻿namespace BD.WTTS.Models;
+namespace BD.WTTS.Models;
 
 [MPObj, MP2Obj(SerializeLayout.Explicit)]
 public partial class OfficialMessageItemDTO
+#if MVVM_VM
+    : BaseNotifyPropertyChanged
+#endif
 {
+#if MVVM_VM
+    private bool _Unread;
+
+    [MPIgnore, MP2Ignore]
+#if __HAVE_N_JSON__
+    [N_JsonIgnore]
+#endif
+#if !__NOT_HAVE_S_JSON__
+    [S_JsonIgnore]
+#endif
+    public bool Unread
+    {
+        get => _Unread;
+        set => this.RaiseAndSetIfChanged(ref _Unread, value);
+    }
+#endif
+
     /// <summary>
     /// 标题
     /// </summary>
