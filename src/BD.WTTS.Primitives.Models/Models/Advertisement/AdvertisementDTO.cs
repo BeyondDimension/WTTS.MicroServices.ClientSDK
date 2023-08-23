@@ -64,6 +64,18 @@ public partial class AdvertisementDTO
 #endif
     public AdvertisementOrientation Standard { get; set; }
 
+    /// <summary>
+    /// 名字
+    /// </summary>
+    [MPKey(5), MP2Key(5)]
+#if __HAVE_N_JSON__
+    [N_JsonProperty("5")]
+#endif
+#if !__NOT_HAVE_S_JSON__
+    [S_JsonProperty("5")]
+#endif
+    public string Name { get; set; } = string.Empty;
+
 #if MVVM_VM
 
     /// <summary>
