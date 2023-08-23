@@ -1,7 +1,7 @@
 namespace BD.WTTS.Models;
 
 [MPObj, MP2Obj(SerializeLayout.Explicit)]
-public class ArticleCategoryDTO
+public partial class ArticleCategoryDTO
 {
     [MPKey(0), MP2Key(0)]
     public Guid Id { get; set; }

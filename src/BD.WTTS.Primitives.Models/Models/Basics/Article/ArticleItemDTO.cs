@@ -3,9 +3,8 @@ namespace BD.WTTS.Models;
 /// <summary>
 /// 文章
 /// </summary>
-
 [MPObj, MP2Obj(SerializeLayout.Explicit)]
-public class ArticleItemDTO
+public partial class ArticleItemDTO
 {
     [MPKey(0), MP2Key(0)]
     public Guid Id { get; set; }

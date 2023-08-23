@@ -1,8 +1,7 @@
 namespace BD.WTTS.Models;
 
-
 [MPObj, MP2Obj(SerializeLayout.Explicit)]
-public class ArticleTagDTO
+public partial class ArticleTagDTO
 {
 
     [MPKey(0), MP2Key(0)]
