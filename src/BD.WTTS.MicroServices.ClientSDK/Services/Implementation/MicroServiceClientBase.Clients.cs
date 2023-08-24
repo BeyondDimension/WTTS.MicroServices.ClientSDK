@@ -1,4 +1,7 @@
+using System;
+using System.Threading;
 using static BD.WTTS.Services.IMicroServiceClient;
+using static System.Serializable;
 
 namespace BD.WTTS.Services.Implementation;
 
@@ -16,7 +19,8 @@ partial class MicroServiceClientBase :
     IAuthenticatorClient,
     ISponsorClient,
     IGameLibaryClient,
-    IArticleClient
+    IArticleClient,
+    IShopClient
 {
     #region BasicServices - 基础服务
     public IArticleClient Article => this;
@@ -654,6 +658,43 @@ partial class MicroServiceClientBase :
     }
 
     public IGameLibaryClient GameLibary => this;
+
+    #endregion
+
+    #region Shop 商城接口
+
+    public async Task<ShopBaseResponse<ShopRecommendGoodItem[]>> RecommendGoods()
+    {
+        //var r = await Conn.SendAsync<ShopBaseRequest, ShopBaseRequest<ShopRecommendGoodItem>>(
+        //        isAnonymous: true,
+        //        isSecurity: false,
+        //        method: HttpMethod.Post,
+        //        requestUri: $"https://shop.api.steampp.net/api/Good/GetGoodsRecommendList",
+        //        request: new() { Id = 20, Data = true },
+        //        cancellationToken: default);
+        var client = CreateClient(null, HttpHandlerCategory.Default);
+        var request = new HttpRequestMessage(HttpMethod.Post, "https://shop.api.steampp.net/api/Good/GetGoodsRecommendList")
+        {
+            Content = new StringContent(SJSON(JsonImplType.SystemTextJson, new ShopBaseRequest()
+            {
+                Id = 20,
+                Data = true
+            }), Encoding.UTF8, MediaTypeNames.JSON)
+        };
+        var response = await client.UseDefaultSendAsync(request,
+             HttpCompletionOption.ResponseHeadersRead,
+             default)
+             .ConfigureAwait(false);
+        using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+        var r = await JsonSerializer.DeserializeAsync<ShopBaseResponse<ShopRecommendGoodItem[]>>(stream, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
+        return r;
+    }
+
+    public IShopClient Shop => this;
 
     #endregion
 }

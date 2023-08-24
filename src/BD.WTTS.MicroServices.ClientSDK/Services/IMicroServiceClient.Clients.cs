@@ -502,4 +502,12 @@ partial interface IMicroServiceClient
     }
 
     #endregion
+
+    IShopClient Shop { get; }
+
+    interface IShopClient
+    {
+        Task<ShopBaseResponse<ShopRecommendGoodItem[]>> RecommendGoods();
+    }
+
 }
