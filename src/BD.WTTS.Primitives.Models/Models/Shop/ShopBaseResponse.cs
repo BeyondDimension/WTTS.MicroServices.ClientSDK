@@ -1,6 +1,6 @@
 namespace BD.WTTS.Models;
 
-public class ShopBaseResponse<T> where T : class
+public sealed class ShopBaseResponse<T>
 {
     public bool Status { get; set; }
 

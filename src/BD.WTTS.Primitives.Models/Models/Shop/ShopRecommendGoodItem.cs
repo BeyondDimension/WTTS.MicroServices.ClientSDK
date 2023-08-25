@@ -1,9 +1,9 @@
 namespace BD.WTTS.Models;
 
-public class ShopRecommendGoodItem
+public sealed class ShopRecommendGoodItem
 {
     /// <summary>
-    /// 商品ID
+    /// 商品 Id
     /// </summary>
     public int Id { get; set; }
 

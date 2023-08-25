@@ -663,35 +663,18 @@ partial class MicroServiceClientBase :
 
     #region Shop 商城接口
 
-    public async Task<ShopBaseResponse<ShopRecommendGoodItem[]>> RecommendGoods()
+    public async Task<IApiRsp<ShopRecommendGoodItem[]>> RecommendGoods(int id)
     {
-        //var r = await Conn.SendAsync<ShopBaseRequest, ShopBaseRequest<ShopRecommendGoodItem>>(
-        //        isAnonymous: true,
-        //        isSecurity: false,
-        //        method: HttpMethod.Post,
-        //        requestUri: $"https://shop.api.steampp.net/api/Good/GetGoodsRecommendList",
-        //        request: new() { Id = 20, Data = true },
-        //        cancellationToken: default);
-        var client = CreateClient(null, HttpHandlerCategory.Default);
-        var request = new HttpRequestMessage(HttpMethod.Post, "https://shop.api.steampp.net/api/Good/GetGoodsRecommendList")
-        {
-            Content = new StringContent(SJSON(JsonImplType.SystemTextJson, new ShopBaseRequest()
+        var r = await Conn.SendShopAsync<ShopBaseRequest, ShopRecommendGoodItem[]?>(
+            method: HttpMethod.Post,
+            requestUri: "https://shop.api.steampp.net/api/Good/GetGoodsRecommendList",
+            request: new ShopBaseRequest
             {
-                Id = 20,
-                Data = true
-            }), Encoding.UTF8, MediaTypeNames.JSON)
-        };
-        var response = await client.UseDefaultSendAsync(request,
-             HttpCompletionOption.ResponseHeadersRead,
-             default)
-             .ConfigureAwait(false);
-        using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-
-        var r = await JsonSerializer.DeserializeAsync<ShopBaseResponse<ShopRecommendGoodItem[]>>(stream, new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
-        return r;
+                Id = id,
+                Data = true,
+            },
+            cancellationToken: default)!;
+        return r!; // IApiRsp.IsSuccess 为 true 时，Content 必定不为 null，由 responseContentMaybeNull = false 控制该行为
     }
 
     public IShopClient Shop => this;

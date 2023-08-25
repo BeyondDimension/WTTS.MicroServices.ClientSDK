@@ -5,7 +5,7 @@ using static BD.WTTS.Services.IApiConnectionPlatformHelper;
 
 namespace BD.WTTS.Services.Implementation;
 
-sealed class ApiConnection : IApiConnection
+sealed partial class ApiConnection : IApiConnection
 {
     readonly ILogger<ApiConnection> logger;
     readonly IHttpPlatformHelperService http_helper;
@@ -685,7 +685,6 @@ sealed class ApiConnection : IApiConnection
                     }
                     async ValueTask<IApiRsp<TResponseModel?>> JsonDeserializeAsync(bool rspIsCiphertext)
                     {
-                        var a = await response.Content.ReadAsByteArrayAsync();
                         using var stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
                         using var cryptoStream = rspIsCiphertext ? new CryptoStream(stream, aes.ThrowIsNull(nameof(aes)).CreateDecryptor(), CryptoStreamMode.Read) : null;
                         var result = await ApiRspHelper.JsonPackDeserializeAsync<TResponseModel>(rspIsCiphertext ? cryptoStream.ThrowIsNull(nameof(cryptoStream)) : stream, cancellationToken);

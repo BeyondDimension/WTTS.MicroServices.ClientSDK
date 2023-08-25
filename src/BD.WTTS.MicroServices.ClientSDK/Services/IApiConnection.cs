@@ -4,7 +4,7 @@ namespace BD.WTTS.Services;
 
 #pragma warning disable CA1068 // CancellationToken parameters must come last
 
-internal interface IApiConnection
+internal partial interface IApiConnection
 {
     /// <summary>
     /// 获取服务端接口的原始内容(ByteArray)

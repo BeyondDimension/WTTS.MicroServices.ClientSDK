@@ -503,11 +503,14 @@ partial interface IMicroServiceClient
 
     #endregion
 
+    #region Shop 商城业务
+
     IShopClient Shop { get; }
 
     interface IShopClient
     {
-        Task<ShopBaseResponse<ShopRecommendGoodItem[]>> RecommendGoods();
+        Task<IApiRsp<ShopRecommendGoodItem[]>> RecommendGoods(int id = 20);
     }
 
+    #endregion
 }
