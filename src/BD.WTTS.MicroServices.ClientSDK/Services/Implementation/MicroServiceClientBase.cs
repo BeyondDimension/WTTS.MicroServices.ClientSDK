@@ -34,7 +34,7 @@ public abstract partial class MicroServiceClientBase : GeneralHttpClientFactory,
     public MicroServiceClientBase(
         ILogger<MicroServiceClientBase> logger,
         ILoggerFactory loggerFactory,
-        System.Net.Http.Client.IHttpClientFactory clientFactory,
+        IHttpClientFactory clientFactory,
         IHttpPlatformHelperService http_helper,
         IToast toast,
         IAuthHelper authHelper,

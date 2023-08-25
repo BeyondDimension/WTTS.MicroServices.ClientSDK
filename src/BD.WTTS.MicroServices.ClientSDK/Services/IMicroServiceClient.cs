@@ -12,7 +12,7 @@ public partial interface IMicroServiceClient
 
     string ApiBaseUrl { get; }
 
-    /// <inheritdoc cref="IApiConnection.DownloadAsync(CancellationToken, string, string, IProgress{float}?, bool, bool, string?, bool)"/>
+    /// <inheritdoc cref="IApiConnection.DownloadAsync(CancellationToken, string, string, IProgress{float}?, bool, bool, string?, bool, HttpHandlerCategory)"/>
     Task<IApiRsp> Download(bool isAnonymous, string requestUri, string cacheFilePath, IProgress<float>? progress, CancellationToken cancellationToken = default);
 
     Task<string> Info();
