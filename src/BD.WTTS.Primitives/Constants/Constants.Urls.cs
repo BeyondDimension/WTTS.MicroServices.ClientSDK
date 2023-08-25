@@ -30,6 +30,14 @@ public static partial class Constants
         public const string OfficialWebsite_Account_Bind = "https://steampp.net/account/center/bind";
         public const string OfficialWebsite_Account_Safe = "https://steampp.net/account/center/safe";
         public const string OfficialWebsite_Sponsor = "https://steampp.net/sponsor";
+        public const string OfficialWebsite_Article = "https://steampp.net/article";
+        public const string OfficialWebsite_Article_Detail_ = "https://steampp.net/article/detail?id={0}";
+
+        #endregion
+
+        #region WattGame Shop
+        public const string WattGame = "https://shop.steampp.net/";
+        public const string WattGame_Goods_Detail_ = "https://shop.steampp.net/goods/detail/{0}";
 
         #endregion
 

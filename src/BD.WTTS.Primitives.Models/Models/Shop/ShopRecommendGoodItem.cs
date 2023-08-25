@@ -23,7 +23,7 @@ public sealed class ShopRecommendGoodItem
     public string Image { get; set; } = string.Empty;
 
     /// <summary>
-    /// 折扣价格
+    /// 商店原价
     /// </summary>
     public decimal Mktprice { get; set; }
 
@@ -38,4 +38,10 @@ public sealed class ShopRecommendGoodItem
     public string GoodsAllCategorys { get; set; } = string.Empty;
 
     public UsePlatform UsePlatform { get; set; } = UsePlatform.Steam;
+
+#if MVVM_VM
+    public string GoodsAllCategorysText => string.Join(" | ", GoodsAllCategorys.Split(',').Select(s => s.Split(':')[1]));
+
+    public int DiscountValue => Mktprice > Price ? (int)Math.Round((1 - (Price / Mktprice)) * 100) : 0;
+#endif
 }

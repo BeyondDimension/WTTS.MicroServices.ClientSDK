@@ -138,7 +138,7 @@ public static class CurrencyCodeEnumExtensions
     /// <returns></returns>
     public static CultureInfo? GetCultureInfo(this CurrencyCode eCurrencyCode)
            => CultureInfo.GetCultures(CultureTypes.SpecificCultures)
-           .FirstOrDefault(culture => new RegionInfo(culture.LCID).ISOCurrencySymbol == eCurrencyCode.ToString());
+           .FirstOrDefault(culture => new RegionInfo(culture.Name).ISOCurrencySymbol == eCurrencyCode.ToString());
 
     /// <summary>
     /// 根据 货币类型/货币种类 获取 区域信息
