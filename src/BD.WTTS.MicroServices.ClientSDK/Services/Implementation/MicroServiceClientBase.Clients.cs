@@ -362,9 +362,9 @@ partial class MicroServiceClientBase :
 
     public IAccelerateClient Accelerate => this;
 
-    public async Task<IApiRsp<ScriptInfoDTO?>> GM(string? errorAppendText = null)
+    public async Task<IApiRsp<ScriptDTO?>> GM(string? errorAppendText = null)
     {
-        var r = await Conn.SendAsync<ScriptInfoDTO>(
+        var r = await Conn.SendAsync<ScriptDTO>(
                isPolly: true,
                isAnonymous: true,
                isSecurity: false,

@@ -282,7 +282,7 @@ partial interface IMicroServiceClient
         /// 获取 GM.js(基础依赖库) 脚本信息
         /// </summary>
         /// <returns></returns>
-        Task<IApiRsp<ScriptInfoDTO?>> GM(string? errorAppendText = null);
+        Task<IApiRsp<ScriptDTO?>> GM(string? errorAppendText = null);
 
         /// <summary>
         /// 获取所有脚本数据
