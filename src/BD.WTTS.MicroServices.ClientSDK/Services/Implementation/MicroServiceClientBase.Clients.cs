@@ -667,7 +667,7 @@ partial class MicroServiceClientBase :
     {
         var r = await Conn.SendShopAsync<ShopBaseRequest, ShopRecommendGoodItem[]?>(
             method: HttpMethod.Post,
-            requestUri: "https://shop.api.steampp.net/api/Good/GetGoodsRecommendList",
+            requestUri: $"https://{Constants.Urls.OfficialShopApiHostName}/api/Good/GetGoodsRecommendList",
             request: new ShopBaseRequest
             {
                 Id = id,

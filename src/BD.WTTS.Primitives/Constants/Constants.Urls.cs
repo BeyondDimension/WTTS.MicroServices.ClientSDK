@@ -5,7 +5,9 @@ public static partial class Constants
 {
     public static class Urls
     {
-        #region OfficialWebsite
+        #region 
+        public const string OfficialApiHostName = "api.steampp.net";
+        public const string OfficialShopApiHostName = "shop.api.steampp.net";
 
         public const string OfficialWebsite = "https://steampp.net";
         public const string OfficialWebsite_Logo = "https://steampp.net/logo.svg";
