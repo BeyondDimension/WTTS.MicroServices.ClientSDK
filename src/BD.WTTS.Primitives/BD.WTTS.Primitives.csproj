@@ -37,10 +37,6 @@
 		<ProjectReference Include="..\..\ref\WTTS.Public\src\BD.WTTS.Primitives.Resources\BD.WTTS.Primitives.Resources.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Enums\SteamRecharge\" />
-	</ItemGroup>
-
 	<Import Project="..\TFM_NETX.props" />
 	<Import Project="..\GeneratePackage.props" />
 
