@@ -293,5 +293,15 @@ public static partial class Constants
         /// 语言编码
         /// </summary>
         public const int Max_LanguageCode = 100;
+
+        /// <summary>
+        /// 商业模块_商品名称
+        /// </summary>
+        public const int Max_GoodsName = 200;
+
+        /// <summary>
+        /// 商业模块_商品描述
+        /// </summary>
+        public const int Max_GoodsDescription = 8000;
     }
 }
