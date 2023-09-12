@@ -303,5 +303,20 @@ public static partial class Constants
         /// 商业模块_商品描述
         /// </summary>
         public const int Max_GoodsDescription = 8000;
+
+        /// <summary>
+        /// 抽奖活动名称最大长度名称
+        /// </summary>
+        public const int Max_RaffleActivityName = 200;
+
+        /// <summary>
+        /// 抽奖活动奖品名称最大长度名称
+        /// </summary>
+        public const int Max_RaffleActivityPrizeName = 200;
+
+        /// <summary>
+        /// 抽奖活动条件名称最大长度名称
+        /// </summary>
+        public const int Max_RaffleActivityConditionName = 200;
     }
 }
