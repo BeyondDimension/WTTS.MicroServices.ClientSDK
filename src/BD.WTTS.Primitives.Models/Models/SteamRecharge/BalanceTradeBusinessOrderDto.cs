@@ -56,8 +56,6 @@ public sealed partial class BalanceTradeBusinessOrderDto
     public Guid? MarketTransactionId { get; set; }
 
     #region Extention
-    [MPKey(17), MP2Key(17)]
-    public OrderDto? Order { get; set; }
     #endregion
 
 }
