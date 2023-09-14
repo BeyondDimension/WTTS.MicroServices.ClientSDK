@@ -328,5 +328,15 @@ public static partial class Constants
         /// 抽奖活动条件名称最大长度名称
         /// </summary>
         public const int Max_RaffleActivityConditionName = 200;
+
+        /// <summary>
+        /// 退款原因
+        /// </summary>
+        public const int Max_RefundReason = 500;
+
+        /// <summary>
+        /// 卖家备注
+        /// </summary>
+        public const int Max_SellerRemark = 2000;
     }
 }
