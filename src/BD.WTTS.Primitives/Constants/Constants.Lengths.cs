@@ -305,6 +305,16 @@ public static partial class Constants
         public const int Max_GoodsDescription = 8000;
 
         /// <summary>
+        /// 商业模块_好友邀请链接
+        /// </summary>
+        public const int Max_FriendInviteUrl = 3000;
+
+        /// <summary>
+        /// 商业模块_交易链接
+        /// </summary>
+        public const int Max_BalanceTradeUrl = 3000;
+
+        /// <summary>
         /// 抽奖活动名称最大长度名称
         /// </summary>
         public const int Max_RaffleActivityName = 200;
