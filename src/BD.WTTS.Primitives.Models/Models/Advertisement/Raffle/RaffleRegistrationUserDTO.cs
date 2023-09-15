@@ -1,6 +1,4 @@
 // ReSharper disable once CheckNamespace
-using BD.WTTS.Models.Abstractions;
-
 namespace BD.WTTS.Models;
 
 [MPObj, MP2Obj(SerializeLayout.Explicit)]

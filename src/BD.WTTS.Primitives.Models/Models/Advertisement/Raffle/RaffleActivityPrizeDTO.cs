@@ -9,7 +9,7 @@ public partial class RaffleActivityPrizeDTO
     public Guid Id { get; set; }
 
     [MPKey(1), MP2Key(1)]
-    public string Name { get; set; } = "";
+    public string Name { get; set; } = string.Empty;
 
     [MPKey(2), MP2Key(2)]
     public byte PrizeLevel { get; set; }

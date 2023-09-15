@@ -8,7 +8,7 @@ public partial class RaffleActivityDetailDTO
     public Guid Id { get; set; }
 
     [MPKey(1), MP2Key(1)]
-    public string ActivityName { get; set; } = "";
+    public string ActivityName { get; set; } = string.Empty;
 
     [MPKey(2), MP2Key(2)]
     public string? Describe { get; set; }
@@ -29,10 +29,10 @@ public partial class RaffleActivityDetailDTO
     public bool Recalibration { get; set; }
 
     [MPKey(8), MP2Key(8)]
-    public string ActivityRules { get; set; } = "";
+    public string ActivityRules { get; set; } = string.Empty;
 
     [MPKey(9), MP2Key(9)]
-    public string RewardRules { get; set; } = "";
+    public string RewardRules { get; set; } = string.Empty;
 
     [MPKey(10), MP2Key(10)]
     public ActivityType ActivityType { get; set; }
