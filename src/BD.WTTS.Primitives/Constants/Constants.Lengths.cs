@@ -100,6 +100,11 @@ public static partial class Constants
         public const int Max_Version = 23;
 
         /// <summary>
+        /// 版本信息最大长度
+        /// </summary>
+        public const int Max_InformationalVersion = 32;
+
+        /// <summary>
         /// 加速名最大长度
         /// </summary>
         public const int Max_AccelerateName = 200;
