@@ -6,8 +6,12 @@ namespace BD.WTTS.Enums;
 /// </summary>
 public enum PaymentType : byte
 {
-    余额 = 1,
-    在线支付,
-    优惠劵,
-    银行转账,
+    [Description("支付宝")]
+    Alipay = 1,
+
+    [Description("微信支付")]
+    WeChatPay = 2,
+
+    [Description("云闪付支付")]
+    UnionPay = 3,
 }
