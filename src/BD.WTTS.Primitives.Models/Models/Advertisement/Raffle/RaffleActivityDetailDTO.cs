@@ -54,4 +54,7 @@ public partial class RaffleActivityDetailDTO
     /// </summary>
     [MPKey(14), MP2Key(14)]
     public RaffleConditionDTO[]? Conditions { get; set; }
+
+    [MPKey(15), MP2Key(15)]
+    public DealerPlatformOnSalesItemDTO[]? PlatformOnSales { get; set; }
 }
