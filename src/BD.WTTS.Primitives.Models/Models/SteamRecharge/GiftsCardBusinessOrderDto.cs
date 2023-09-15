@@ -41,17 +41,20 @@ public sealed partial class GiftsCardBusinessOrderDto
     public DateTimeOffset? UsersAddSteamBotFriendTime { get; set; }
 
     [MPKey(12), MP2Key(12)]
-    public float TheExchangeRateAtTheTimeOfTransaction { get; set; }
+    public decimal TheExchangeRateAtTheTimeOfTransaction { get; set; }
 
     [MPKey(13), MP2Key(13)]
     public decimal RechargeAmount { get; set; }
 
     [MPKey(14), MP2Key(14)]
-    public decimal RechargeArea { get; set; }
+    public string RechargeArea { get; set; } = string.Empty;
 
     [MPKey(15), MP2Key(15)]
     public Guid? TransactionId { get; set; }
 
     [MPKey(16), MP2Key(16)]
+    public string FriendInvitationLink { get; set; } = string.Empty;
+
+    [MPKey(17), MP2Key(17)]
     public decimal Premium { get; set; }
 }
