@@ -11,9 +11,9 @@ public enum ConditionType
     Age = 1,
 
     /// <summary>
-    /// 用户级别
+    /// 赞助用户
     /// </summary>
-    UserLevel = 2,
+    SponsorUser = 2,
 
     /// <summary>
     /// 地理位置
@@ -23,6 +23,10 @@ public enum ConditionType
     /// <summary>
     /// AppId愿望单匹配
     /// </summary>
-    WishListMatching = 4,
+    SteamWishListMatching = 4,
 
+    /// <summary>
+    /// 电话号码
+    /// </summary>
+    PhoneNumber = 5,
 }

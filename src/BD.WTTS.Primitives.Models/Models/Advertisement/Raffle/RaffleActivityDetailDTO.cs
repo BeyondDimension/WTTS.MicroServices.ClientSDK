@@ -56,5 +56,18 @@ public partial class RaffleActivityDetailDTO
     public RaffleConditionDTO[]? Conditions { get; set; }
 
     [MPKey(15), MP2Key(15)]
-    public DealerPlatformOnSalesItemDTO[]? PlatformOnSales { get; set; }
+    public string? DealerGameId { get; set; }
+
+    [MPKey(16), MP2Key(16)]
+    public Guid? GameId { get; set; }
+
+    [MPKey(17), MP2Key(17)]
+    public string? GameName { get; set; }
+
+    [MPKey(18), MP2Key(18)]
+    public Guid? GamePlatformId { get; set; }
+
+    [MPKey(19), MP2Key(19)]
+    public string? GamePlatformName { get; set; }
+
 }
