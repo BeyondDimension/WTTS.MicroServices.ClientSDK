@@ -5,8 +5,12 @@ namespace BD.WTTS.Enums;
 /// </summary>
 public enum OrderBusinessType
 {
-    礼品卡充值 = 1,
-    自助礼品卡充值 = 2,
-    余额交易充值 = 3,
-    // 关联的支付业务类型枚举
+    [Description("礼品卡充值")]
+    GiftCardRecharge = 1,
+
+    [Description("自助礼品卡充值")]
+    SelfServiceGiftCardRecharge = 2,
+
+    [Description("余额交易充值")]
+    BalanceTransactionRecharge = 3,
 }
