@@ -6,10 +6,21 @@ namespace BD.WTTS.Enums;
 /// </summary>
 public enum PaymentMethod : byte
 {
-    现金 = 1,
-    在线支付,
-    余额,
-    优惠卷,
-    银行转账,
-    POS机,
+    [Description("现金")]
+    Cash = 1,
+
+    [Description("在线支付")]
+    Online = 2,
+
+    [Description("余额")]
+    Balance = 3,
+
+    [Description("优惠卷")]
+    Coupons = 4,
+
+    [Description("银行转账")]
+    BankTransfer = 5,
+
+    [Description("POS机")]
+    PointOfSalesTerminal = 6,
 }
