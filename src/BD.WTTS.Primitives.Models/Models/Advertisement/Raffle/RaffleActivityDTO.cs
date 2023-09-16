@@ -29,6 +29,9 @@ public partial class RaffleActivityDTO
     public DateTimeOffset RaffleOpeningTime { get; set; }
 
     [MPKey(8), MP2Key(8)]
-    public DateTimeOffset RaffleRevealTime { get; set; }
+    public DateTimeOffset? RaffleRevealTime { get; set; }
+
+    [MPKey(9), MP2Key(9)]
+    public DateTimeOffset? RaffleRevealEndTime { get; set; }
 
 }

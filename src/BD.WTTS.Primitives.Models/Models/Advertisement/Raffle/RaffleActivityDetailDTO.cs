@@ -38,7 +38,7 @@ public partial class RaffleActivityDetailDTO
     public DateTimeOffset RaffleOpeningTime { get; set; }
 
     [MPKey(11), MP2Key(11)]
-    public DateTimeOffset RaffleRevealTime { get; set; }
+    public DateTimeOffset? RaffleRevealTime { get; set; }
 
     /// <summary>
     /// 奖品列表
@@ -66,5 +66,8 @@ public partial class RaffleActivityDetailDTO
 
     [MPKey(18), MP2Key(18)]
     public string? GamePlatformName { get; set; }
+
+    [MPKey(19), MP2Key(19)]
+    public DateTimeOffset? RaffleRevealEndTime { get; set; }
 
 }
