@@ -5,7 +5,7 @@ public class OrderPaymentSuccessInfo
     /// <summary>
     /// 订单号
     /// </summary>
-    public string OrderNumber { get; set; } = "";
+    public long OrderNumber { get; set; }
 
     /// <summary>
     /// 支付平台
@@ -15,7 +15,7 @@ public class OrderPaymentSuccessInfo
     /// <summary>
     /// 支付平台的订单号/交易号
     /// </summary>
-    public string PaymentPlatformOrderNumber { get; set; } = "";
+    public string PaymentPlatformOrderNumber { get; set; } = string.Empty;
 
     /// <summary>
     /// 实收金额
@@ -25,5 +25,5 @@ public class OrderPaymentSuccessInfo
     /// <summary>
     /// 支付时间
     /// </summary>
-    public DateTimeOffset PaymentTime { get; set; }
+    public string PaymentTime { get; set; } = string.Empty;
 }
