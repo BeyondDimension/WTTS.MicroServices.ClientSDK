@@ -102,6 +102,7 @@ public static class CurrencyCodeEnumExtensions
         CurrencyCode.HKD => "HK",
         CurrencyCode.RUB => "RU",
         CurrencyCode.INR => "IN",
+        CurrencyCode.USD => "US",
         _ => null,
     };
 
