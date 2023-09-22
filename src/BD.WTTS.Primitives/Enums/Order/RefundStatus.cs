@@ -20,4 +20,9 @@ public enum RefundStatus
     /// 同意退款但原路退还失败
     /// </summary>
     Fail = 3,
+
+    /// <summary>
+    /// 被拒绝
+    /// </summary>
+    Refused = 4,
 }
