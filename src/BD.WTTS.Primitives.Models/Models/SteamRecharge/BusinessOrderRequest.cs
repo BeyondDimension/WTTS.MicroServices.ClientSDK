@@ -20,7 +20,6 @@ public sealed partial class BusinessOrderRequest
     /// <summary>
     /// 用户 SteamId
     /// </summary>
-    [Required]
     [MPKey(3), MP2Key(3)]
     public long UserSteamId { get; set; }
 
