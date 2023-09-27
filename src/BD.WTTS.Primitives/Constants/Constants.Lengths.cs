@@ -320,6 +320,11 @@ public static partial class Constants
         public const int Max_BalanceTradeUrl = 3000;
 
         /// <summary>
+        /// 商业模块_业务订单描述
+        /// </summary>
+        public const int Max_BusinessOrderDescription = 5000;
+
+        /// <summary>
         /// 抽奖活动名称最大长度名称
         /// </summary>
         public const int Max_RaffleActivityName = 200;
