@@ -22,7 +22,7 @@ public class OrderItemInfoDTO : IKeyModel<Guid>
     /// <summary>
     /// 支付时间
     /// </summary>
-    public DateTimeOffset PaymentTime { get; set; }
+    public DateTimeOffset? PaymentTime { get; set; }
 
     /// <summary>
     /// 业务类型，关联的支付业务类型枚举
