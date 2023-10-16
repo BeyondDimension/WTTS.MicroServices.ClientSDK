@@ -10,7 +10,7 @@ public class OrderPaymentSuccessInfo
     /// <summary>
     /// 支付平台
     /// </summary>
-    public PaymentPlatform PaymentPlatform { get; set; }
+    public PaymentType PaymentPlatform { get; set; }
 
     /// <summary>
     /// 支付平台的订单号/交易号
