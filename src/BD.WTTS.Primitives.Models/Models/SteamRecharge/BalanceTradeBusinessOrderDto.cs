@@ -44,7 +44,7 @@ public partial class BalanceTradeBusinessOrderDto
     /// 充值状态
     /// </summary>
     [MPKey(7), MP2Key(7)]
-    public GoodsRechageStatus GoodsRechargeStatus { get; set; }
+    public GoodsRechargeStatus GoodsRechargeStatus { get; set; }
 
     /// <summary>
     /// 支付时间

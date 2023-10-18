@@ -62,7 +62,7 @@ public sealed partial class GiftsCardRechargeBizOrderInfoDTO : BizOrderInfoDTO
     /// <summary>
     /// 充值状态
     /// </summary>
-    public GoodsRechageStatus GoodsRechargeStatus { get; set; }
+    public GoodsRechargeStatus GoodsRechargeStatus { get; set; }
 
     /// <summary>
     /// 用户 Steam Id
@@ -148,7 +148,7 @@ public sealed partial class BalanceTradeRechargeBizOrderInfoDTO : BizOrderInfoDT
     /// <summary>
     /// 充值状态
     /// </summary>
-    public GoodsRechageStatus GoodsRechargeStatus { get; set; }
+    public GoodsRechargeStatus GoodsRechargeStatus { get; set; }
 
     /// <summary>
     /// 支付时间
