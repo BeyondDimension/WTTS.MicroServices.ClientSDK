@@ -75,4 +75,9 @@ public class OrderDetailDTO : IKeyModel<Guid>
     /// 业务订单信息
     /// </summary>
     public object? BusinessOrderInfo { get; set; }
+
+    /// <summary>
+    /// 售后信息
+    /// </summary>
+    public List<AftersalesBillItemDTO>? AftersalesBills { get; set; }
 }
