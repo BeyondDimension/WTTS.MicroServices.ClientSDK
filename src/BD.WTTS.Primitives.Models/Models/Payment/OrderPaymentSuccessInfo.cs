@@ -1,29 +1,11 @@
 namespace BD.WTTS.Models;
 
-public class OrderPaymentSuccessInfo
-{
-    /// <summary>
-    /// 订单号
-    /// </summary>
-    public long OrderNumber { get; set; }
-
-    /// <summary>
-    /// 支付平台
-    /// </summary>
-    public PaymentType PaymentPlatform { get; set; }
-
-    /// <summary>
-    /// 支付平台的订单号/交易号
-    /// </summary>
-    public string PaymentPlatformOrderNumber { get; set; } = string.Empty;
-
-    /// <summary>
-    /// 实收金额
-    /// </summary>
-    public decimal AmountReceived { get; set; }
-
-    /// <summary>
-    /// 支付时间
-    /// </summary>
-    public string PaymentTime { get; set; } = string.Empty;
-}
+/// <summary>
+/// 订单支付成功信息
+/// </summary>
+/// <param name="OrderNumber">订单号</param>
+/// <param name="PaymentPlatform">支付平台</param>
+/// <param name="PaymentPlatformOrderNumber">支付平台的订单号/交易号</param>
+/// <param name="AmountReceived">实收金额</param>
+/// <param name="PaymentTime">支付时间</param>
+public record OrderPaymentSuccessInfo(long OrderNumber, PaymentType PaymentPlatform, string PaymentPlatformOrderNumber, decimal AmountReceived, string PaymentTime);
