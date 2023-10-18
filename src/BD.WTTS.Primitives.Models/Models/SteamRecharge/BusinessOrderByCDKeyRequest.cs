@@ -1,5 +1,4 @@
 // ReSharper disable once CheckNamespace
-using BD.WTTS.Enums.SteamRecharge;
 
 namespace BD.WTTS.Models;
 
@@ -34,7 +33,7 @@ public sealed partial class BusinessOrderByCDKeyRequest
     /// 充值地区
     /// </summary>
     [MPKey(4), MP2Key(4)]
-    public string RechargeArea { get; set; } = string.Empty;
+    public string? RechargeArea { get; set; }
 
     /// <summary>
     /// 订单来源
@@ -53,4 +52,10 @@ public sealed partial class BusinessOrderByCDKeyRequest
     /// </summary>
     [MPKey(7), MP2Key(7)]
     public decimal TheExchangeRateAtTheTimeOfTransaction { get; set; }
+
+    [MPKey(8), MP2Key(8)]
+    public Guid? ParsedCDKey => ShortGuid.TryParse(CDKey, out Guid parsedGuid) ? parsedGuid : null;
+
+    [MPKey(9), MP2Key(9)]
+    public Guid GoodsRechargeCategoryId { get; set; }
 }

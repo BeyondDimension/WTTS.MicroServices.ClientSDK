@@ -1,4 +1,4 @@
-namespace BD.WTTS.Enums.SteamRecharge;
+namespace BD.WTTS.Enums;
 
 public enum BusinessSource
 {
