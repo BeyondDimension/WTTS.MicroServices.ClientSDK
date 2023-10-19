@@ -16,12 +16,14 @@ public sealed partial record BatchCreateProductKeyRecordRequest
     /// 批量创建数量
     /// </summary>
     [MPKey(1), MP2Key(1)]
+    [Required(ErrorMessage = "充值数量错误")]
     public int Count { get; set; }
 
     /// <summary>
     /// 充值物品面额
     /// </summary>
     [MPKey(2), MP2Key(2)]
+    [Required(ErrorMessage = "充值面额错误")]
     public decimal Amount { get; set; }
 
     [MPKey(3), MP2Key(3)]
