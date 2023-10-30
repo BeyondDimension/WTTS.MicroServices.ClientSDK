@@ -14,5 +14,5 @@ public enum QuotesTradingStatus : byte
 
     待完成 = 4,
 
-    已失败 = 5
+    已失败 = 5,
 }
