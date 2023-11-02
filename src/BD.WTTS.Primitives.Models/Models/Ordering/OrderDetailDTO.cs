@@ -7,7 +7,7 @@ public class OrderDetailDTO : IKeyModel<Guid>
     /// <summary>
     /// 订单号
     /// </summary>
-    public long OrderNumber { get; set; }
+    public string OrderNumber { get; set; } = string.Empty;
 
     /// <summary>
     /// 订单类型

@@ -8,4 +8,4 @@ namespace BD.WTTS.Models;
 /// <param name="PaymentPlatformOrderNumber">支付平台的订单号/交易号</param>
 /// <param name="AmountReceived">实收金额</param>
 /// <param name="PaymentTime">支付时间</param>
-public record OrderPaymentSuccessInfo(long OrderNumber, PaymentType PaymentPlatform, string PaymentPlatformOrderNumber, decimal AmountReceived, string PaymentTime);
+public record OrderPaymentSuccessInfo(string OrderNumber, PaymentType PaymentPlatform, string PaymentPlatformOrderNumber, decimal AmountReceived, string PaymentTime);

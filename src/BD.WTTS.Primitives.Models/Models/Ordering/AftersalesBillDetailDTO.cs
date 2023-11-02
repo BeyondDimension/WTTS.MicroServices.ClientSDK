@@ -15,7 +15,7 @@ public class AftersalesBillDetailDTO : IKeyModel<Guid>
     /// <summary>
     /// 售后单号
     /// </summary>
-    public long AftersalesNumber { get; set; }
+    public string AftersalesNumber { get; set; } = string.Empty;
 
     /// <summary>
     /// 退款金额
@@ -52,7 +52,7 @@ public class AftersalesBillDetailDTO : IKeyModel<Guid>
     /// <summary>
     /// 订单号
     /// </summary>
-    public long OrderNumber { get; set; }
+    public string OrderNumber { get; set; } = string.Empty;
 
     /// <summary>
     /// 订单业务类型
@@ -82,7 +82,7 @@ public class AftersalesBillItemDTO
     /// <summary>
     /// 售后单号
     /// </summary>
-    public long AftersalesNumber { get; set; }
+    public string AftersalesNumber { get; set; } = string.Empty;
 
     /// <summary>
     /// 退款原因

@@ -348,5 +348,10 @@ public static partial class Constants
         /// 卖家备注
         /// </summary>
         public const int Max_SellerRemark = 2000;
+
+        /// <summary>
+        /// SnowflakeId
+        /// </summary>
+        public const int Max_SnowflakeId = 20;
     }
 }
