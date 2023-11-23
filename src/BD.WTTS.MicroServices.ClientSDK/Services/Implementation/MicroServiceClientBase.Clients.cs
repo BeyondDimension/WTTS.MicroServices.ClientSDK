@@ -663,10 +663,17 @@ partial class MicroServiceClientBase :
 
     #region Shop 商城接口
 
+    public async Task<IApiRsp<JWTEntity?>> GetShopUserTokenAsync()
+    {
+        var r = await Conn.GetShopUserTokenAsync(cancellationToken: default)!;
+        return r!; // IApiRsp.IsSuccess 为 true 时，Content 必定不为 null，由 responseContentMaybeNull = false 控制该行为
+    }
+
     public async Task<IApiRsp<ShopRecommendGoodItem[]>> RecommendGoods(int id)
     {
         var r = await Conn.SendShopAsync<ShopBaseRequest, ShopRecommendGoodItem[]?>(
             method: HttpMethod.Post,
+            isAnonymous: false,
             requestUri: $"https://{Constants.Urls.OfficialShopApiHostName}/api/Good/GetGoodsRecommendList",
             request: new ShopBaseRequest
             {

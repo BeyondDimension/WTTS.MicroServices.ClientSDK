@@ -5,8 +5,93 @@ namespace BD.WTTS.Services.Implementation;
 
 partial class ApiConnection
 {
+    /// <summary>
+    /// 从 Api 获取商城用户信息 特殊接口
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<IApiRsp<JWTEntity?>> GetShopUserTokenAsync(CancellationToken cancellationToken)
+    {
+        var requestUri = "/identity/loginshop/token";
+        var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
+        var client = conn_helper.CreateClient(DefaultHttpHandlerCategory);
+
+        IApiRsp<JWTEntity?> responseResult;
+        try
+        {
+            JWTEntity? jwt = await SetRequestHeaderAuthorization(request);
+
+            HandleHttpRequest(request);
+            var response = await client.UseDefaultSendAsync(request,
+                   HttpCompletionOption.ResponseHeadersRead,
+                   cancellationToken)
+                   .ConfigureAwait(false);
+
+            HandleAppObsolete(response.Headers);
+
+            var code = (ApiRspCode)response.StatusCode;
+
+            if (response.Content == null)
+            {
+                responseResult = ApiRspHelper.Code<JWTEntity>(code);
+            }
+            else
+            {
+                using var stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+                var obj = await JsonSerializer.DeserializeAsync<ShopBaseResponse<ShopJwtToken>>(stream, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                }, cancellationToken: cancellationToken);
+                if (obj == null)
+                {
+                    responseResult = ApiRspHelper.Code<JWTEntity>(code);
+                }
+                else
+                {
+                    responseResult = ApiRspHelper.Code(obj.Status ? ApiRspCode.OK : code, obj.Msg, obj.Data != null ? new JWTEntity
+                    {
+                        AccessToken = obj.Data.AccessToken,
+                        ExpiresIn = DateTimeOffset.Now.AddSeconds(obj.Data.ExpiresIn - 3600)
+                    } : null);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            (var code, var msg) = GetRspByExceptionWithLog(ex, requestUri);
+            responseResult = ApiRspHelper.Code<JWTEntity>(code, msg, default, ex);
+        }
+        await GlobalResponseIntercept(
+            true,
+            HttpMethod.Get,
+            requestUri,
+            null,
+            responseResult,
+            false,
+            isShowResponseErrorMessage: false);
+        return responseResult;
+    }
+
+    /// <summary>
+    /// 设置请求中的授权头
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    async ValueTask<JWTEntity?> SetShopRequestHeaderAuthorization(HttpRequestMessage request)
+    {
+        var authToken = await conn_helper.Auth.GetShopAuthTokenAsync();
+        var authHeaderValue = conn_helper.GetAuthenticationHeaderValue(authToken);
+        if (authHeaderValue != null)
+        {
+            request.Headers.Authorization = authHeaderValue;
+            return authToken;
+        }
+        return null;
+    }
+
     public async Task<IApiRsp<TResponseModel?>> SendShopAsync<TRequestModel, TResponseModel>(
         CancellationToken cancellationToken,
+        bool isAnonymous,
         HttpMethod method,
         string requestUri,
         TRequestModel? request,
@@ -17,6 +102,7 @@ partial class ApiConnection
         HttpHandlerCategory category = DefaultHttpHandlerCategory)
     {
         var rsp = await SendShopCoreAsync<TRequestModel, TResponseModel>(
+            isAnonymous,
             isPolly: isPolly,
             cancellationToken,
             method,
@@ -29,6 +115,7 @@ partial class ApiConnection
     }
 
     async Task<IApiRsp<TResponseModel?>> SendShopCoreAsync<TRequestModel, TResponseModel>(
+        bool isAnonymous,
         bool isPolly,
         CancellationToken cancellationToken,
         HttpMethod method,
@@ -45,6 +132,7 @@ partial class ApiConnection
         IApiRsp<TResponseModel?> response;
         Task<IApiRsp<TResponseModel?>> _SendShopCoreAsync(CancellationToken cancellationToken)
             => SendShopCoreAsync<TRequestModel, TResponseModel>(
+                isAnonymous,
                 cancellationToken,
                 method,
                 requestUri,
@@ -90,6 +178,7 @@ partial class ApiConnection
     }
 
     async Task<IApiRsp<TResponseModel?>> SendShopCoreAsync<TRequestModel, TResponseModel>(
+        bool isAnonymous,
         CancellationToken cancellationToken,
         HttpMethod method,
         string requestUri,
@@ -136,6 +225,13 @@ partial class ApiConnection
             request.Headers.Accept.ParseAdd(MediaTypeNames.JSON);
 
             var client = conn_helper.CreateClient(category);
+
+            JWTEntity? jwt = null;
+
+            if (!isAnonymous)
+            {
+                jwt = await SetShopRequestHeaderAuthorization(request);
+            }
 
             HandleHttpRequest(request);
 

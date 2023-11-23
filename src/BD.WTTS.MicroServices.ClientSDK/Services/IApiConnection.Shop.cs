@@ -6,12 +6,16 @@ namespace BD.WTTS.Services;
 
 internal partial interface IApiConnection
 {
+
+    Task<IApiRsp<JWTEntity?>> GetShopUserTokenAsync(CancellationToken cancellationToken);
+
     /// <summary>
     /// RequestModel+ResponseModel(调用 Shop 服务端接口)
     /// </summary>
     /// <typeparam name="TRequestModel">请求模型类型</typeparam>
     /// <typeparam name="TResponseModel">响应模型类型</typeparam>
     /// <param name="cancellationToken">传播应取消操作的通知</param>
+    /// <param name="isAnonymous">是否匿名</param>
     /// <param name="method">HTTP方法</param>
     /// <param name="requestUri">服务端接口 Url 地址</param>
     /// <param name="request">请求模型</param>
@@ -23,6 +27,7 @@ internal partial interface IApiConnection
     /// <returns></returns>
     Task<IApiRsp<TResponseModel?>> SendShopAsync<TRequestModel, TResponseModel>(
         CancellationToken cancellationToken,
+        bool isAnonymous,
         HttpMethod method,
         string requestUri,
         TRequestModel? request,

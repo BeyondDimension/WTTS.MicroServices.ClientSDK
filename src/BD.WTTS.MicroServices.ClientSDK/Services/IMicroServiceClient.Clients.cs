@@ -509,6 +509,8 @@ partial interface IMicroServiceClient
 
     interface IShopClient
     {
+        Task<IApiRsp<JWTEntity?>> GetShopUserTokenAsync();
+
         Task<IApiRsp<ShopRecommendGoodItem[]>> RecommendGoods(int id = 20);
     }
 
