@@ -9,39 +9,53 @@ public static partial class Constants
         public const string OfficialApiHostName = "api.steampp.net";
         public const string OfficialShopApiHostName = "shop.api.steampp.net";
 
-        public const string OfficialWebsite = "https://steampp.net";
-        public const string OfficialWebsite_Logo = "https://steampp.net/logo.svg";
-        public const string OfficialWebsite_Privacy = "https://steampp.net/privacy";
-        public const string OfficialWebsite_Agreement = "https://steampp.net/agreement";
-        public const string OfficialWebsite_Contact = "https://steampp.net/contact";
-        public const string OfficialWebsite_Faq = "https://steampp.net/faq";
-        public const string OfficialWebsite_JoinUs = "https://steampp.net/joinus";
-        public const string OfficialWebsite_Changelog = "https://steampp.net/changelog";
-        public const string OfficialWebsite_Box_Changelog_ = "https://steampp.net/changelogbox?theme={0}&language={1}";
-        public const string OfficialWebsite_Box_Faq_ = "https://steampp.net/faqbox?theme={0}&language={1}";
-        public const string OfficialWebsite_Box_Privacy = "https://steampp.net/PrivacyBox";
-        public const string OfficialWebsite_Box_Agreement = "https://steampp.net/AgreementBox";
-        public const string OfficialWebsite_LiunxSetupCer = "https://steampp.net/liunxSetupCer";
-        public const string OfficialWebsite_UnixHostAccess_ = "https://steampp.net/unixhostaccess?prot={0}";
-        public const string OfficialWebsite_UnixHostAccess = "https://steampp.net/unixhostaccess";
-        public const string OfficialWebsite_AppUpdateFailCode_ = "https://steampp.net?appUpdFailCode={0}";
-        public const string OfficialWebsite_Notice = "https://steampp.net/notice?id={0}";
-        public const string OfficialWebsite_UploadsPublishFiles = $"https://steampp.net/uploads/publish/files/{{0}}{FileEx.BIN}";
-        public const string OfficialWebsite_UploadsPublish = "https://steampp.net/uploads/publish/{0}";
-        public const string OfficialWebsite_Account_Center = "https://steampp.net/account/center/info";
-        public const string OfficialWebsite_Account_Bind = "https://steampp.net/account/center/bind";
-        public const string OfficialWebsite_Account_Safe = "https://steampp.net/account/center/safe";
-        public const string OfficialWebsite_Sponsor = "https://steampp.net/sponsor";
-        public const string OfficialWebsite_Article = "https://steampp.net/article";
-        public const string OfficialWebsite_Article_Detail_ = "https://steampp.net/article/detail?id={0}";
-        public const string OfficialWebsite_Fast_Login_ = "https://steampp.net/account/login?tk={0}&t={1}&redirectUrl={2}";
+        public const string OfficialWebsite =
+#if DEBUG
+        "https://steampp.mossimo.net:8500";
+
+#else
+        "https://steampp.net";
+
+#endif
+        public const string OfficialWebsite_Logo = $"{OfficialWebsite}/logo.svg";
+        public const string OfficialWebsite_Privacy = $"{OfficialWebsite}/privacy";
+        public const string OfficialWebsite_Agreement = $"{OfficialWebsite}/agreement";
+        public const string OfficialWebsite_Contact = $"{OfficialWebsite}/contact";
+        public const string OfficialWebsite_Faq = $"{OfficialWebsite}/faq";
+        public const string OfficialWebsite_JoinUs = $"{OfficialWebsite}/joinus";
+        public const string OfficialWebsite_Changelog = $"{OfficialWebsite}/changelog";
+        public const string OfficialWebsite_Box_Changelog_ = $"{OfficialWebsite}/changelogbox?theme={{0}}&language={{1}}";
+        public const string OfficialWebsite_Box_Faq_ = $"{OfficialWebsite}/faqbox?theme={{0}}&language={{1}}";
+        public const string OfficialWebsite_Box_Privacy = $"{OfficialWebsite}/PrivacyBox";
+        public const string OfficialWebsite_Box_Agreement = $"{OfficialWebsite}/AgreementBox";
+        public const string OfficialWebsite_LiunxSetupCer = $"{OfficialWebsite}/liunxSetupCer";
+        public const string OfficialWebsite_UnixHostAccess_ = $"{OfficialWebsite}/unixhostaccess?prot={{0}}";
+        public const string OfficialWebsite_UnixHostAccess = $"{OfficialWebsite}/unixhostaccess";
+        public const string OfficialWebsite_AppUpdateFailCode_ = $"{OfficialWebsite}?appUpdFailCode={{0}}";
+        public const string OfficialWebsite_Notice = $"{OfficialWebsite}/notice?id={{0}}";
+        public const string OfficialWebsite_UploadsPublishFiles = $"{OfficialWebsite}/uploads/publish/files/{{0}}{FileEx.BIN}";
+        public const string OfficialWebsite_UploadsPublish = $"{OfficialWebsite}/uploads/publish/{{0}}";
+        public const string OfficialWebsite_Account_Center = $"{OfficialWebsite}/account/center/info";
+        public const string OfficialWebsite_Account_Bind = $"{OfficialWebsite}/account/center/bind";
+        public const string OfficialWebsite_Account_Safe = $"{OfficialWebsite}/account/center/safe";
+        public const string OfficialWebsite_Sponsor = $"{OfficialWebsite}/sponsor";
+        public const string OfficialWebsite_Article = $"{OfficialWebsite}/article";
+        public const string OfficialWebsite_Article_Detail_ = $"{OfficialWebsite}/article/detail?id={{0}}";
+        public const string OfficialWebsite_Fast_Login_ = $"{OfficialWebsite}/account/login?tk={{0}}&t={{1}}&redirectUrl={{2}}";
 
         #endregion
 
         #region WattGame Shop
-        public const string WattGame = "https://shop.steampp.net/";
-        public const string WattGame_Goods_Detail_ = "https://shop.steampp.net/goods/detail/{0}";
-        public const string WattGame_Fast_Login_ = "https://shop.steampp.net/oauth/verifier?tk={0}&t={1}&to={2}";
+        public const string WattGame =
+#if DEBUG
+        "https://steampp.mossimo.net:7500";
+
+#else
+        "https://shop.steampp.net";
+
+#endif
+        public const string WattGame_Goods_Detail_ = $"{WattGame}/goods/detail/{{0}}";
+        public const string WattGame_Fast_Login_ = $"{WattGame}/oauth/verifier?tk={{0}}&t={{1}}&to={{2}}";
 
         #endregion
 
