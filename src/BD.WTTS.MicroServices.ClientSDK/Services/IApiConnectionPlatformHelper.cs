@@ -17,6 +17,12 @@ public interface IApiConnectionPlatformHelper
     Task SaveAuthTokenAsync(JWTEntity authToken);
 
     /// <summary>
+    /// 保存商城用户登录凭证
+    /// </summary>
+    /// <param name="authToken"></param>
+    Task SaveShopAuthTokenAsync(JWTEntity authToken);
+
+    /// <summary>
     /// 当登录完成时
     /// </summary>
     /// <param name="phoneNumber"></param>

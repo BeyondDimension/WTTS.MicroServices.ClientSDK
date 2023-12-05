@@ -56,6 +56,8 @@ public abstract partial class MicroServiceClientBase : GeneralHttpClientFactory,
 
     public virtual Task SaveAuthTokenAsync(JWTEntity authToken) => Task.CompletedTask;
 
+    public virtual Task SaveShopAuthTokenAsync(JWTEntity authToken) => Task.CompletedTask;
+
     public virtual Task OnLoginedAsync(IReadOnlyPhoneNumber? phoneNumber, ILoginResponse response) => Task.CompletedTask;
 
     public virtual void ShowResponseErrorMessage(string message) => toast.Show(ToastIcon.Error, message);

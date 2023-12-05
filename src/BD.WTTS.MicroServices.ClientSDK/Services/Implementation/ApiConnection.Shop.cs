@@ -51,7 +51,8 @@ partial class ApiConnection
                     responseResult = ApiRspHelper.Code(obj.Status ? ApiRspCode.OK : code, obj.Msg, obj.Data != null ? new JWTEntity
                     {
                         AccessToken = obj.Data.AccessToken,
-                        ExpiresIn = DateTimeOffset.Now.AddSeconds(obj.Data.ExpiresIn - 3600)
+                        ExpiresIn = DateTimeOffset.Now.AddSeconds(obj.Data.ExpiresIn - 3600),
+                        RefreshToken = nameof(RefreshToken)
                     } : null);
                 }
             }
@@ -87,6 +88,34 @@ partial class ApiConnection
             return authToken;
         }
         return null;
+    }
+
+    public Task<bool>? RefreshShopTokenAndAutoSaveTask { get; private set; }
+
+    async Task<bool> RefreshShopTokenAndAutoSave()
+    {
+        var rsp = await GetShopUserTokenAsync(default);
+
+        if (rsp.IsSuccess && rsp.Content != null)
+        {
+            await conn_helper.SaveShopAuthTokenAsync(rsp.Content);
+            return true;
+        }
+        else if (rsp.Code != ApiRspCode.Unauthorized)
+        {
+            logger.LogWarning("GetShopUserToken fail, Code: {0}", rsp.Code);
+        }
+        return false;
+    }
+
+    async Task<bool> RefreshShopToken()
+    {
+        if (RefreshShopTokenAndAutoSaveTask == null)
+        {
+            RefreshShopTokenAndAutoSaveTask = RefreshShopTokenAndAutoSave();
+        }
+        var r = await RefreshShopTokenAndAutoSaveTask;
+        return r;
     }
 
     public async Task<IApiRsp<TResponseModel?>> SendShopAsync<TRequestModel, TResponseModel>(
@@ -243,6 +272,26 @@ partial class ApiConnection
             HandleAppObsolete(response.Headers);
 
             var code = (ApiRspCode)response.StatusCode;
+
+            if (!isAnonymous && code == ApiRspCode.Unauthorized && jwt != null)
+            {
+                var resultRefreshToken = await RefreshShopToken();
+                if (resultRefreshToken)
+                {
+                    var resultRecursion = await SendShopCoreAsync<TRequestModel, TResponseModel>(
+                        isAnonymous,
+                        isApi,
+                        cancellationToken,
+                        method,
+                        requestUri,
+                        requestModel,
+                        responseContentMaybeNull,
+                        isShowResponseErrorMessage,
+                        errorAppendText,
+                        category: HttpHandlerCategory.UserInitiated);
+                    return resultRecursion;
+                }
+            }
 
             if (response.Content == null)
             {

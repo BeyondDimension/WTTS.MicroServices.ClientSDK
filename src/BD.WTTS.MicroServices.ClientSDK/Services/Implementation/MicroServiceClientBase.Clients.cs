@@ -673,7 +673,7 @@ partial class MicroServiceClientBase :
     {
         var r = await Conn.SendShopAsync<ShopBaseRequest, ShopRecommendGoodItem[]?>(
             method: HttpMethod.Post,
-            isAnonymous: false,
+            isAnonymous: true,
             requestUri: $"https://{Constants.Urls.OfficialShopApiHostName}/api/Good/GetGoodsRecommendList",
             request: new ShopBaseRequest
             {
