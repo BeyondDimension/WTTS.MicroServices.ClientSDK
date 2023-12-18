@@ -13,4 +13,7 @@ public enum OrderBusinessType
 
     [Description("余额交易充值")]
     BalanceTransactionRecharge = 3,
+
+    [Description("迅游订单")]
+    XunYouOrder = 4,
 }
