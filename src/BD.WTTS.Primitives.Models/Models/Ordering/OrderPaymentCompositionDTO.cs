@@ -35,7 +35,7 @@ public class OrderPaymentCompositionDTO
     /// <summary>
     /// 支付状态
     /// </summary>
-    public bool PaymentStatus { get; set; }
+    public PaymentStatus PaymentStatus { get; set; }
 
     /// <summary>
     /// 订单 Id
