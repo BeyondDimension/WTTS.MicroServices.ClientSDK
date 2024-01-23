@@ -3,9 +3,6 @@ namespace BD.WTTS.Models;
 /// <summary>
 /// 订单退款消息内容
 /// </summary>
-public class OrderRefundMessage
-{
-    public Guid OrderId { get; set; }
-
-    public Guid RefundBillId { get; set; }
-}
+/// <param name="OrderNumber">订单号</param>
+/// <param name="RefundNumber">退款单号</param>
+public record OrderRefundMessage(string OrderNumber, string RefundNumber);
