@@ -25,4 +25,9 @@ public enum RefundStatus
     /// 被拒绝
     /// </summary>
     Refused = 4,
+
+    /// <summary>
+    /// 退款中
+    /// </summary>
+    Refunding = 5,
 }
