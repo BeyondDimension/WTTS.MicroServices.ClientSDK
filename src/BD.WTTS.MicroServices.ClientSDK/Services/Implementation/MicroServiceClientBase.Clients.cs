@@ -123,7 +123,7 @@ partial class MicroServiceClientBase :
               isAnonymous: true,
               isSecurity: true,
               method: HttpMethod.Post,
-              requestUri: "identity/account/loginorregister",
+              requestUri: "identity/v1/account/loginorregister",
               request: request,
               cancellationToken: default,
               responseContentMaybeNull: false);
@@ -269,7 +269,7 @@ partial class MicroServiceClientBase :
                 isAnonymous: false,
                 isSecurity: true,
                 method: HttpMethod.Get,
-                requestUri: "identity/manage/refreshuserinfo",
+                requestUri: "identity/v1/manage/refreshuserinfo",
                 cancellationToken: default);
         return r;
     }

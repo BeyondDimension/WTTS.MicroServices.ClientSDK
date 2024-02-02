@@ -4,7 +4,7 @@ namespace BD.WTTS.Models;
 /// <summary>
 /// 用户资料模型类 3.0.0 rc1 - rc3 使用
 /// </summary>
-[MPObj, MP2Obj(SerializeLayout.Explicit)]
+[MPObj, MP2Obj(GenerateType.VersionTolerant, SerializeLayout.Explicit)]
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 public sealed partial class IdentityUserInfoDTO :
 #if MVVM_VM
@@ -168,4 +168,13 @@ public sealed partial class IdentityUserInfoDTO :
     [Reactive]
 #endif
     public string? PersonalizedSignature { get; set; }
+
+    /// <summary>
+    /// 个性签名
+    /// </summary>
+    [MPKey(21), MP2Key(21)]
+#if MVVM_VM
+    [Reactive]
+#endif
+    public string? WattOpenId { get; set; }
 }

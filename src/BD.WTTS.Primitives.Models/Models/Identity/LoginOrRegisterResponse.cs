@@ -5,7 +5,7 @@ namespace BD.WTTS.Models;
 /// 登录或注册接口响应模型
 /// </summary>
 [GenerateTypeScript]
-[MPObj, MP2Obj(SerializeLayout.Explicit)]
+[MPObj, MP2Obj(GenerateType.VersionTolerant, SerializeLayout.Explicit)]
 public partial class LoginOrRegisterResponse : ILoginResponse, IExplicitHasValue, ILoginOrRegisterResponse
 {
     Guid ILoginResponse.UserId => User.ThrowIsNull().Id;
