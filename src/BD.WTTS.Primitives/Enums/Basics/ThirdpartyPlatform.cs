@@ -31,4 +31,6 @@ public enum ThirdpartyPlatform
     Google = 1 << 12,
 
     RiotGames = 1 << 13,
+
+    Rockstar = 1 << 14,
 }
