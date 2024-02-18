@@ -170,7 +170,7 @@ public sealed partial class IdentityUserInfoDTO :
     public string? PersonalizedSignature { get; set; }
 
     /// <summary>
-    /// 个性签名
+    /// 加速器 OpenId
     /// </summary>
     [MPKey(21), MP2Key(21)]
 #if MVVM_VM
