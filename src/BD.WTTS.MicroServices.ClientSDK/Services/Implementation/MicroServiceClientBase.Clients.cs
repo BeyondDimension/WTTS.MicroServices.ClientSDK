@@ -410,15 +410,41 @@ partial class MicroServiceClientBase :
 
     public async Task<IApiRsp<string?>> GetMyIP(bool ipV4 = false, bool ipV6 = false)
     {
-        var r = await Conn.SendAsync<string?>(
-               isPolly: true,
-               isAnonymous: true,
-               isSecurity: false,
-               method: HttpMethod.Get,
-               requestUri: $"accelerator/projectgroups/myip?ipv4={ipV4}&ipv6={ipV6}",
-               responseContentMaybeNull: true,
-               cancellationToken: default)!;
-        return r;
+        //var r = await Conn.SendAsync<string?>(
+        //       isPolly: true,
+        //       isAnonymous: true,
+        //       isSecurity: false,
+        //       method: HttpMethod.Get,
+        //       requestUri: $"accelerator/projectgroups/myip?ipv4={ipV4}&ipv6={ipV6}",
+        //       responseContentMaybeNull: true,
+        //       cancellationToken: default)!;
+        //return r;
+
+        try
+        {
+            string url;
+            if (ipV4)
+            {
+                url = "https://v4.ipip.net";
+            }
+            else if (ipV6)
+            {
+                url = "https://v6.ipip.net";
+            }
+            else
+            {
+                return ApiRspHelper.Ok((string?)null);
+            }
+            using var client = new HttpClient();
+            client.Timeout = TimeSpan.FromSeconds(7.75d);
+            var r = (await client.GetStringAsync(url, cancellationToken: default))?.Trim();
+            if (IPAddress.TryParse(r, out var _))
+                return ApiRspHelper.Ok(r);
+        }
+        catch
+        {
+        }
+        return ApiRspHelper.Ok((string?)null);
     }
 
     public async Task<IApiRsp<bool>> ScriptEvaluationAddorUpdate(AddOrUpdateEvaluationRequest addOrUpdateEvaluationRequest)
