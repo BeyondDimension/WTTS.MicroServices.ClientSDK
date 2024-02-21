@@ -74,6 +74,12 @@ public static partial class Constants
         #region API
 
         /// <summary>
+        /// SppWebApi 正式环境基地址
+        /// </summary>
+        public const string BaseUrl_API_Production =
+            $"{String2.Prefix_HTTPS}{OfficialApiHostName}";
+
+        /// <summary>
         /// SppWebApi 测试环境基地址
         /// </summary>
         public const string BaseUrl_API_Development =
@@ -85,8 +91,6 @@ public static partial class Constants
         /// </summary>
         public const string BaseUrl_API_Debug =
             "https://localhost:5001";
-
-        public const string BaseUrl_API_Debug = "https://localhost:5001";
 
         static bool IsApiBaseUrl(string value) => value switch
         {
