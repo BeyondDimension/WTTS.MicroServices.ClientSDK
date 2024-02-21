@@ -6,17 +6,23 @@ public static partial class Constants
     public static class Urls
     {
         #region 
+
         public const string OfficialApiHostName = "api.steampp.net";
         public const string OfficialShopApiHostName = "shop.api.steampp.net";
 
+        /// <summary>
+        /// 官网网址
+        /// </summary>
         public const string OfficialWebsite =
-#if DEBUG
-        "https://steampp.mossimo.net:8500";
+#if DEBUG || USE_DEV_API
+            //"https://steampp.mossimo.net:8500";
+            "https://ms-test.steampp.net";
 
 #else
         "https://steampp.net";
 
 #endif
+
         public const string OfficialWebsite_Logo = $"{OfficialWebsite}/logo.svg";
         public const string OfficialWebsite_Privacy = $"{OfficialWebsite}/privacy";
         public const string OfficialWebsite_Agreement = $"{OfficialWebsite}/agreement";
@@ -46,14 +52,20 @@ public static partial class Constants
         #endregion
 
         #region WattGame Shop
+
+        /// <summary>
+        /// 商城网址
+        /// </summary>
         public const string WattGame =
-#if DEBUG
-        "https://steampp.mossimo.net:7500";
+#if DEBUG || USE_DEV_API
+            "https://steampp.mossimo.net:7500";
+        //"https://ms-test.steampp.net";
 
 #else
         "https://shop.steampp.net";
 
 #endif
+
         public const string WattGame_Goods_Detail_ = $"{WattGame}/goods/detail/{{0}}";
         public const string WattGame_Fast_Login_ = $"{WattGame}/oauth/verifier?tk={{0}}&t={{1}}&to={{2}}";
 
@@ -61,8 +73,19 @@ public static partial class Constants
 
         #region API
 
-        public const string BaseUrl_API_Production = "https://api.steampp.net";
-        public const string BaseUrl_API_Development = "https://steampp.mossimo.net:8800";
+        /// <summary>
+        /// SppWebApi 测试环境基地址
+        /// </summary>
+        public const string BaseUrl_API_Development =
+            //"https://steampp.mossimo.net:8800";
+            "https://ms-test.steampp.net";
+
+        /// <summary>
+        /// SppWebApi 本地调试基地址
+        /// </summary>
+        public const string BaseUrl_API_Debug =
+            "https://localhost:5001";
+
         public const string BaseUrl_API_Debug = "https://localhost:5001";
 
         static bool IsApiBaseUrl(string value) => value switch
