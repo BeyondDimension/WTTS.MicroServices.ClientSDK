@@ -29,4 +29,9 @@ public enum ConditionType
     /// 电话号码
     /// </summary>
     PhoneNumber = 5,
+
+    /// <summary>
+    /// 迅游订单
+    /// </summary>
+    XunYouOrder = 6,
 }
