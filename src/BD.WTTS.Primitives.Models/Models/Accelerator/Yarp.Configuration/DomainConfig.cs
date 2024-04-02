@@ -41,7 +41,11 @@ public sealed partial class DomainConfig : IDomainConfig
     [MPKey(9), MP2Key(9)]
     public IReadOnlyDictionary<DomainPattern, IDomainConfig>? Items { get; init; }
 
+    [MPKey(10), MP2Key(10)]
+    public bool IsServerSideProxy { get; }
+
     IResponseConfig? IDomainConfig.Response => Response;
+
 }
 
 /// <summary>
@@ -100,6 +104,8 @@ public interface IDomainConfig
     /// 子匹配项
     /// </summary>
     IReadOnlyDictionary<DomainPattern, IDomainConfig>? Items { get; }
+
+    bool IsServerSideProxy { get; }
 }
 
 public static class DomainConfigExtensions
@@ -173,9 +179,16 @@ partial class AccelerateProjectDTO : IDomainConfig
                 };
                 return b.Uri;
             }
+            else if (ProxyType == ProxyType.ServerAccelerate)
+            {
+                var uri = new Uri(ForwardDomainNames);
+                return uri;
+            }
             return null;
         }
     }
+
+    bool IDomainConfig.IsServerSideProxy => ProxyType == ProxyType.ServerAccelerate;
 
     string? IDomainConfig.UserAgent => FakeUserAgent;
 
