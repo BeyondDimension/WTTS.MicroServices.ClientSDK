@@ -1,7 +1,4 @@
-using System;
-using System.Threading;
 using static BD.WTTS.Services.IMicroServiceClient;
-using static System.Serializable;
 
 namespace BD.WTTS.Services.Implementation;
 
@@ -23,6 +20,7 @@ partial class MicroServiceClientBase :
     IShopClient
 {
     #region BasicServices - 基础服务
+
     public IArticleClient Article => this;
 
     public async Task<IApiRsp<PagedModel<ArticleItemDTO>?>> Order(
@@ -92,7 +90,7 @@ partial class MicroServiceClientBase :
         return r;
     }
 
-    #endregion
+    #endregion BasicServices - 基础服务
 
     #region BigDataAnalysis - 大数据分析
 
@@ -110,7 +108,7 @@ partial class MicroServiceClientBase :
 
     public IActiveUserClient ActiveUser => this;
 
-    #endregion
+    #endregion BigDataAnalysis - 大数据分析
 
     #region Identity - 账号服务
 
@@ -143,6 +141,20 @@ partial class MicroServiceClientBase :
                 },
                 cancellationToken: default,
                 responseContentMaybeNull: true);
+        return r;
+    }
+
+    public async Task<IApiRsp<string?>> GenerateServerSideProxyToken(GenerateServerSideProxyTokenRequest request)
+    {
+        var r = await Conn.SendAsync<GenerateServerSideProxyTokenRequest, string>(
+                isSecurity: true,
+                method: HttpMethod.Post,
+                requestUri: "identity/v1/account/serversideproxytoken",
+                request: request,
+                cancellationToken: default,
+                responseContentMaybeNull: false
+            );
+
         return r;
     }
 
@@ -296,7 +308,7 @@ partial class MicroServiceClientBase :
         return r;
     }
 
-    #endregion
+    #endregion Identity - 账号服务
 
     #region Accelerator - 加速与脚本业务
 
@@ -495,7 +507,7 @@ partial class MicroServiceClientBase :
 
     public IScriptClient Script => this;
 
-    #endregion
+    #endregion Accelerator - 加速与脚本业务
 
     #region Advertisement - 广告业务
 
@@ -518,7 +530,7 @@ partial class MicroServiceClientBase :
 
     public IAdvertisementClient Advertisement => this;
 
-    #endregion
+    #endregion Advertisement - 广告业务
 
     #region Authenticator - 云令牌业务
 
@@ -620,7 +632,7 @@ partial class MicroServiceClientBase :
         return r;
     }
 
-    #endregion
+    #endregion Authenticator - 云令牌业务
 
     #region Sponsor - 外部赞助业务
 
@@ -640,7 +652,7 @@ partial class MicroServiceClientBase :
 
     public ISponsorClient Sponsor => this;
 
-    #endregion
+    #endregion Sponsor - 外部赞助业务
 
     #region GameLibary - 游戏库存业务
 
@@ -685,7 +697,7 @@ partial class MicroServiceClientBase :
 
     public IGameLibaryClient GameLibary => this;
 
-    #endregion
+    #endregion GameLibary - 游戏库存业务
 
     #region Shop 商城接口
 
@@ -712,5 +724,5 @@ partial class MicroServiceClientBase :
 
     public IShopClient Shop => this;
 
-    #endregion
+    #endregion Shop 商城接口
 }

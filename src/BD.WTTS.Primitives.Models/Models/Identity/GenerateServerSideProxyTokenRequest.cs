@@ -1,4 +1,4 @@
-namespace BD.WTTS.Models.Identity;
+namespace BD.WTTS.Models;
 
 [MPObj, MP2Obj(SerializeLayout.Explicit)]
 public sealed partial class GenerateServerSideProxyTokenRequest

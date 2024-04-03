@@ -79,7 +79,7 @@ partial interface IMicroServiceClient
         Task<IApiRsp> SubmitAppVersion(AppVerSubmissionRequest request);
     }
 
-    #endregion
+    #endregion BasicServices - 基础服务
 
     #region BigDataAnalysis - 大数据分析
 
@@ -95,7 +95,7 @@ partial interface IMicroServiceClient
         Task<IApiRsp> Record(ActiveUserRecordDTO request);
     }
 
-    #endregion
+    #endregion BigDataAnalysis - 大数据分析
 
     #region Identity - 账号服务
 
@@ -128,6 +128,13 @@ partial interface IMicroServiceClient
             var refresh_token = jWT.RefreshToken;
             return RefreshToken(refresh_token.ThrowIsNull(nameof(refresh_token)));
         }
+
+        /// <summary>
+        /// 生成服务端代理信息 JWT
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<IApiRsp<string?>> GenerateServerSideProxyToken(GenerateServerSideProxyTokenRequest request);
     }
 
     IManageClient Manage { get; }
@@ -213,7 +220,7 @@ partial interface IMicroServiceClient
         ValueTask<IApiRsp> SendSms(SendSmsRequest request);
     }
 
-    #endregion
+    #endregion Identity - 账号服务
 
     #region Accelerator - 加速与脚本业务
 
@@ -366,7 +373,7 @@ partial interface IMicroServiceClient
         Task<IApiRsp<bool>> DeleteScriptEvaluation(Guid? id);
     }
 
-    #endregion
+    #endregion Accelerator - 加速与脚本业务
 
     #region Advertisement - 广告业务
 
@@ -382,7 +389,7 @@ partial interface IMicroServiceClient
         Task<IApiRsp<List<AdvertisementDTO>?>> All(AdvertisementType type);
     }
 
-    #endregion
+    #endregion Advertisement - 广告业务
 
     #region Authenticator - 云令牌业务
 
@@ -404,7 +411,7 @@ partial interface IMicroServiceClient
         /// <returns></returns>
         Task<IApiRsp<UserAuthenticatorPushResponse?>> SyncAuthenticatorsToCloud(UserAuthenticatorPushRequest request);
 
-        #endregion
+        #endregion 云令牌
 
         #region 云令牌独立密码
 
@@ -435,7 +442,7 @@ partial interface IMicroServiceClient
         /// <returns></returns>
         Task<IApiRsp<string?>> GetIndependentPasswordQuestion();
 
-        #endregion
+        #endregion 云令牌独立密码
 
         #region 云令牌的删除备份
 
@@ -451,10 +458,10 @@ partial interface IMicroServiceClient
         /// <returns></returns>
         Task<IApiRsp> RecoverAuthenticatorsFromDeleteBackups(UserAuthenticatorDeleteBackupRecoverRequest request);
 
-        #endregion
+        #endregion 云令牌的删除备份
     }
 
-    #endregion
+    #endregion Authenticator - 云令牌业务
 
     #region Sponsor - 外部赞助业务
 
@@ -471,7 +478,7 @@ partial interface IMicroServiceClient
             PageQueryRequest<QueryRankRecordsRequest> request);
     }
 
-    #endregion
+    #endregion Sponsor - 外部赞助业务
 
     #region GameLibary 游戏库存业务
 
@@ -501,7 +508,7 @@ partial interface IMicroServiceClient
         Task<IApiRsp<bool>> WishListExist(QuerySteamAppIdExistsWishListRequest request);
     }
 
-    #endregion
+    #endregion GameLibary 游戏库存业务
 
     #region Shop 商城业务
 
@@ -514,5 +521,5 @@ partial interface IMicroServiceClient
         Task<IApiRsp<ShopRecommendGoodItem[]>> RecommendGoods(int id = 20);
     }
 
-    #endregion
+    #endregion Shop 商城业务
 }
