@@ -29,7 +29,7 @@ public sealed partial record class ServerSideForwardConfigDTO
         Remarks = remarks;
     }
 
-    public ServerSideForwardConfigDTO() : this(string.Empty, string.Empty, [], null, null)
+    public ServerSideForwardConfigDTO() : this(string.Empty, string.Empty, Array.Empty<ServerSideForwardDestDTO>(), null, null)
     {
     }
 }
