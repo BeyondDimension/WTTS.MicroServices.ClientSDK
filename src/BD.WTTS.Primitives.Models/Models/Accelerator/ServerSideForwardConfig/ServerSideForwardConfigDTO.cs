@@ -10,8 +10,7 @@ public sealed partial record class ServerSideForwardConfigDTO
     public string MatchPattern { get; set; }
 
     [MPKey(2), MP2Key(2)]
-    [N_JsonProperty("destList"), S_JsonProperty("destList")]
-    public ServerSideForwardDestDTO[] DestConfig { get; set; }
+    public ServerSideForwardDestMappingDTO[] ForwardDestList { get; set; }
 
     [MPKey(3), MP2Key(3)]
     public UserType? AccessLevel { get; set; } = null;
@@ -20,16 +19,16 @@ public sealed partial record class ServerSideForwardConfigDTO
     public string? Remarks { get; set; }
 
     [MPConstructor, MP2Constructor]
-    public ServerSideForwardConfigDTO(string key, string matchPattern, ServerSideForwardDestDTO[] destConfig, UserType? accessLevel, string? remarks)
+    public ServerSideForwardConfigDTO(string key, string matchPattern, ServerSideForwardDestMappingDTO[] forwardDestList, UserType? accessLevel, string? remarks)
     {
         Key = key;
         MatchPattern = matchPattern;
-        DestConfig = destConfig;
+        ForwardDestList = forwardDestList;
         AccessLevel = accessLevel;
         Remarks = remarks;
     }
 
-    public ServerSideForwardConfigDTO() : this(string.Empty, string.Empty, Array.Empty<ServerSideForwardDestDTO>(), null, null)
+    public ServerSideForwardConfigDTO() : this(string.Empty, string.Empty, Array.Empty<ServerSideForwardDestMappingDTO>(), null, null)
     {
     }
 }
