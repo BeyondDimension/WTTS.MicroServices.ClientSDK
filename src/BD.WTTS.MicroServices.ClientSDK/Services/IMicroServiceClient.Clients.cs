@@ -134,7 +134,7 @@ partial interface IMicroServiceClient
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<IApiRsp<string?>> GenerateServerSideProxyToken(GenerateServerSideProxyTokenRequest request);
+        Task<IApiRsp<JWTEntity>> GenerateServerSideProxyToken();
     }
 
     IManageClient Manage { get; }
