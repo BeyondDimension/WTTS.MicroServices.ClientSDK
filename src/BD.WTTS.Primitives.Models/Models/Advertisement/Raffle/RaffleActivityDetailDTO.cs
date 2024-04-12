@@ -70,4 +70,6 @@ public partial class RaffleActivityDetailDTO
     [MPKey(19), MP2Key(19)]
     public DateTimeOffset? RaffleRevealEndTime { get; set; }
 
+    [MPKey(20), MP2Key(20)]
+    public List<PrizeLevelItemDTO> PrizeLevelSetting { get; set; } = new();
 }
