@@ -69,4 +69,10 @@ public partial class RaffleActivityDTO
     /// </summary>
     [MPKey(10), MP2Key(10)]
     public DateTimeOffset? RaffleRevealEndTime { get; set; }
+
+    /// <summary>
+    /// 描述
+    /// </summary>
+    [MPKey(11), MP2Key(11)]
+    public string? Describe { get; set; }
 }

@@ -8,46 +8,23 @@ public partial class ForthwithRaffleResultDTO
     /// </summary>
     public Guid Id { get; set; }
 
-    #region inventory
+    /// <summary>
+    /// 奖品主键
+    /// </summary>
+    public Guid PrizeId { get; set; }
+
+    /// <summary>
+    /// 奖品名称
+    /// </summary>
+    public string PrizeName { get; set; } = string.Empty;
 
     /// <summary>
     /// 奖品内容
     /// </summary>
     public string Content { get; set; } = string.Empty;
 
-    #endregion inventory
-
-    #region prize
-
     /// <summary>
-    /// 名称
+    /// 中奖时间
     /// </summary>
-    public string PrizeName { get; set; } = string.Empty;
-
-    /// <summary>
-    /// 奖品级别
-    /// </summary>
-    public byte PrizeLevel { get; set; }
-
-    /// <summary>
-    /// 参考价格
-    /// </summary>
-    public decimal? PriceIndication { get; set; }
-
-    /// <summary>
-    /// 中奖概率。1为100%，0.5为50%，
-    /// </summary>
-    public float? WinningProbability { get; set; }
-
-    /// <summary>
-    /// 描述
-    /// </summary>
-    public string? Describe { get; set; }
-
-    /// <summary>
-    /// 奖品图
-    /// </summary>
-    public string? PrizeImg { get; set; }
-
-    #endregion prize
+    public DateTimeOffset? AwardReceivingTime { get; set; }
 }
