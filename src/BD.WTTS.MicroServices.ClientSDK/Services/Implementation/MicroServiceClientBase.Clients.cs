@@ -146,11 +146,10 @@ partial class MicroServiceClientBase :
 
     public async Task<IApiRsp<JWTEntity?>> GenerateServerSideProxyToken()
     {
-        var r = await Conn.SendAsync<GenerateServerSideProxyTokenRequest, JWTEntity>(
+        var r = await Conn.SendAsync<JWTEntity?>(
                 isSecurity: true,
                 method: HttpMethod.Post,
                 requestUri: "identity/v1/account/serversideproxytoken",
-                request: null,
                 cancellationToken: default,
                 responseContentMaybeNull: false
             );
