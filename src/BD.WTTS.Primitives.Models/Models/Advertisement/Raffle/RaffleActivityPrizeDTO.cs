@@ -4,7 +4,6 @@ namespace BD.WTTS.Models;
 [MPObj, MP2Obj(SerializeLayout.Explicit)]
 public partial class RaffleActivityPrizeDTO
 {
-
     [MPKey(0), MP2Key(0)]
     public Guid Id { get; set; }
 
@@ -22,4 +21,7 @@ public partial class RaffleActivityPrizeDTO
 
     [MPKey(5), MP2Key(5)]
     public int PrizeNumber { get; set; }
+
+    [MPKey(6), MP2Key(6)]
+    public decimal? PriceIndication { get; set; }
 }
