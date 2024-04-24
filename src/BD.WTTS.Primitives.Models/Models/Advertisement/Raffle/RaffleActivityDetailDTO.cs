@@ -72,4 +72,7 @@ public partial class RaffleActivityDetailDTO
 
     [MPKey(20), MP2Key(20)]
     public List<PrizeLevelItemDTO> PrizeLevelSetting { get; set; } = new();
+
+    [MPKey(21), MP2Key(21)]
+    public bool GuaranteePrizeStockOut { get; set; }
 }
