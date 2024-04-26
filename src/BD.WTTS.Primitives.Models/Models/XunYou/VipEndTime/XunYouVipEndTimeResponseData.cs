@@ -10,4 +10,11 @@ public sealed partial record class XunYouVipEndTimeResponseData
     [MPKey(1), MP2Key(1)]
     [JsonPropertyName("svip")]
     public XunYouVipEndTimeResponseDataSVIP? SVIP { get; set; }
+
+    /// <summary>
+    /// 到期时间 UnixSeconds
+    /// </summary>
+    [MPKey(2), MP2Key(2)]
+    [JsonPropertyName("etime")]
+    public long ExpireTime { get; set; }
 }

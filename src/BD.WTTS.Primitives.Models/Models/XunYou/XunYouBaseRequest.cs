@@ -9,8 +9,8 @@ public abstract record class XunYouBaseRequest
     {
         var dict = new SortedDictionary<string, string>();
 
-        if (!string.IsNullOrEmpty(UserId))
-            dict.Add("user_id", UserId);
+        if (!string.IsNullOrEmpty(OpenId))
+            dict.Add("open_id", OpenId);
 
         if (!string.IsNullOrEmpty(ChannelNo))
             dict.Add("channel_no", ChannelNo);
@@ -35,8 +35,8 @@ public abstract record class XunYouBaseRequest
     /// <summary>
     /// 用户账号
     /// </summary>
-    [JsonPropertyName("user_id")]
-    public string? UserId { get; set; }
+    [JsonPropertyName("open_id")]
+    public string? OpenId { get; set; }
 
     /// <summary>
     /// 渠道编号
@@ -60,7 +60,7 @@ public abstract record class XunYouBaseRequest
     /// 时间戳
     /// </summary>
     [JsonPropertyName("timestamp")]
-    public long Timestamp { get; set; } = DateTime.Now.ToUnixTimeMilliseconds();
+    public long Timestamp { get; set; } = DateTime.Now.ToUnixTimeSeconds();
 
     /// <summary>
     /// 签名类型
