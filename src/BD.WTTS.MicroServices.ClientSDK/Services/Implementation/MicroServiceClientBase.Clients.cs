@@ -285,6 +285,17 @@ partial class MicroServiceClientBase :
         return r;
     }
 
+    public virtual async Task<IApiRsp<XunYouVipEndTimeResponse?>> GetXunYouVipEndTime()
+    {
+        var r = await Conn.SendAsync<XunYouVipEndTimeResponse?>(
+            isAnonymous: false,
+            isSecurity: true,
+            method: HttpMethod.Get,
+            requestUri: "identity/v1/manage/xunyouvipendtime",
+            cancellationToken: default);
+        return r;
+    }
+
     public IAuthMessageClient AuthMessage => this;
 
     protected async Task<IApiRsp> SendSmsCore(SendSmsRequest request)

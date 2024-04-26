@@ -135,6 +135,12 @@ partial interface IMicroServiceClient
         /// <param name="request"></param>
         /// <returns></returns>
         Task<IApiRsp<JWTEntity?>> GenerateServerSideProxyToken();
+
+        /// <summary>
+        /// 获取迅游 VIP 到期时间
+        /// </summary>
+        /// <returns></returns>
+        Task<IApiRsp<XunYouVipEndTimeResponse?>> GetXunYouVipEndTime();
     }
 
     IManageClient Manage { get; }
