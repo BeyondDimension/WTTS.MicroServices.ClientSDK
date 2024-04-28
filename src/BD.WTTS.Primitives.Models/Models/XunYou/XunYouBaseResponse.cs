@@ -2,7 +2,7 @@ namespace BD.WTTS.Models;
 
 [MemoryPackUnion(0, typeof(XunYouVipEndTimeResponse))]
 [MPObj]
-public abstract partial record class XunYouBaseResponse<TData> where TData : IMemoryPackable<TData>
+public abstract partial record class XunYouBaseResponse<TData> where TData : notnull
 {
     [JsonPropertyName("code")]
     [MPKey(0), MP2Key(0)]
