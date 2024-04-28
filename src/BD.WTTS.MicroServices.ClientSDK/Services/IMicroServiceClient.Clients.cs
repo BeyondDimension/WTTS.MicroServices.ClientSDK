@@ -77,24 +77,23 @@ partial interface IMicroServiceClient
         /// <param name="request"></param>
         /// <returns></returns>
         Task<IApiRsp> SubmitAppVersion(AppVerSubmissionRequest request);
-
-        IOrderClient Ordering { get; }
-
-        /// <summary>
-        /// 订单
-        /// </summary>
-        interface IOrderClient
-        {
-            /// <summary>
-            /// 获取用户订单数量
-            /// </summary>
-            /// <param name="status"></param>
-            /// <param name="businessType"></param>
-            /// <returns></returns>
-            Task<IApiRsp<int>> GetUserOrderCount(OrderStatus?[]? status, OrderBusinessType? businessType);
-        }
     }
 
+    IOrderClient Ordering { get; }
+
+    /// <summary>
+    /// 订单
+    /// </summary>
+    interface IOrderClient
+    {
+        /// <summary>
+        /// 获取用户订单数量
+        /// </summary>
+        /// <param name="status"></param>
+        /// <param name="businessType"></param>
+        /// <returns></returns>
+        Task<IApiRsp<int>> GetUserOrderCount(OrderStatus?[]? status, OrderBusinessType? businessType);
+    }
     #endregion BasicServices - 基础服务
 
     #region BigDataAnalysis - 大数据分析
