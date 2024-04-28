@@ -17,7 +17,8 @@ partial class MicroServiceClientBase :
     ISponsorClient,
     IGameLibaryClient,
     IArticleClient,
-    IShopClient
+    IShopClient,
+    IOrderClient
 {
     #region BasicServices - 基础服务
 
@@ -87,6 +88,19 @@ partial class MicroServiceClientBase :
                 isPolly: true,
                 isAnonymous: true,
                 cancellationToken: default);
+        return r;
+    }
+
+    public IOrderClient Ordering => this;
+
+    public virtual async Task<IApiRsp<int>> GetUserOrderCount(OrderStatus?[]? status, OrderBusinessType? businessType)
+    {
+        var status_query = status is not null ? string.Join("&status=", status) : string.Empty;
+        var r = await Conn.SendAsync<int>(
+            method: HttpMethod.Get,
+            isAnonymous: false,
+            requestUri: $"ordering/userorder/count?{status_query}&businessType={businessType}",
+            cancellationToken: default)!;
         return r;
     }
 
