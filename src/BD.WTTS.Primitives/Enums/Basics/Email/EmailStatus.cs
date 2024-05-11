@@ -22,4 +22,10 @@ public enum EmailStatus : byte
     /// </summary>
     [Description("发送失败")]
     Failed = 2,
+
+    /// <summary>
+    /// 被拦截
+    /// </summary>
+    [Description("被拦截")]
+    Intercepted = 3,
 }
