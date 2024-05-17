@@ -40,4 +40,14 @@ public enum SmsCodeType
     /// 绑定手机号码
     /// </summary>
     BindPhoneNumber = 206,
+
+    /// <summary>
+    /// [绑定邮箱要手机号短信验证]绑定邮箱
+    /// </summary>
+    BindEmail = 207,
+
+    /// <summary>
+    /// [换绑邮箱要手机号短信验证]换绑邮箱
+    /// </summary>
+    ChangeEmail = 208,
 }
