@@ -50,4 +50,14 @@ public enum SmsCodeType
     /// [换绑邮箱要手机号短信验证]换绑邮箱
     /// </summary>
     ChangeEmail = 208,
+
+    /// <summary>
+    /// 设置密码
+    /// </summary>
+    SetPassword = 209,
+
+    /// <summary>
+    /// 重置密码
+    /// </summary>
+    ResetPassword = 210,
 }

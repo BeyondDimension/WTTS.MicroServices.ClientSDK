@@ -195,4 +195,13 @@ public sealed partial class IdentityUserInfoDTO :
     [Reactive]
 #endif
     public bool EmailConfirmed { get; set; }
+
+    /// <summary>
+    /// 已设置密码
+    /// </summary>
+    [MPKey(24), MP2Key(24)]
+#if MVVM_VM
+    [Reactive]
+#endif
+    public bool HasPassword { get; set; }
 }
