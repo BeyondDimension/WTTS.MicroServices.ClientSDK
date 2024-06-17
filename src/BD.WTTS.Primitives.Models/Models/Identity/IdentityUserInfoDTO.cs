@@ -177,31 +177,4 @@ public sealed partial class IdentityUserInfoDTO :
     [Reactive]
 #endif
     public string? WattOpenId { get; set; }
-
-    /// <summary>
-    /// 邮箱地址
-    /// </summary>
-    [MPKey(22), MP2Key(22)]
-#if MVVM_VM
-    [Reactive]
-#endif
-    public string? Email { get; set; }
-
-    /// <summary>
-    /// 邮箱地址已确认
-    /// </summary>
-    [MPKey(23), MP2Key(23)]
-#if MVVM_VM
-    [Reactive]
-#endif
-    public bool EmailConfirmed { get; set; }
-
-    /// <summary>
-    /// 已设置密码
-    /// </summary>
-    [MPKey(24), MP2Key(24)]
-#if MVVM_VM
-    [Reactive]
-#endif
-    public bool HasPassword { get; set; }
 }
