@@ -168,13 +168,4 @@ public sealed partial class IdentityUserInfoDTO :
     [Reactive]
 #endif
     public string? PersonalizedSignature { get; set; }
-
-    /// <summary>
-    /// 加速器 OpenId
-    /// </summary>
-    [MPKey(21), MP2Key(21)]
-#if MVVM_VM
-    [Reactive]
-#endif
-    public string? WattOpenId { get; set; }
 }
