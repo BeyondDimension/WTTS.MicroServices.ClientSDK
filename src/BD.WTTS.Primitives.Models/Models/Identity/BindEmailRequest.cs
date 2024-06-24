@@ -18,4 +18,10 @@ public sealed partial class BindEmailRequest
     /// </summary>
     [MPKey(1), MP2Key(1)]
     public string? SmsCode { get; set; } = string.Empty;
+
+    /// <summary>
+    /// IsSmSValid 是否使用短信验证 绑定修改邮箱
+    /// </summary>
+    [MPKey(2), MP2Key(2)]
+    public bool IsSms { get; set; } = true;
 }
