@@ -99,7 +99,7 @@ partial class MicroServiceClientBase :
         var r = await Conn.SendAsync<int>(
             method: HttpMethod.Get,
             isAnonymous: false,
-            requestUri: $"ordering/userorder/count?{status_query}&businessType={businessType}",
+            requestUri: $"ordering/userorder/count?status={status_query}&businessType={businessType}",
             cancellationToken: default)!;
         return r;
     }
