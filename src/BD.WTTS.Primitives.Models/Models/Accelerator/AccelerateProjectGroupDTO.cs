@@ -31,7 +31,7 @@ public sealed partial class AccelerateProjectGroupDTO
                     .Subscribe(_ =>
                     {
                         bool? b = null;
-                        var count = items.Count(s => s.ThreeStateEnable is null or true);
+                        var count = items.Count(s => s.ThreeStateEnable is true);
                         if (!items.Any_Nullable() || count == 0)
                             b = false;
                         else if (count == items.Count)
