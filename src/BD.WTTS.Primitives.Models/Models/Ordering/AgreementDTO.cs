@@ -28,9 +28,9 @@ public sealed class AgreementDTO
     public string AgreementNo { get; set; } = "";
 
     /// <summary>
-    /// 支付宝协议号
+    /// 外部协议号
     /// </summary>
-    public string AlipayAgreementNo { get; set; } = "";
+    public string ExtAgreementNo { get; set; } = "";
 
     /// <summary>
     /// 生效时间
@@ -70,7 +70,7 @@ public sealed class AgreementDTO
     /// <summary>
     /// 状态
     /// </summary>
-    public string Status { get; set; } = "";
+    public AgreementStatus Status { get; set; }
 
     /// <summary>
     /// 备注
