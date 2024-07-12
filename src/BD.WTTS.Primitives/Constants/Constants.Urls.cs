@@ -15,8 +15,8 @@ public static partial class Constants
         /// </summary>
         public const string OfficialWebsite =
 #if DEBUG || USE_DEV_API
-            //"https://steampp.mossimo.net:8500";
-            "https://ms-test.steampp.net";
+            "https://steampp.mossimo.net:8500";
+        //"https://ms-test.steampp.net";
 
 #else
         "https://steampp.net";
@@ -83,8 +83,8 @@ public static partial class Constants
         /// SppWebApi 测试环境基地址
         /// </summary>
         public const string BaseUrl_API_Development =
-            //"https://steampp.mossimo.net:8800";
-            "https://ms-test.steampp.net";
+            "https://steampp.mossimo.net:8800";
+        //"https://ms-test.steampp.net";
 
         /// <summary>
         /// SppWebApi 本地调试基地址

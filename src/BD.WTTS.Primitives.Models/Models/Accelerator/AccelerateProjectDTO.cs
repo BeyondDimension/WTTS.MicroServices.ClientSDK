@@ -31,18 +31,31 @@ public sealed partial class AccelerateProjectDTO
                   .Subscribe(_ =>
                   {
                       bool? b = null;
-                      var count = items.Count(s => s.Checked);
-                      if (!items.Any_Nullable() || count == 0)
-                          b = false;
-                      else if (count == items.Count)
-                          b = true;
-
+                      if (items.Any_Nullable())
+                      {
+                          var count = items.Count(s => s.Checked);
+                          if (!items.Any_Nullable() || count == 0)
+                              b = false;
+                          else if (count == items.Count)
+                              b = true;
+                      }
+                      else
+                      {
+                          b = Checked;
+                      }
                       if (ThreeStateEnable != b)
                       {
                           mThreeStateEnable = b;
                           this.RaisePropertyChanged(nameof(ThreeStateEnable));
                       }
                   }));
+
+        this.WhenValueChanged(x => x.Checked)
+            .Subscribe(_ =>
+            {
+                mThreeStateEnable = Checked;
+                this.RaisePropertyChanged(nameof(ThreeStateEnable));
+            });
     }
 
     private ObservableCollection<AccelerateProjectDTO>? _ObservableItems;
