@@ -14,30 +14,6 @@ public sealed partial class PluginPaymentOrderDTO { }
 public sealed partial class PluginPriceDTO { }
 
 /// <summary>
-/// 插件分类DTO
-/// </summary>
-[MPObj, MP2Obj(SerializeLayout.Explicit)]
-public sealed partial class PluginCategoryDTO
-{
-    /// <summary>
-    /// 主键
-    /// </summary>
-    [IgnoreDataMember]
-    [MPIgnore, MP2Ignore]
-    public Guid Id { get; set; }
-
-    /// <summary>
-    /// 分类编码
-    /// </summary>
-    public string CategoryCode { get; set; } = "";
-
-    /// <summary>
-    /// 分类名称
-    /// </summary>
-    public string CategoryName { get; set; } = "";
-}
-
-/// <summary>
 /// 插件包DTO
 /// </summary>
 [MPObj, MP2Obj(SerializeLayout.Explicit)]
