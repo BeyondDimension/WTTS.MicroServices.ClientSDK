@@ -6,8 +6,15 @@ namespace BD.WTTS.Enums;
 /// </summary>
 public enum OrderType : byte
 {
-    普通订单 = 1,
-    测试订单,
-    营销刷单,
-    活动订单,
+    /// <summary>
+    /// 一般订单
+    /// </summary>
+    [Description("一般订单")]
+    GeneralOrder = 1,
+
+    /// <summary>
+    /// 续费订单
+    /// </summary>
+    [Description("续费订单")]
+    RenewalOrder,
 }
