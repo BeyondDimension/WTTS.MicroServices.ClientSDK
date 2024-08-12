@@ -4,10 +4,10 @@ namespace BD.WTTS.Models;
 /// <summary>
 /// 插件分类DTO
 /// </summary>
-[MPObj, MP2Obj(SerializeLayout.Explicit)]
-public sealed partial class PluginUpdateDTO
+[MP2Obj(GenerateType.VersionTolerant, SerializeLayout.Explicit)]
+public sealed partial class PluginUpdateRequest
 {
-    [MP2Key(0),MPKey(0)]
+    [MP2Key(0), MPKey(0)]
     public Guid Id { get; set; }
 
     [MP2Key(1), MPKey(1)]
