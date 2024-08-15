@@ -6,7 +6,12 @@ public sealed partial class PluginUpdateDetailDTO
     /// <summary>
     /// 插件 Id
     /// </summary>
-    public Guid Id { get; set; }
+    public string UniqueName { get; set; } = "";
+
+    /// <summary>
+    /// 最新版本号 如果有更新
+    /// </summary>
+    public string? NewVersionNumber { get; set; }
 
     /// <summary>
     /// 更新地址 有更新会有 Url
@@ -18,5 +23,8 @@ public sealed partial class PluginUpdateDetailDTO
     /// </summary>
     public string? MinVersion { get; set; }
 
+    /// <summary>
+    /// 错误消息
+    /// </summary>
     public string? Message { get; set; }
 }
