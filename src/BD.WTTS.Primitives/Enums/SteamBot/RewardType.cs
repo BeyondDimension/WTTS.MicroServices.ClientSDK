@@ -6,5 +6,23 @@ namespace BD.WTTS.Enums;
 /// </summary>
 public enum RewardType : byte
 {
+    /// <summary>
+    /// 评测
+    /// </summary>
+    RecommendID = 1,
 
+    /// <summary>
+    /// 物品
+    /// </summary>
+    FileDetailsID = 2,
+
+    /// <summary>
+    /// SteamID
+    /// </summary>
+    SteamID = 3,
+
+    /// <summary>
+    /// 主题ID
+    /// </summary>
+    ForumTopicID = 4
 }
