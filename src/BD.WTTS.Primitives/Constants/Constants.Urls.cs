@@ -164,7 +164,7 @@ public static partial class Constants
         public const string MicrosoftStoreProtocolLink = "ms-windows-store://pdp/?productid=" + MicrosoftStoreId;
         public const string MicrosoftStoreReviewLink = "ms-windows-store://review/?ProductId=" + MicrosoftStoreId;
 
-        public const string SponsorUrl_afdian = "https://afdian.net/@rmbgame";
+        public const string SponsorUrl_afdian = "https://afdian.com/@rmbgame";
         public const string SponsorUrl_ko_fi = "https://ko-fi.com/rmbgame";
         public const string SponsorUrl_patreon = "https://www.patreon.com/rmbgame";
 
