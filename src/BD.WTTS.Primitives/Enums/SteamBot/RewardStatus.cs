@@ -7,12 +7,12 @@ namespace BD.WTTS.Enums;
 public enum RewardStatus : byte
 {
     /// <summary>
-    /// 等待打赏
+    /// 等待支付
     /// </summary>
     Waiting,
 
     /// <summary>
-    /// 打赏中
+    /// 进行中
     /// </summary>
     InProgress,
 
@@ -25,4 +25,9 @@ public enum RewardStatus : byte
     /// 异常
     /// </summary>
     Exception,
+
+    /// <summary>
+    /// 停止
+    /// </summary>
+    Closed
 }
