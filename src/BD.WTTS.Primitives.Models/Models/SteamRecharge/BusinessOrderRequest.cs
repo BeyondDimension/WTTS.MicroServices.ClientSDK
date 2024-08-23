@@ -38,7 +38,10 @@ public sealed partial class BusinessOrderRequest
     public string RechargeArea { get; set; } = string.Empty;
 
     /// <summary>
-    /// 用户交易链接，礼品卡为【用户好友邀请链接】，余额充值为【用户库存交易链接】
+    /// 用户交易链接
+    /// 礼品卡为【用户好友邀请链接】
+    /// 余额充值为【用户库存交易链接】
+    /// 点数充值为【打赏内容链接】
     /// </summary>
     [Required]
     [MPKey(6), MP2Key(6)]
