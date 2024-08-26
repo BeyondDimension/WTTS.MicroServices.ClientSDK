@@ -543,4 +543,35 @@ partial interface IMicroServiceClient
     }
 
     #endregion Shop 商城业务
+
+    #region SSE 服务器消息订阅
+
+    ISSEClient SSE { get; }
+
+    interface ISSEClient
+    {
+        /// <summary>
+        /// 获取授权 带 JWT 信息则为刷新
+        /// </summary>
+        /// <param name="auth"></param>
+        /// <returns></returns>
+        Task<IApiRsp<JWTEntity?>> Auth(JWTEntity? auth = null);
+
+        IAsyncEnumerable<string> ConnectToSSE(JWTEntity auth, string? lastId = null);
+    }
+
+    #endregion SSE 服务器消息订阅
+
+    #region Accelerator VIP 加速器业务
+
+    IAcceleratorRechargeClient AcceleratorRecharge { get; }
+
+    interface IAcceleratorRechargeClient
+    {
+        Task<IApiRsp<List<XunYouGoodDTO>?>> Goods();
+
+        Task<IApiRsp<string>> PayLink(Guid goodId);
+    }
+
+    #endregion  Accelerator VIP 加速器业务
 }

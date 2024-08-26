@@ -1,3 +1,4 @@
+using System.Net.Http;
 using static BD.WTTS.Services.IMicroServiceClient;
 
 namespace BD.WTTS.Services.Implementation;
@@ -18,7 +19,9 @@ partial class MicroServiceClientBase :
     IGameLibaryClient,
     IArticleClient,
     IShopClient,
-    IOrderClient
+    IOrderClient,
+    ISSEClient,
+    IAcceleratorRechargeClient
 {
     #region BasicServices - 基础服务
 
@@ -749,4 +752,86 @@ partial class MicroServiceClientBase :
     public IShopClient Shop => this;
 
     #endregion Shop 商城接口
+
+    #region SSE 服务器消息订阅
+
+    public ISSEClient SSE => this;
+
+    public async Task<IApiRsp<JWTEntity?>> Auth(JWTEntity? auth = null)
+    {
+        var isRefresh = auth is not null;
+        var request = new HttpRequestMessage(isRefresh ? HttpMethod.Put : HttpMethod.Get, "sse");
+        if (isRefresh)
+        {
+            request.Headers.Add("refreshtoken", auth!.RefreshToken);
+        }
+        var r = await Conn.SendAsync<JWTEntity?>(
+               isPolly: false,
+               isAnonymous: true,
+               isSecurity: false,
+               method: isRefresh ? HttpMethod.Put : HttpMethod.Get,
+               requestUri: "sse/auth",
+               cancellationToken: default)!;
+        return r;
+    }
+
+    public async IAsyncEnumerable<string> ConnectToSSE(JWTEntity auth, string? lastId = null)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get, "sse");
+        request.Headers.Authorization = new("Bearer", auth.AccessToken);
+        request.Headers.Accept.ParseAdd("text/event-stream");
+        if (!string.IsNullOrWhiteSpace(lastId))
+        {
+            request.Headers.Add("last-event-id", lastId);
+        }
+        using (var response = await Conn.SendAsync(request, HttpCompletionOption.ResponseHeadersRead))
+        {
+            response.EnsureSuccessStatusCode();
+
+            using (var stream = await response.Content.ReadAsStreamAsync())
+            using (var reader = new StreamReader(stream))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = await reader.ReadLineAsync();
+                    if (!string.IsNullOrWhiteSpace(line))
+                    {
+                        yield return line;
+                    }
+                }
+                if (reader.EndOfStream)
+                    yield return "TimeOut";
+            }
+        }
+    }
+
+    #endregion SSE 服务器消息订阅
+
+    #region Accelerator VIP 加速器业务
+
+    IAcceleratorRechargeClient AcceleratorRecharge { get; }
+
+    public async Task<IApiRsp<XunYouGoodDTO?>> Goods()
+    {
+        var r = await Conn.SendAsync<XunYouGoodDTO>(
+            method: HttpMethod.Get,
+            isAnonymous: false,
+            isSecurity: false,
+            requestUri: $"payment/xyvip/goods",
+            cancellationToken: default)!;
+        return r;
+    }
+
+    public async Task<IApiRsp<string>> PayLink(Guid goodId)
+    {
+        var r = await Conn.SendAsync<string>(
+            method: HttpMethod.Get,
+            isAnonymous: false,
+            isSecurity: false,
+            requestUri: $"payment/xyvip/paylink",
+            cancellationToken: default)!;
+        return r;
+    }
+
+    #endregion  Accelerator VIP 加速器业务
 }

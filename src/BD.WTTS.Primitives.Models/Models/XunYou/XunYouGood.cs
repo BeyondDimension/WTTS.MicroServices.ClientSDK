@@ -1,6 +1,6 @@
 // ReSharper disable once CheckNamespace
 
-namespace BD.WTTS.Models.XunYou;
+namespace BD.WTTS.Models;
 
 [MemoryPackable(GenerateType.VersionTolerant, SerializeLayout.Explicit)]
 public partial class XunYouGoodDTO
