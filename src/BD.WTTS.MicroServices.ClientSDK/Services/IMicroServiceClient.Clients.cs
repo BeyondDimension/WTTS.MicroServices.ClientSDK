@@ -557,6 +557,12 @@ partial interface IMicroServiceClient
         /// <returns></returns>
         Task<IApiRsp<JWTEntity?>> Auth(JWTEntity? auth = null);
 
+        /// <summary>
+        /// 连接 SSE 服务器 如果断开 需要 Auth 刷新 授权 LastId 传入最后接收的 id 不然会收到重复消息
+        /// </summary>
+        /// <param name="auth"></param>
+        /// <param name="lastId">最后处理消息 Id</param>
+        /// <returns></returns>
         IAsyncEnumerable<string> ConnectToSSE(JWTEntity auth, string? lastId = null);
     }
 

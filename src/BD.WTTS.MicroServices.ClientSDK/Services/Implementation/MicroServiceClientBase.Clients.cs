@@ -809,7 +809,7 @@ partial class MicroServiceClientBase :
 
     #region Accelerator VIP 加速器业务
 
-    public IAcceleratorRechargeClient AcceleratorRecharge { get; }
+    public IAcceleratorRechargeClient AcceleratorRecharge => this;
 
     public async Task<IApiRsp<List<XunYouGoodDTO?>>> Goods()
     {
