@@ -809,11 +809,11 @@ partial class MicroServiceClientBase :
 
     #region Accelerator VIP 加速器业务
 
-    IAcceleratorRechargeClient AcceleratorRecharge { get; }
+    public IAcceleratorRechargeClient AcceleratorRecharge { get; }
 
-    public async Task<IApiRsp<XunYouGoodDTO?>> Goods()
+    public async Task<IApiRsp<List<XunYouGoodDTO?>>> Goods()
     {
-        var r = await Conn.SendAsync<XunYouGoodDTO>(
+        var r = await Conn.SendAsync<List<XunYouGoodDTO>>(
             method: HttpMethod.Get,
             isAnonymous: false,
             isSecurity: false,
