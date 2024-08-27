@@ -33,4 +33,6 @@ public enum ThirdpartyPlatform
     RiotGames = 1 << 13,
 
     Rockstar = 1 << 14,
+
+    Discord = 1 << 15,
 }
