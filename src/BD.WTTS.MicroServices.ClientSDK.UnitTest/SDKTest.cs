@@ -148,6 +148,11 @@ public sealed partial class SDKTest : IDisposable
 
         Task IAuthHelper.SignOutAsync() => Task.CompletedTask;
 
+        public ValueTask<JWTEntity?> GetShopAuthTokenAsync()
+        {
+            return new((JWTEntity?)null);
+        }
+
         internal static JWTEntity? AuthToken;
     }
 
