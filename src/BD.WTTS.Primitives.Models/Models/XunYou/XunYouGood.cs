@@ -27,7 +27,7 @@ public partial class XunYouGoodDTO
     /// 首次价格
     /// </summary>
     [MemoryPackOrder(3)]
-    public decimal FirstPrice { get; set; }
+    public decimal? FirstPrice { get; set; }
 
     /// <summary>
     /// 充值天数
