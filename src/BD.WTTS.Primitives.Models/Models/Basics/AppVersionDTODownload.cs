@@ -23,6 +23,9 @@ public sealed partial class AppVersionDTODownload : IExplicitHasValue
     [MPKey(5), MP2Key(5)]
     public string? SHA384 { get; set; }
 
+    [MPIgnore, MP2Ignore]
+    public Guid? ApplicableAppVerId { get; set; }
+
     bool IExplicitHasValue.ExplicitHasValue()
     {
         return ((SHA256 != null && SHA256.Length == Hashs.String.Lengths.SHA256) || (SHA384 != null && SHA384.Length == Hashs.String.Lengths.SHA384)) &&
