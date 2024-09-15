@@ -75,4 +75,10 @@ public partial class RaffleActivityDetailDTO
 
     [MPKey(21), MP2Key(21)]
     public bool GuaranteePrizeStockOut { get; set; }
+
+    [MPKey(22), MP2Key(22)]
+    public DateTimeOffset? PublicParameterDate { get; set; }
+
+    [MPKey(23), MP2Key(23)]
+    public long? PublicParameterValue { get; set; }
 }
