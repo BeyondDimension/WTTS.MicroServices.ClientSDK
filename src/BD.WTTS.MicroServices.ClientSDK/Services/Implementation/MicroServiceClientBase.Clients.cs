@@ -84,7 +84,7 @@ partial class MicroServiceClientBase :
         int current = 1,
         int pageSize = 10)
     {
-        var apiUrl = $"basic/officialmessage/message";
+        var apiUrl = $"basic/officialmessage/message?clientPlatform={(int?)clientPlatform}&messageType={(int?)messageType}&current={current}&pageSize={pageSize}";
         var r = await Conn.SendAsync<PagedModel<OfficialMessageItemDTO>>(
                 method: HttpMethod.Get,
                 requestUri: apiUrl,
