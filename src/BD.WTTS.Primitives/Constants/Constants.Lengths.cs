@@ -117,7 +117,7 @@ public static partial class Constants
         /// <summary>
         /// 游戏名称最大长度
         /// </summary>
-        public const int Max_GameName = 300;
+        public const int Max_GameName = 500;
 
         /// <summary>
         /// 游戏开发者最大长度
