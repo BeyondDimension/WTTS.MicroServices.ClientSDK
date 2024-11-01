@@ -204,4 +204,16 @@ public sealed partial class IdentityUserInfoDTO_v1 :
     [Reactive]
 #endif
     public bool HasPassword { get; set; }
+
+    [MPKey(25), MP2Key(25)]
+#if MVVM_VM
+    [Reactive]
+#endif
+    public string? AlipayNickName { get; set; }
+
+    [MPKey(26), MP2Key(26)]
+#if MVVM_VM
+    [Reactive]
+#endif
+    public string? WeixinNickName { get; set; }
 }

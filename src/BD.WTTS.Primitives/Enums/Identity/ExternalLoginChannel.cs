@@ -50,5 +50,21 @@ public enum ExternalLoginChannel
     /// </summary>
     Apple,
 
+    /// <summary>
+    /// <list type="bullet">
+    /// <item>Documentation：https://opendocs.alipay.com/open/01emu5 </item>
+    /// <item>Package：https://www.nuget.org/packages/AspNet.Security.OAuth.Alipay </item>
+    /// </list>
+    /// </summary>
+    Alipay,
+
+    /// <summary>
+    /// <list type="bullet">
+    /// <item>Documentation：https://open.wechat.com/cgi-bin/newreadtemplate?t=overseas_open/docs/web/login/login </item>
+    /// <item>Package：https://www.nuget.org/packages/AspNet.Security.OAuth.Weixin </item>
+    /// </list>
+    /// </summary>
+    Weixin,
+
     Xbox = Microsoft,
 }
