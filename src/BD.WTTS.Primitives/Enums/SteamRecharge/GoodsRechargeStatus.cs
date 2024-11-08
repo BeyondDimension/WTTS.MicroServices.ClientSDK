@@ -34,4 +34,10 @@ public enum GoodsRechargeStatus : byte
     /// </summary>
     [Description("充值关闭")]
     Closed = 5,
+
+    /// <summary>
+    /// 等待支付
+    /// </summary>
+    [Description("等待支付")]
+    Waiting = 6
 }

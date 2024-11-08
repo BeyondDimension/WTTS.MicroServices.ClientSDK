@@ -18,5 +18,8 @@ public enum OrderBusinessType
     XunYouOrder = 4,
 
     [Description("点数交易充值")]
-    PointRewardRecharge = 5
+    PointRewardRecharge = 5,
+
+    [Description("用户点数交易充值")]
+    PointRewardUserRecharge = 6
 }
