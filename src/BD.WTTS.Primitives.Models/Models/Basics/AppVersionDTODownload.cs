@@ -2,7 +2,7 @@
 namespace BD.WTTS.Models;
 
 [MPObj, MP2Obj(SerializeLayout.Explicit)]
-public sealed partial class AppVersionDTODownload : IExplicitHasValue
+public partial class AppVersionDTODownload : IExplicitHasValue
 {
     /// <inheritdoc cref="CloudFileType"/>
     [MPKey(0), MP2Key(0)]

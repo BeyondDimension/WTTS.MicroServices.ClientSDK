@@ -2,7 +2,7 @@
 namespace BD.WTTS.Models;
 
 [MPObj, MP2Obj(SerializeLayout.Explicit)]
-public sealed partial class AppVersionDTO : IKeyModel<Guid>, IExplicitHasValue
+public sealed partial class AppVersionDTO<TAppVersionDTODownload> : IKeyModel<Guid>, IExplicitHasValue where TAppVersionDTODownload : AppVersionDTODownload
 {
     [MPKey(0), MP2Key(0)]
     public Guid Id { get; set; }
@@ -41,7 +41,7 @@ public sealed partial class AppVersionDTO : IKeyModel<Guid>, IExplicitHasValue
     /// 下载类型与下载地址
     /// </summary>
     [MPKey(6), MP2Key(6)]
-    public List<AppVersionDTODownload>? Downloads { get; set; }
+    public List<TAppVersionDTODownload>? Downloads { get; set; }
 
     bool IExplicitHasValue.ExplicitHasValue()
     {
