@@ -24,6 +24,7 @@ public partial class AppVersionDTODownload : IExplicitHasValue
     public string? SHA384 { get; set; }
 
     [MPIgnore, MP2Ignore]
+    [N_JsonIgnore, S_JsonIgnore]
     public Guid? ApplicableAppVerId { get; set; }
 
     bool IExplicitHasValue.ExplicitHasValue()
