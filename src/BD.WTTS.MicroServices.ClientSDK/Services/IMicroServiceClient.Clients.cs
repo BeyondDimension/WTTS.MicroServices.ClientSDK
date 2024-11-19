@@ -407,7 +407,7 @@ partial interface IMicroServiceClient
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        Task<IApiRsp<List<AdvertisementDTO>?>> All(AdvertisementType type);
+        Task<IApiRsp<List<AdvertisementDTOV1>?>> All(AdvertisementType type);
     }
 
     #endregion Advertisement - 广告业务

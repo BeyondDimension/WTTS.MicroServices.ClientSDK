@@ -538,9 +538,9 @@ partial class MicroServiceClientBase :
 
     #region Advertisement - 广告业务
 
-    public async Task<IApiRsp<List<AdvertisementDTO>?>> All(AdvertisementType type)
+    public async Task<IApiRsp<List<AdvertisementDTOV1>?>> All(AdvertisementType type)
     {
-        var r = await Conn.SendAsync<GetAccelerateProjectGroupRequest, List<AdvertisementDTO>>(
+        var r = await Conn.SendAsync<GetAccelerateProjectGroupRequest, List<AdvertisementDTOV1>>(
                isPolly: true,
                isAnonymous: false,
                isSecurity: false,
@@ -549,7 +549,7 @@ partial class MicroServiceClientBase :
                request: new()
                {
                    ADType = type,
-                   Version = 1,
+                   Version = 3, // 查询带 IsAuth 的版本
                },
                cancellationToken: default)!;
         return r;
