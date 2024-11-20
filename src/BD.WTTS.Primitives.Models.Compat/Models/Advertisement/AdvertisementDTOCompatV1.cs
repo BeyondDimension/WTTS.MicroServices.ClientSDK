@@ -2,7 +2,7 @@
 namespace BD.WTTS.Models;
 
 [MPObj, MP2Obj(SerializeLayout.Explicit)]
-public partial class AdvertisementDTOV1
+public partial class AdvertisementDTOCompatV1
 #if MVVM_VM
         : BaseNotifyPropertyChanged
 #endif
@@ -76,18 +76,6 @@ public partial class AdvertisementDTOV1
 #endif
     public string Name { get; set; } = string.Empty;
 
-    /// <summary>
-    /// IsAuth
-    /// </summary>
-    [MPKey(6), MP2Key(6)]
-#if __HAVE_N_JSON__
-    [N_JsonProperty("6")]
-#endif
-#if !__NOT_HAVE_S_JSON__
-    [S_JsonProperty("6")]
-#endif
-    public bool IsAuth { get; set; }
-
 #if MVVM_VM
 
     /// <summary>
@@ -125,6 +113,6 @@ public partial class AdvertisementDTOV1
 #if !__NOT_HAVE_S_JSON__
     [S_JsonIgnore]
 #endif
-    public string Url => Constants.Urls.GetAdvertisementJumpUrl(Id) + "?isauth=1";
+    public string Url => Constants.Urls.GetAdvertisementJumpUrl(Id);
 #endif
 }
