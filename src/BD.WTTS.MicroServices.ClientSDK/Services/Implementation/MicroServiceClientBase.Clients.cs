@@ -538,9 +538,9 @@ partial class MicroServiceClientBase :
 
     #region Advertisement - 广告业务
 
-    public async Task<IApiRsp<List<AdvertisementDTOV1>?>> All(AdvertisementType type)
+    public async Task<IApiRsp<List<AdvertisementDTO>?>> All(AdvertisementType type)
     {
-        var r = await Conn.SendAsync<GetAccelerateProjectGroupRequest, List<AdvertisementDTOV1>>(
+        var r = await Conn.SendAsync<GetAccelerateProjectGroupRequest, List<AdvertisementDTO>>(
                isPolly: true,
                isAnonymous: false,
                isSecurity: false,
