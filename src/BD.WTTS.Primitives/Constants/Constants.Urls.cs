@@ -7,21 +7,22 @@ public static partial class Constants
     {
         #region 
 
+        public const string OfficialWebsiteHost =
+#if DEBUG || USE_DEV_API
+    "steampp.mossimo.net:8500";
+        //"https://ms-test.steampp.net";
+
+#else
+        "steampp.net";
+
+#endif
         public const string OfficialApiHostName = "api.steampp.net";
         public const string OfficialShopApiHostName = "shop.api.steampp.net";
 
         /// <summary>
         /// 官网网址
         /// </summary>
-        public const string OfficialWebsite =
-#if DEBUG || USE_DEV_API
-            "https://steampp.mossimo.net:8500";
-        //"https://ms-test.steampp.net";
-
-#else
-        "https://steampp.net";
-
-#endif
+        public const string OfficialWebsite = $"{String2.Prefix_HTTPS}{OfficialWebsiteHost}";
 
         public const string OfficialWebsite_Logo = $"{OfficialWebsite}/logo.svg";
         public const string OfficialWebsite_Privacy = $"{OfficialWebsite}/privacy";
@@ -66,7 +67,7 @@ public static partial class Constants
 
 #endif
 
-        public const string WattGame_Goods_Detail_ = $"{WattGame}/goods/detail/{{0}}";
+        public const string WattGame_Goods_Detail_ = $"{WattGame}/goods/detail/{{0}}{Komaasharu_IsAuthQuery}";
         public const string WattGame_Fast_Login_ = $"{WattGame}/oauth/verifier?tk={{0}}&t={{1}}&to={{2}}";
 
         #endregion
@@ -136,6 +137,10 @@ public static partial class Constants
         public const string GitHub_User_AigioL = "https://github.com/AigioL";
         public const string GitHub_User_Mossimos = "https://github.com/Mossimos";
 
+        #endregion
+
+        #region Komaasharu
+        public const string Komaasharu_IsAuthQuery = "isauth=1";
         #endregion
 
         #region Email
