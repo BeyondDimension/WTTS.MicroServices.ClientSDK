@@ -67,7 +67,7 @@ public static partial class Constants
 
 #endif
 
-        public const string WattGame_Goods_Detail_ = $"{WattGame}/goods/detail/{{0}}{Komaasharu_IsAuthQuery}";
+        public const string WattGame_Goods_Detail_ = $"{WattGame}/goods/detail/{{0}}?{Komaasharu_IsAuthQuery}";
         public const string WattGame_Fast_Login_ = $"{WattGame}/oauth/verifier?tk={{0}}&t={{1}}&to={{2}}";
 
         #endregion
@@ -113,8 +113,8 @@ public static partial class Constants
             }
         }
 
-        public static string GetAdvertisementJumpUrl(Guid id)
-            => $"{BaseUrl_API}/komaasharu/{id}";
+        public static string GetAdvertisementJumpUrl(Guid id, bool isAuth)
+            => $"{BaseUrl_API}/komaasharu/{id}?{(isAuth ? Komaasharu_IsAuthQuery : "")}";
 
         public static string GetAdvertisementImageUrl(Guid id)
             => $"{BaseUrl_API}/komaasharu/images/{id}";

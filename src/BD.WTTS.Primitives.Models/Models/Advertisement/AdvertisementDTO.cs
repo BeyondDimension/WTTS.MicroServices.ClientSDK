@@ -125,6 +125,6 @@ public partial class AdvertisementDTO
 #if !__NOT_HAVE_S_JSON__
     [S_JsonIgnore]
 #endif
-    public string Url => Constants.Urls.GetAdvertisementJumpUrl(Id) + "?isauth=1";
+    public string Url => Constants.Urls.GetAdvertisementJumpUrl(Id, IsAuth);
 #endif
 }
