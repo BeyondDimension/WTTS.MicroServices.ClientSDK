@@ -45,6 +45,11 @@ public static partial class ApiConstants
             /// 安全密钥填充
             /// </summary>
             public const string SecurityKeyPadding = "App-SKey-Padding";
+
+            /// <summary>
+            /// 安全密钥填充
+            /// </summary>
+            public const string SecurityBodyContentType = "Request-Type-Hex";
         }
 
         public static class Response
