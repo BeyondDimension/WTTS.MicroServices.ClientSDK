@@ -147,9 +147,7 @@ partial interface IMicroServiceClient
         /// <summary>
         /// 生成服务端代理信息 JWT
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        Task<IApiRsp<JWTEntity?>> GenerateServerSideProxyToken();
+        Task<IApiRsp<JWTEntity?>> GenerateServerSideProxyToken(CancellationToken cancellationToken = default);
     }
 
     IManageClient Manage { get; }

@@ -161,13 +161,13 @@ partial class MicroServiceClientBase :
         return r;
     }
 
-    public async Task<IApiRsp<JWTEntity?>> GenerateServerSideProxyToken()
+    public async Task<IApiRsp<JWTEntity?>> GenerateServerSideProxyToken(CancellationToken cancellationToken = default)
     {
         var r = await Conn.SendAsync<JWTEntity?>(
                 isSecurity: true,
                 method: HttpMethod.Post,
                 requestUri: "identity/v1/account/serversideproxytoken",
-                cancellationToken: default,
+                cancellationToken: cancellationToken,
                 responseContentMaybeNull: false
             );
 
