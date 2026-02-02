@@ -13,7 +13,7 @@ public abstract class BaseNotifyPropertyChanged
 #if MVVM_VM
     /// <inheritdoc cref="ReactiveObject.Changing"/>
     [IgnoreDataMember]
-    [MPIgnore, MP2Ignore]
+    [MP2Ignore]
 #if __HAVE_N_JSON__
     [N_JsonIgnore]
 #endif
@@ -24,7 +24,7 @@ public abstract class BaseNotifyPropertyChanged
 
     /// <inheritdoc cref="ReactiveObject.Changed"/>
     [IgnoreDataMember]
-    [MPIgnore, MP2Ignore]
+    [MP2Ignore]
 #if __HAVE_N_JSON__
     [N_JsonIgnore]
 #endif
@@ -35,7 +35,7 @@ public abstract class BaseNotifyPropertyChanged
 
     /// <inheritdoc cref="ReactiveObject.ThrownExceptions"/>
     [IgnoreDataMember]
-    [MPIgnore, MP2Ignore]
+    [MP2Ignore]
 #if __HAVE_N_JSON__
     [N_JsonIgnore]
 #endif
