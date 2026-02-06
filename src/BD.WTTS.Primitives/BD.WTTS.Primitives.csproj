@@ -31,6 +31,7 @@
 	<ItemGroup>
 		<PackageReference Include="BD.Common" />
 		<PackageReference Include="BD.Common.Primitives" />
+		<PackageReference Include="MemoryPack" />
 	</ItemGroup>
 
 	<ItemGroup>
