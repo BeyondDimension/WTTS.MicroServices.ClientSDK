@@ -1,4 +1,6 @@
 // ReSharper disable once CheckNamespace
+using Polly;
+
 namespace BD.WTTS.Models;
 
 [MPObj, MP2Obj(SerializeLayout.Explicit)]
@@ -100,8 +102,20 @@ public partial class AdvertisementDTO
 #if !__NOT_HAVE_S_JSON__
     [S_JsonIgnore]
 #endif
-    public Task<ImageSource.ClipStream?> ImageSrc
-        => ImageSource.GetAsync(Constants.Urls.GetAdvertisementImageUrl(Id), cache: true);
+    public Task<MemoryStream?> ImageSrc
+    {
+        get
+        {
+            var imageHttpClientService = Ioc.Get_Nullable<IImageHttpClientService>();
+            if (imageHttpClientService == default)
+                return default;
+
+            var imageMemoryStream = imageHttpClientService.GetImageMemoryStreamAsync(Constants.Urls.GetAdvertisementImageUrl(Id), cache: true);
+            if (imageMemoryStream == default)
+                return default;
+            return imageMemoryStream;
+        }
+    }
 
     /// <summary>
     /// 广告图片Url
