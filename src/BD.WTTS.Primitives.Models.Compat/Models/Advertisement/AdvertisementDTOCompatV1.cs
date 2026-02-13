@@ -103,16 +103,16 @@ public partial class AdvertisementDTOCompatV1
 #endif
     public string ImageUrl => Constants.Urls.GetAdvertisementImageUrl(Id);
 
-    /// <summary>
-    /// 广告点击跳转地址
-    /// </summary>
-    [MPIgnore, MP2Ignore]
-#if __HAVE_N_JSON__
-    [N_JsonIgnore]
-#endif
-#if !__NOT_HAVE_S_JSON__
-    [S_JsonIgnore]
-#endif
-    public string Url => Constants.Urls.GetAdvertisementJumpUrl(Id);
+    //    /// <summary>
+    //    /// 广告点击跳转地址
+    //    /// </summary>
+    //    [MPIgnore, MP2Ignore]
+    //#if __HAVE_N_JSON__
+    //    [N_JsonIgnore]
+    //#endif
+    //#if !__NOT_HAVE_S_JSON__
+    //    [S_JsonIgnore]
+    //#endif
+    //    public string Url => Constants.Urls.GetAdvertisementJumpUrl(Id);
 #endif
 }

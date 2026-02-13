@@ -75,14 +75,14 @@ public partial class AdvertisementDTOCompat
     public Task<ImageSource.ClipStream?>? ImageUrl
         => ImageSource.GetAsync(Constants.Urls.GetAdvertisementImageUrl(Id), cache: true);
 
-    [MPIgnore, MP2Ignore]
-#if __HAVE_N_JSON__
-        [N_JsonIgnore]
-#endif
-#if !__NOT_HAVE_S_JSON__
-    [S_JsonIgnore]
-#endif
-    public string Url => Constants.Urls.GetAdvertisementJumpUrl(Id);
+    //    [MPIgnore, MP2Ignore]
+    //#if __HAVE_N_JSON__
+    //        [N_JsonIgnore]
+    //#endif
+    //#if !__NOT_HAVE_S_JSON__
+    //    [S_JsonIgnore]
+    //#endif
+    //    public string Url => Constants.Urls.GetAdvertisementJumpUrl(Id);
 #endif
 
 #endif
