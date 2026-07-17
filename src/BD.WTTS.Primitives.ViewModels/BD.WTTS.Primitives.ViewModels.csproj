@@ -36,13 +36,13 @@
 			<LinkBase>Properties</LinkBase>
 		</Compile>
 	</ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="BD.Common" />
 		<PackageReference Include="BD.Common.Primitives" />
 		<PackageReference Include="BD.Common.BirthDate" />
 		<PackageReference Include="BD.Common.PhoneNumber" />
 		<PackageReference Include="BD.Common.Mvvm" />
+		<PackageReference Include="DynamicData" />
 		<PackageReference Include="ReactiveUI" />
 		<PackageReference Include="ReactiveUI.Fody" />
 		<PackageReference Include="BD.Common.Essentials.Utils" />
