@@ -1,6 +1,8 @@
 <Project>
 	<PropertyGroup>
 		<DotNet_Version>10.0</DotNet_Version>
+		<DotNet_Version_LTS>10.0</DotNet_Version_LTS>
+		<DotNet_Version_STS>11.0</DotNet_Version_STS>
 		<NoWarn>$(NoWarn);NU1507;1591;SA1612;IL2026;IL2091</NoWarn>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
@@ -21,6 +23,12 @@
 		<NeutralLanguage>zh-Hans</NeutralLanguage>
 		<Product>瓦特工具箱</Product>
 	</PropertyGroup>
+
+	<!-- 👇 .NET 11+ 配置 -->
+	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net11.0'))">
+		<Features>$(Features);runtime-async=on</Features>
+	</PropertyGroup>
+	
 	<ItemGroup>
 		<Compile Condition=" Exists('..\AssemblyInfo.cs') " Include="..\AssemblyInfo.cs">
 			<LinkBase>Properties</LinkBase>
