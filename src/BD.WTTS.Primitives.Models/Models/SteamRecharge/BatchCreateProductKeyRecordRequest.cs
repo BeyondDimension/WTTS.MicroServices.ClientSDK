@@ -16,14 +16,14 @@ public sealed partial record BatchCreateProductKeyRecordRequest
     /// 批量创建数量
     /// </summary>
     [MPKey(1), MP2Key(1)]
-    [Required(ErrorMessage = "充值数量错误")]
+    [Required(ErrorMessageResourceType = typeof(BD.WTTS.R.Strings), ErrorMessageResourceName = nameof(BD.WTTS.R.Strings.L10nSdk_RechargeCountInvalid))]
     public int Count { get; set; }
 
     /// <summary>
     /// 充值物品面额
     /// </summary>
     [MPKey(2), MP2Key(2)]
-    [Required(ErrorMessage = "充值面额错误")]
+    [Required(ErrorMessageResourceType = typeof(BD.WTTS.R.Strings), ErrorMessageResourceName = nameof(BD.WTTS.R.Strings.L10nSdk_RechargeAmountInvalid))]
     public decimal Amount { get; set; }
 
     [MPKey(3), MP2Key(3)]

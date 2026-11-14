@@ -36,10 +36,10 @@ public static class OfficialMessageTypeEnumExtensions
     /// <returns></returns>
     public static string ToDisplayString(this OfficialMessageType value) => value switch
     {
-        OfficialMessageType.OfficialMessage => "官方公告",
-        OfficialMessageType.Promotions => "优惠活动",
-        OfficialMessageType.News => "最新消息",
-        OfficialMessageType.SteamNews => "Steam 资讯",
+        OfficialMessageType.OfficialMessage => R.Strings.L10nSdk_OfficialMessageType_OfficialMessage,
+        OfficialMessageType.Promotions => R.Strings.L10nSdk_OfficialMessageType_Promotions,
+        OfficialMessageType.News => R.Strings.L10nSdk_OfficialMessageType_News,
+        OfficialMessageType.SteamNews => R.Strings.L10nSdk_OfficialMessageType_SteamNews,
         _ => value.ToString(),
     };
 

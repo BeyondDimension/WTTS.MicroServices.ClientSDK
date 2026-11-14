@@ -8,50 +8,56 @@ public static class CurrencyCodeEnumExtensions
     /// </summary>
     /// <param name="currencyCode"></param>
     /// <returns></returns>
-    public static string ToChineseString(this CurrencyCode currencyCode) => currencyCode switch
+    public static string ToChineseString(this CurrencyCode currencyCode)
     {
-        CurrencyCode.AED => "阿联酋迪拉姆",
-        CurrencyCode.ARS => "阿根廷比索",
-        CurrencyCode.AUD => "澳元",
-        CurrencyCode.BRL => "巴西雷亚尔",
-        CurrencyCode.CAD => "加元",
-        CurrencyCode.CHF => "瑞士法郎",
-        CurrencyCode.CLP => "智利比索",
-        CurrencyCode.CNY => "人民币",
-        CurrencyCode.COP => "哥伦比亚比索",
-        CurrencyCode.CRC => "哥斯达尼家科朗",
-        CurrencyCode.EUR => "欧元",
-        CurrencyCode.GBP => "英镑",
-        CurrencyCode.HKD => "港元",
-        CurrencyCode.IDR => "卢比",
-        CurrencyCode.ILS => "新谢克尔",
-        CurrencyCode.INR => "印度卢比",
-        CurrencyCode.JPY => "日元",
-        CurrencyCode.KRW => "韩元",
-        CurrencyCode.KWD => "科威特第纳尔",
-        CurrencyCode.KZT => "腾格",
-        CurrencyCode.MXN => "墨西哥比索",
-        CurrencyCode.MYR => "马来西亚林吉特",
-        CurrencyCode.NOK => "挪威克朗",
-        CurrencyCode.NZD => "新西兰",
-        CurrencyCode.PEN => "新索尔",
-        CurrencyCode.PHP => "菲律宾比索",
-        CurrencyCode.PLN => "兹罗提",
-        CurrencyCode.QAR => "卡塔尔里亚尔",
-        CurrencyCode.RUB => "俄罗斯卢布",
-        CurrencyCode.SAR => "沙特里亚尔",
-        CurrencyCode.SGD => "新加坡",
-        CurrencyCode.THB => "泰铢",
-        CurrencyCode.TRY => "土耳其里拉",
-        CurrencyCode.TWD => "新台币",
-        CurrencyCode.UAH => "格里夫尼亚",
-        CurrencyCode.USD => "美元",
-        CurrencyCode.UYU => "乌拉圭比索",
-        CurrencyCode.VND => "越南盾",
-        CurrencyCode.ZAR => "兰特",
-        CurrencyCode.BYN => "白俄罗斯卢布",
+        var key = CurrencyNameResourceKey(currencyCode);
+        return key == null ? currencyCode.ToString() :
+            R.Strings.ResourceManager.GetString(key, CultureInfo.InvariantCulture) ?? currencyCode.ToString();
+    }
 
-        _ => currencyCode.ToString(),
+    static string? CurrencyNameResourceKey(CurrencyCode currencyCode) => currencyCode switch
+    {
+        CurrencyCode.AED => nameof(R.Strings.L10nSdk_Currency_AED),
+        CurrencyCode.ARS => nameof(R.Strings.L10nSdk_Currency_ARS),
+        CurrencyCode.AUD => nameof(R.Strings.L10nSdk_Currency_AUD),
+        CurrencyCode.BRL => nameof(R.Strings.L10nSdk_Currency_BRL),
+        CurrencyCode.CAD => nameof(R.Strings.L10nSdk_Currency_CAD),
+        CurrencyCode.CHF => nameof(R.Strings.L10nSdk_Currency_CHF),
+        CurrencyCode.CLP => nameof(R.Strings.L10nSdk_Currency_CLP),
+        CurrencyCode.CNY => nameof(R.Strings.L10nSdk_Currency_CNY),
+        CurrencyCode.COP => nameof(R.Strings.L10nSdk_Currency_COP),
+        CurrencyCode.CRC => nameof(R.Strings.L10nSdk_Currency_CRC),
+        CurrencyCode.EUR => nameof(R.Strings.L10nSdk_Currency_EUR),
+        CurrencyCode.GBP => nameof(R.Strings.L10nSdk_Currency_GBP),
+        CurrencyCode.HKD => nameof(R.Strings.L10nSdk_Currency_HKD),
+        CurrencyCode.IDR => nameof(R.Strings.L10nSdk_Currency_IDR),
+        CurrencyCode.ILS => nameof(R.Strings.L10nSdk_Currency_ILS),
+        CurrencyCode.INR => nameof(R.Strings.L10nSdk_Currency_INR),
+        CurrencyCode.JPY => nameof(R.Strings.L10nSdk_Currency_JPY),
+        CurrencyCode.KRW => nameof(R.Strings.L10nSdk_Currency_KRW),
+        CurrencyCode.KWD => nameof(R.Strings.L10nSdk_Currency_KWD),
+        CurrencyCode.KZT => nameof(R.Strings.L10nSdk_Currency_KZT),
+        CurrencyCode.MXN => nameof(R.Strings.L10nSdk_Currency_MXN),
+        CurrencyCode.MYR => nameof(R.Strings.L10nSdk_Currency_MYR),
+        CurrencyCode.NOK => nameof(R.Strings.L10nSdk_Currency_NOK),
+        CurrencyCode.NZD => nameof(R.Strings.L10nSdk_Currency_NZD),
+        CurrencyCode.PEN => nameof(R.Strings.L10nSdk_Currency_PEN),
+        CurrencyCode.PHP => nameof(R.Strings.L10nSdk_Currency_PHP),
+        CurrencyCode.PLN => nameof(R.Strings.L10nSdk_Currency_PLN),
+        CurrencyCode.QAR => nameof(R.Strings.L10nSdk_Currency_QAR),
+        CurrencyCode.RUB => nameof(R.Strings.L10nSdk_Currency_RUB),
+        CurrencyCode.SAR => nameof(R.Strings.L10nSdk_Currency_SAR),
+        CurrencyCode.SGD => nameof(R.Strings.L10nSdk_Currency_SGD),
+        CurrencyCode.THB => nameof(R.Strings.L10nSdk_Currency_THB),
+        CurrencyCode.TRY => nameof(R.Strings.L10nSdk_Currency_TRY),
+        CurrencyCode.TWD => nameof(R.Strings.L10nSdk_Currency_TWD),
+        CurrencyCode.UAH => nameof(R.Strings.L10nSdk_Currency_UAH),
+        CurrencyCode.USD => nameof(R.Strings.L10nSdk_Currency_USD),
+        CurrencyCode.UYU => nameof(R.Strings.L10nSdk_Currency_UYU),
+        CurrencyCode.VND => nameof(R.Strings.L10nSdk_Currency_VND),
+        CurrencyCode.ZAR => nameof(R.Strings.L10nSdk_Currency_ZAR),
+        CurrencyCode.BYN => nameof(R.Strings.L10nSdk_Currency_BYN),
+        _ => null,
     };
 
     /// <summary>
@@ -62,9 +68,10 @@ public static class CurrencyCodeEnumExtensions
     public static string ToDisplayString(this CurrencyCode currencyCode)
     {
         var currencyCodeStr = currencyCode.ToString();
-        var currencyCodeCNStr = currencyCode.ToChineseString();
-        if (currencyCodeStr == currencyCodeCNStr) return currencyCodeStr;
-        return $"{currencyCodeCNStr} {currencyCodeStr}";
+        var key = CurrencyNameResourceKey(currencyCode);
+        var currencyName = key == null ? null : R.Strings.ResourceManager.GetString(key, R.Strings.Culture);
+        if (string.IsNullOrEmpty(currencyName) || currencyCodeStr == currencyName) return currencyCodeStr;
+        return $"{currencyName} {currencyCodeStr}";
     }
 
     /// <summary>
