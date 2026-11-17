@@ -38,10 +38,8 @@ partial class ApiConnection
             else
             {
                 using var stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
-                var obj = await JsonSerializer.DeserializeAsync<ShopBaseResponse<ShopJwtToken>>(stream, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                }, cancellationToken: cancellationToken);
+                var obj = await JsonSerializer.DeserializeAsync(stream,
+                    ApiJsonSerializerContext.GetMetadata<ShopBaseResponse<ShopJwtToken>>(shopResponse: true), cancellationToken);
                 if (obj == null)
                 {
                     responseResult = ApiRspHelper.Code<JWTEntity>(code);
@@ -248,7 +246,7 @@ partial class ApiConnection
             var request = new HttpRequestMessage(method, requestUri);
             if (requestModel != null)
             {
-                request.Content = JsonContent.Create(requestModel);
+                request.Content = JsonContent.Create(requestModel, ApiJsonSerializerContext.GetWebMetadata<TRequestModel>());
             }
 
             request.Headers.Accept.ParseAdd(MediaTypeNames.JSON);
@@ -300,10 +298,8 @@ partial class ApiConnection
             else
             {
                 using var stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
-                var obj = await JsonSerializer.DeserializeAsync<ShopBaseResponse<TResponseModel>>(stream, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                }, cancellationToken: cancellationToken);
+                var obj = await JsonSerializer.DeserializeAsync(stream,
+                    ApiJsonSerializerContext.GetMetadata<ShopBaseResponse<TResponseModel>>(shopResponse: true), cancellationToken);
                 if (obj == null)
                 {
                     responseResult = ApiRspHelper.Code<TResponseModel>(code);

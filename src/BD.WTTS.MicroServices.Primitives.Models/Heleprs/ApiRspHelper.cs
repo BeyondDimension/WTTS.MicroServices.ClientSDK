@@ -15,47 +15,34 @@ public static class ApiRspHelper
         return typeof(ApiRsp<T>);
     }
 
-    //public static IApiRsp<T> Deserialize<T>(
-    //    Newtonsoft.Json.JsonSerializer jsonSerializer,
-    //    Newtonsoft.Json.JsonReader jsonReader)
-    //{
-    //    var type = GetDeserializeType<T>();
-    //    var obj = (IApiRsp<T>?)jsonSerializer.Deserialize(jsonReader, type);
-    //    return obj ?? ClientDeserializeFail<T>();
-    //}
-
     public static async ValueTask<IApiRsp<T?>> DeserializeAsync<T>(
         Stream stream,
         CancellationToken cancellationToken = default)
     {
-        var type = GetDeserializeType<T>();
-        var obj = await MessagePackSerializer.DeserializeAsync(
-            type, stream, options: Serializable.lz4Options, cancellationToken: cancellationToken);
-        if (obj is IApiRsp<T?> rsp) return rsp;
-        return ClientDeserializeFail<T>();
+        if (typeof(T) == typeof(object))
+        {
+            var response = await MessagePackSerializer.DeserializeAsync<ApiRsp>(stream,
+                options: Serializable.lz4Options, cancellationToken: cancellationToken);
+            return response == null ? ClientDeserializeFail<T>() : (IApiRsp<T?>)(object)response;
+        }
+        return await MessagePackSerializer.DeserializeAsync<ApiRsp<T?>>(stream,
+            options: Serializable.lz4Options, cancellationToken: cancellationToken) ?? ClientDeserializeFail<T>();
     }
 
     public static async ValueTask<IApiRsp<T?>> MemoryPackDeserializeAsync<T>(
         Stream stream,
         CancellationToken cancellationToken = default)
     {
-        try
+        if (typeof(T) == typeof(object))
         {
-            var type = GetDeserializeType<T>();
-            var obj = await MemoryPackSerializer.DeserializeAsync(
-                type, stream, cancellationToken: cancellationToken);
-            if (obj is IApiRsp<T?> rsp) return rsp;
-            return ClientDeserializeFail<T>();
+            var response = await MemoryPackSerializer.DeserializeAsync<ApiRsp>(stream,
+                cancellationToken: cancellationToken);
+            return response == null ? ClientDeserializeFail<T>() : (IApiRsp<T?>)(object)response;
         }
-        catch
-        {
-            var type = typeof(ApiRsp);
-            var obj = await MemoryPackSerializer.DeserializeAsync(
-                type, stream, cancellationToken: cancellationToken);
-            if (obj is IApiRsp rsp) return Create<T>(rsp);
-            return ClientDeserializeFail<T>();
-
-        }
+        // Generated readers accept the shorter, content-free error envelope too.
+        // Do not retry an already-consumed HTTP/CryptoStream after a format error.
+        return await MemoryPackSerializer.DeserializeAsync<ApiRsp<T?>>(stream,
+            cancellationToken: cancellationToken) ?? ClientDeserializeFail<T>();
     }
 
     public static async ValueTask<IApiRsp<T?>> JsonPackDeserializeAsync<T>(
@@ -64,17 +51,19 @@ public static class ApiRspHelper
     {
         var type = GetDeserializeType<T>();
         var obj = await JsonSerializer.DeserializeAsync(
-            stream, type, cancellationToken: cancellationToken);
+            stream, ApiJsonSerializerContext.GetMetadata(type), cancellationToken: cancellationToken);
         if (obj is IApiRsp<T?> rsp) return rsp;
         return ClientDeserializeFail<T>();
     }
 
     public static IApiRsp<T?> Deserialize<T>(byte[] buffer)
     {
-        var type = GetDeserializeType<T>();
-        var obj = MessagePackSerializer.Deserialize(type, buffer, options: Serializable.lz4Options);
-        if (obj is IApiRsp<T?> rsp) return rsp;
-        return ClientDeserializeFail<T>();
+        if (typeof(T) == typeof(object))
+        {
+            var response = MessagePackSerializer.Deserialize<ApiRsp>(buffer, options: Serializable.lz4Options);
+            return response == null ? ClientDeserializeFail<T>() : (IApiRsp<T?>)(object)response;
+        }
+        return MessagePackSerializer.Deserialize<ApiRsp<T?>>(buffer, options: Serializable.lz4Options) ?? ClientDeserializeFail<T>();
     }
 
     public static bool TryGetContent<T>(

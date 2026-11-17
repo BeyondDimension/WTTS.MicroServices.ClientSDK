@@ -150,17 +150,16 @@ sealed partial class ApiConnection : IApiConnection
         {
             httpContent = serializableImplType switch // 序列化模型
             {
-                //Serializable.ImplType.NewtonsoftJson => GetJsonContent(Serializable.JsonImplType.NewtonsoftJson),
                 Serializable.ImplType.MessagePack => GetMessagePackContent(),
-                Serializable.ImplType.SystemTextJson => GetJsonContent(Serializable.JsonImplType.SystemTextJson),
+                Serializable.ImplType.SystemTextJson => GetJsonContent(),
                 Serializable.ImplType.MemoryPack => GetMemoryPackContent(),
                 _ => throw new ArgumentOutOfRangeException(nameof(serializableImplType), serializableImplType, null),
             };
         }
         return httpContent;
-        HttpContent? GetJsonContent(Serializable.JsonImplType jsonImplType)
+        HttpContent? GetJsonContent()
         {
-            var jsonStr = request == null ? null : Serializable.SJSON(jsonImplType, request);
+            var jsonStr = request == null ? null : JsonSerializer.Serialize(request, ApiJsonSerializerContext.GetMetadata<TRequestModel>());
             if (jsonStr == null) return null;
             if (isSecurity)
             {
