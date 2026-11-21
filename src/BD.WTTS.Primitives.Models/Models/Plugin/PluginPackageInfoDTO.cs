@@ -3,7 +3,7 @@ namespace BD.WTTS.Models;
 /// <summary>
 /// 插件包详情
 /// </summary>
-[MPObj, MP2Obj(GenerateType.VersionTolerant, SerializeLayout.Sequential)]
+[MPObj(SuppressSourceGeneration = true), MP2Obj(GenerateType.VersionTolerant, SerializeLayout.Sequential)]
 public sealed partial class PluginPackageInfoDTO
 {
     public Guid Id { get; set; }

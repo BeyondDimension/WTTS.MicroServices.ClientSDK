@@ -41,6 +41,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="MessagePack" />
 		<PackageReference Include="BD.Common" />
 		<PackageReference Include="BD.Common.Primitives" />
 		<PackageReference Include="BD.Common.BirthDate" />

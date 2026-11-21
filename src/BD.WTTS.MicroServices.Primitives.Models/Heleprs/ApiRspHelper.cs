@@ -22,11 +22,11 @@ public static class ApiRspHelper
         if (typeof(T) == typeof(object))
         {
             var response = await MessagePackSerializer.DeserializeAsync<ApiRsp>(stream,
-                options: Serializable.lz4Options, cancellationToken: cancellationToken);
+                options: ApiMessagePack.Options, cancellationToken: cancellationToken);
             return response == null ? ClientDeserializeFail<T>() : (IApiRsp<T?>)(object)response;
         }
         return await MessagePackSerializer.DeserializeAsync<ApiRsp<T?>>(stream,
-            options: Serializable.lz4Options, cancellationToken: cancellationToken) ?? ClientDeserializeFail<T>();
+            options: ApiMessagePack.Options, cancellationToken: cancellationToken) ?? ClientDeserializeFail<T>();
     }
 
     public static async ValueTask<IApiRsp<T?>> MemoryPackDeserializeAsync<T>(
@@ -60,10 +60,10 @@ public static class ApiRspHelper
     {
         if (typeof(T) == typeof(object))
         {
-            var response = MessagePackSerializer.Deserialize<ApiRsp>(buffer, options: Serializable.lz4Options);
+            var response = MessagePackSerializer.Deserialize<ApiRsp>(buffer, options: ApiMessagePack.Options);
             return response == null ? ClientDeserializeFail<T>() : (IApiRsp<T?>)(object)response;
         }
-        return MessagePackSerializer.Deserialize<ApiRsp<T?>>(buffer, options: Serializable.lz4Options) ?? ClientDeserializeFail<T>();
+        return MessagePackSerializer.Deserialize<ApiRsp<T?>>(buffer, options: ApiMessagePack.Options) ?? ClientDeserializeFail<T>();
     }
 
     public static bool TryGetContent<T>(

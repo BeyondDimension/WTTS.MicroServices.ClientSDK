@@ -67,6 +67,12 @@ internal static class ApiMemoryPackFormatters
         MemoryPackFormatterProvider.Register<QueryRankRecordsResponse>();
         MemoryPackFormatterProvider.Register<QueryRankRecordsRequest>();
         MemoryPackFormatterProvider.Register<XunYouGoodDTO>();
+        MemoryPackFormatterProvider.Register<AppVerBuildDTO>();
+        MemoryPackFormatterProvider.Register<AppVerSubmissionRequest>();
+        MemoryPackFormatterProvider.Register<ActiveUserRecordDTO>();
+
+        // IdentityUserInfoDTO generates the dictionary formatter; its key formatter is looked up separately.
+        MemoryPackFormatterProvider.Register(new MemoryPack.Formatters.UnmanagedFormatter<ExternalLoginChannel>());
         MemoryPackFormatterProvider.Register(new MemoryPack.Formatters.ListFormatter<AccelerateProjectGroupDTO>());
         MemoryPackFormatterProvider.Register(new MemoryPack.Formatters.ListFormatter<ScriptInfoDTO>());
         MemoryPackFormatterProvider.Register(new MemoryPack.Formatters.ListFormatter<AdvertisementDTO>());

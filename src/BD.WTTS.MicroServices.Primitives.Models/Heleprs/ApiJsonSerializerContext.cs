@@ -33,6 +33,8 @@ namespace BD.WTTS;
 [JsonSerializable(typeof(ApiRsp<UserAuthenticatorDeleteBackupResponse[]>))]
 [JsonSerializable(typeof(ApiRsp<PagedModel<QueryRankRecordsResponse>>))]
 [JsonSerializable(typeof(ApiRsp<List<XunYouGoodDTO>>))]
+[JsonSerializable(typeof(ActiveUserRecordDTO))]
+[JsonSerializable(typeof(AppVerSubmissionRequest))]
 [JsonSerializable(typeof(LoginOrRegisterRequest))]
 [JsonSerializable(typeof(RefreshTokenRequest))]
 [JsonSerializable(typeof(ChangePhoneNumberValidationRequest))]

@@ -6,7 +6,7 @@ namespace BD.WTTS.Models;
 // https://github.com/dotnetcore/FastGithub/blob/2.1.4/FastGithub.Configuration/DomainConfig.cs
 
 /// <inheritdoc cref="IDomainConfig"/>
-[MPObj, MP2Obj(SerializeLayout.Explicit)]
+[MPObj(SuppressSourceGeneration = true), MP2Obj(SerializeLayout.Explicit)]
 public sealed partial class DomainConfig : IDomainConfig
 {
     [MPKey(0), MP2Key(0)]

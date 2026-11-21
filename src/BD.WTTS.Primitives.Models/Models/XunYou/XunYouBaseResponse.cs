@@ -1,7 +1,8 @@
 namespace BD.WTTS.Models;
 
 [MemoryPackUnion(0, typeof(XunYouVipEndTimeResponse))]
-[MPObj]
+// Only the concrete response is a MessagePack wire contract; it inherits these keys.
+[MPObj(SuppressSourceGeneration = true)]
 public abstract partial record class XunYouBaseResponse<TData> where TData : notnull
 {
     [JsonPropertyName("code")]

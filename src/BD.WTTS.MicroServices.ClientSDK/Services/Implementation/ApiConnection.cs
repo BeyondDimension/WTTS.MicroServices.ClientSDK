@@ -176,8 +176,7 @@ sealed partial class ApiConnection : IApiConnection
         }
         ByteArrayContent? GetMessagePackContent()
         {
-            var byteArray = Serializable.SMP(request, cancellationToken);
-            if (byteArray == null) return null;
+            var byteArray = MessagePackSerializer.Serialize(request, ApiMessagePack.Options, cancellationToken);
             if (isSecurity)
             {
                 byteArray = aes.ThrowIsNull(nameof(aes)).Encrypt(byteArray);

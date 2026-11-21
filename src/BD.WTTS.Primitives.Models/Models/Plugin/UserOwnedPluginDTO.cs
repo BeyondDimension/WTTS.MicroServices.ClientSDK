@@ -3,7 +3,7 @@ namespace BD.WTTS.Models;
 /// <summary>
 /// 用户拥有的插件DTO
 /// </summary>
-[MPObj, MP2Obj(GenerateType.VersionTolerant, SerializeLayout.Sequential)]
+[MPObj(SuppressSourceGeneration = true), MP2Obj(GenerateType.VersionTolerant, SerializeLayout.Sequential)]
 public sealed partial class UserOwnedPluginDTO
 {
     /// <summary>
